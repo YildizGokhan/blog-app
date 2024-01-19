@@ -1,109 +1,200 @@
-import Box from "@mui/material/Box"
-import Button from "@mui/material/Button"
-import TextField from "@mui/material/TextField"
-import { Form } from "formik"
-import { object, string } from "yup"
+import { useState } from "react";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import { Stack, IconButton, InputAdornment } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import { Form } from "formik";
+import { object, string } from "yup";
 
 export const registerSchema = object({
   username: string()
-    .max(20, "Kullanıcı adı 10 karakterden az olmalıdır.")
-    .required("Kullanıcı adı zorunludur"),
+    .max(20, "Username include max 10 characters")
+    .required("Username is mandatory."),
   firstName: string()
-    .max(20, "İsim 20 karakterden az olmalıdır.")
-    .required("İsim zorunludur"),
+    .max(20, "Firstname includes 20 characters.")
+    .required("Firstname is mandatory."),
   lastName: string()
-    .max(20, "Soyisim 30 karakterden az olmalıdır.")
-    .required("Soyisim zorunludur"),
-
+    .max(20, "Lastname includes 20 characters.")
+    .required("Lastname is mandatory."),
+  bio: string()
+    .max(20, "Bio includes 2000 characters.")
+    .required("Bio is mandatory."),
+  image: string()
+    .max(20, "Image must be URL format.")
+    .required("Image is mandatory."),
   email: string()
-    .email("Lütfen geçerli bir email giriniz.")
-    .required("Email zorunludur"),
+    .email("Please enter a valid e-mail.")
+    .required("E-mail entry is mandatory."),
   password: string()
-    .required("Şifre zorunludur")
-    .min(8, "Şifre en az 8 karakter olmalıdır")
-    .max(20, "Şifre en fazla 20 karakter olmalıdır")
-    .matches(/\d+/, "Şifre bir sayı içermelidir")
-    .matches(/[a-z]/, "Şifre bir küçük harf içermelidir")
-    .matches(/[A-Z]/, "Şifre bir büyük harf içermelidir")
-    .matches(/[!/[@$!%*?&]+/, "Şifre bir özel karakter içermelidir"),
-})
+    .required("Password is mandatory.")
+    .min(8, "The password must contain at least 8 characters.")
+    .max(16, "The password must contain a maximum of 16 characters.")
+    .matches(/\d+/, "The password must contain at least one number.")
+    .matches(
+      /[a-z]/,
+      "The password must contain at least one lower case letter."
+    )
+    .matches(/[A-Z]/, "The password must contain at least one capital letter.")
+    .matches(
+      /[@$!%*?&]+/,
+      "The password must contain at least one special character (@$!%*?&)."
+    ),
+});
 
 const RegisterForm = ({
-  values,
   handleChange,
-  errors,
+  values,
   touched,
+  errors,
   handleBlur,
 }) => {
+  const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
   return (
     <Form>
-      <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+      <Box noValidate sx={{ mt: 1 }}>
         <TextField
-          label="User Name"
+          margin="normal"
+          required
+          fullWidth
+          id="username"
+          label="Username"
           name="username"
-          id="userName"
           type="text"
-          variant="outlined"
           value={values.username}
           onChange={handleChange}
-          onBlur={handleBlur}
           error={touched.username && Boolean(errors.username)}
           helperText={errors.username}
+          onBlur={handleBlur}
         />
         <TextField
+          margin="normal"
+          required
+          fullWidth
+          id="firstName"
           label="First Name"
           name="firstName"
-          id="firstName"
           type="text"
-          variant="outlined"
           value={values.firstName}
           onChange={handleChange}
-          onBlur={handleBlur}
           error={touched.firstName && Boolean(errors.firstName)}
           helperText={errors.firstName}
+          onBlur={handleBlur}
         />
         <TextField
+          margin="normal"
+          required
+          fullWidth
+          id="lastName"
           label="Last Name"
           name="lastName"
-          id="lastName"
           type="text"
-          variant="outlined"
           value={values.lastName}
           onChange={handleChange}
-          onBlur={handleBlur}
           error={touched.lastName && Boolean(errors.lastName)}
           helperText={errors.lastName}
+          onBlur={handleBlur}
         />
         <TextField
-          label="Email"
-          name="email"
+          margin="normal"
+          required
+          fullWidth
           id="email"
+          label="Email Address"
+          name="email"
           type="email"
-          variant="outlined"
           value={values.email}
           onChange={handleChange}
-          onBlur={handleBlur}
           error={touched.email && Boolean(errors.email)}
           helperText={errors.email}
+          onBlur={handleBlur}
         />
         <TextField
-          label="password"
+          margin="normal"
+          required
+          fullWidth
+          id="image"
+          label="Image"
+          name="image"
+          type="url"
+          value={values.image}
+          onChange={handleChange}
+          error={touched.image && Boolean(errors.image)}
+          helperText={errors.image}
+          onBlur={handleBlur}
+        />
+        <TextField
+          margin="normal"
+          required
+          fullWidth
+          id="bio"
+          label="Bio"
+          name="bio"
+          type="text"
+          value={values.bio}
+          onChange={handleChange}
+          error={touched.bio && Boolean(errors.bio)}
+          helperText={errors.bio}
+          onBlur={handleBlur}
+        />
+        <TextField
+          margin="normal"
+          required
+          fullWidth
           name="password"
+          label="Password"
+          type={showPassword ? "text" : "password"}
           id="password"
-          type="password"
-          variant="outlined"
           value={values.password}
           onChange={handleChange}
-          onBlur={handleBlur}
           error={touched.password && Boolean(errors.password)}
           helperText={errors.password}
+          onBlur={handleBlur}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={togglePasswordVisibility}
+                  edge="end"
+                >
+                  {showPassword ? <Visibility /> : <VisibilityOff />}
+                </IconButton>
+              </InputAdornment>
+            ),
+          }}
         />
-        <Button type="submit" variant="contained" size="large">
-          Submit
+
+        <Button
+          type="submit"
+          fullWidth
+          variant="contained"
+          sx={{ mt: 3, mb: 2 }}
+        >
+          Sign Up
         </Button>
+        <Stack direction={"row"} gap={"5px"}>
+          <Typography variant="body2">Already have an account?</Typography>
+
+          <Typography
+            variant="body2"
+            sx={{ color: "red", cursor: "pointer" }}
+            onClick={() => navigate("/login")}
+          >
+            Sign In
+          </Typography>
+        </Stack>
       </Box>
     </Form>
-  )
-}
+  );
+};
 
-export default RegisterForm
+export default RegisterForm;
