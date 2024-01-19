@@ -15,6 +15,8 @@ import AdbIcon from "@mui/icons-material/Adb";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import useAuthCalls from "../hooks/useAuthCalls";
+import bloglogo from "../assets/bloglogo.jpeg"
+import { CardMedia } from "@mui/material";
 
 const pages = [
   {
@@ -54,7 +56,7 @@ const settings = [
 
 function Navbar() {
   const { user, image } = useSelector((state) => state.auth);
-  
+
   const { logout } = useAuthCalls();
   const navigate = useNavigate();
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -79,26 +81,23 @@ function Navbar() {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="#app-bar-with-responsive-menu"
+          <Box
+            component="img"
             sx={{
-              mr: 2,
+              height: 50,
+              width: 50,
+              maxHeight: { xs: 233, md: 167 },
+              maxWidth: { xs: 50, md: 50 },
+              flexGrow: 1,
               display: { xs: "none", md: "flex" },
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "inherit",
-              textDecoration: "none",
+              borderRadius: "50%",
             }}
-          >
-            LOGO
-          </Typography>
+            alt="logo"
+            src={bloglogo}
+          />
 
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+
+          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" }}}>
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -108,6 +107,22 @@ function Navbar() {
               color="inherit"
             >
               <MenuIcon />
+              <Box
+                component="img"
+                sx={{
+                  height: 50,
+                  width: 50,
+                  maxHeight: { xs: 233, md: 167 },
+                  maxWidth: { xs: 50, md: 50 },
+                  flexGrow: 1,
+                  display: { xs: "flex", md: "none" },
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  borderRadius: "50%",
+                }}
+                alt="logo"
+                src={bloglogo}
+              />
             </IconButton>
             <Menu
               id="menu-appbar"
@@ -140,25 +155,7 @@ function Navbar() {
               ))}
             </Menu>
           </Box>
-          <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href="#app-bar-with-responsive-menu"
-            sx={{
-              mr: 2,
-              display: { xs: "flex", md: "none" },
-              flexGrow: 1,
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "inherit",
-              textDecoration: "none",
-            }}
-          >
-            LOGO
-          </Typography>
+
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
               <Button
