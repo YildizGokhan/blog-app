@@ -1,19 +1,20 @@
 import React from 'react'
-import { Route, Router, Routes } from 'react-router-dom'
+import { BrowserRouter, Route, Routes } from 'react-router-dom' 
 import Login from "../pages/Login"
 import Register from '../pages/Register'
 import Navbar from '../components/Navbar'
-
+import DashBoard from '../pages/DashBoard'
 
 const AppRouter = () => {
   return (
-    <Router>
-    <Navbar />
-      <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="register" element={<Register />} />
+    <BrowserRouter>
+      <Navbar />
+      <Routes> 
+        <Route path="/" element={<DashBoard />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
-    </Router>
+    </BrowserRouter>
   )
 }
 

@@ -7,7 +7,7 @@ const useAxios = () => {
     const axiosPublic = axios.create({
         baseURL: `${process.env.REACT_APP_BASE_URL}`
     })
-    //register ve diyer işlemlerde token kullanılacağı zaman
+    //register ve diğer işlemlerde token kullanılacağı zaman
     const axiosWithToken = axios.create({
         baseURL: `${process.env.REACT_APP_BASE_URL}`,
         headers: {Authorization : `Token ${token}`}
