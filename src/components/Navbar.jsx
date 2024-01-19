@@ -16,7 +16,6 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import useAuthCalls from "../hooks/useAuthCalls";
 
-
 const pages = [
   {
     id: 1,
@@ -54,7 +53,8 @@ const settings = [
 ];
 
 function Navbar() {
-  const { user } = useSelector((state) => state.auth);
+  const { user, image } = useSelector((state) => state.auth);
+  
   const { logout } = useAuthCalls();
   const navigate = useNavigate();
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -173,11 +173,10 @@ function Navbar() {
               </Button>
             ))}
           </Box>
-
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar alt="Remy Sharp" src={image} />
               </IconButton>
             </Tooltip>
             <Menu

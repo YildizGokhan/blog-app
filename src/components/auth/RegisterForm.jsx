@@ -24,7 +24,6 @@ export const registerSchema = object({
     .max(20, "Bio includes 2000 characters.")
     .required("Bio is mandatory."),
   image: string()
-    .max(20, "Image must be URL format.")
     .required("Image is mandatory."),
   email: string()
     .email("Please enter a valid e-mail.")
@@ -124,7 +123,7 @@ const RegisterForm = ({
           id="image"
           label="Image"
           name="image"
-          type="url"
+          type="text"
           value={values.image}
           onChange={handleChange}
           error={touched.image && Boolean(errors.image)}
