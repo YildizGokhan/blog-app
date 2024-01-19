@@ -1,7 +1,7 @@
 
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { fetchFail, fetchStart, loginSuccess, registerSuccess } from '../features/authSlice'
+import { fetchFail, fetchStart, loginSuccess, logoutSuccess, registerSuccess } from '../features/authSlice'
 import useAxios from "./useAxios"
 import { toastErrorNotify, toastSuccessNotify} from "../helper/ToastNotify"
 
@@ -10,7 +10,7 @@ import { toastErrorNotify, toastSuccessNotify} from "../helper/ToastNotify"
 const useAuthCalls = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const { axiosPublic } = useAxios()
+  const { axiosPublic, axiosWithToken } = useAxios()
 
   const login = async (userInfo) => {
     dispatch(fetchStart())
@@ -37,6 +37,18 @@ const useAuthCalls = () => {
       toastErrorNotify("Register işlemi başarısız oldu.")
     }
   }
-  return { login, register }
+
+  const logout = async () => {
+    dispatch(fetchStart())
+    try {
+      await axiosWithToken.get("/auth/logout")
+      dispatch(logoutSuccess())
+      toastSuccessNotify("Logout işlemi başarılı.")
+    } catch (error) {
+      dispatch(fetchFail())
+      toastErrorNotify("Logout işlemi başarısız oldu.")
+    }
+  }
+  return { login, register, logout }
 }
 export default useAuthCalls
