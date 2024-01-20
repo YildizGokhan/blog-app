@@ -11,12 +11,12 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import AdbIcon from "@mui/icons-material/Adb";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import useAuthCalls from "../hooks/useAuthCalls";
 import bloglogo from "../assets/bloglogo.jpeg"
-import { CardMedia } from "@mui/material";
+import { Stack } from "@mui/material";
+
 
 const pages = [
   {
@@ -79,10 +79,11 @@ function Navbar() {
 
   return (
     <AppBar position="static">
-      <Container maxWidth="xl">
+      <Container maxWidth="xl" sx={{ backgroundColor: "#000010" }}>
         <Toolbar disableGutters>
           <Box
-            component="img"
+            component="a"
+            href="/"
             sx={{
               height: 50,
               width: 50,
@@ -92,38 +93,46 @@ function Navbar() {
               display: { xs: "none", md: "flex" },
               borderRadius: "50%",
             }}
-            alt="logo"
-            src={bloglogo}
-          />
+          >
+            <img
+              alt="logo"
+              src={bloglogo}
+              style={{ width: '100%', height: '100%' }}
+            />
+          </Box>
 
-
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" }}}>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit"
+          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+            <Stack
+              sx={{
+                flexGrow: 1,
+                display: { xs: "flex", md: "none" },
+                justifyContent: "space-between",
+                alignItems: "center",
+                flexDirection: "row"
+              }}
             >
-              <MenuIcon />
+              <MenuIcon sx={{ fontSize: 32, }} onClick={handleOpenNavMenu} />
               <Box
-                component="img"
+                component="a"
+                href="/"
                 sx={{
-                  height: 50,
-                  width: 50,
+                  height: 85,
+                  width: 85,
                   maxHeight: { xs: 233, md: 167 },
-                  maxWidth: { xs: 50, md: 50 },
-                  flexGrow: 1,
+                  maxWidth: { xs: 120, md: 50 },
                   display: { xs: "flex", md: "none" },
-                  alignItems: 'center',
-                  justifyContent: 'center',
                   borderRadius: "50%",
                 }}
-                alt="logo"
-                src={bloglogo}
-              />
-            </IconButton>
+              >
+                <img
+                  alt="logo"
+                  src={bloglogo}
+                  style={{ width: '100%', height: '100%' }}
+                />
+              </Box>
+              <Typography></Typography>
+            </Stack>
+
             <Menu
               id="menu-appbar"
               anchorEl={anchorElNav}

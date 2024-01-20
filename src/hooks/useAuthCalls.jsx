@@ -1,11 +1,8 @@
-
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { fetchFail, fetchStart, loginSuccess, logoutSuccess, registerSuccess } from '../features/authSlice'
 import useAxios from "./useAxios"
 import { toastErrorNotify, toastSuccessNotify} from "../helper/ToastNotify"
-
-
 
 const useAuthCalls = () => {
   const navigate = useNavigate()
