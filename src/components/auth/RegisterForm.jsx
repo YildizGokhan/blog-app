@@ -185,7 +185,7 @@ const RegisterForm = ({
 
           <Typography
             variant="body2"
-            sx={{ color: "red", cursor: "pointer" }}
+            sx={{ color: "blue", cursor: "pointer", textDecoration: "underline" }}
             onClick={() => navigate("/login")}
           >
             Sign In

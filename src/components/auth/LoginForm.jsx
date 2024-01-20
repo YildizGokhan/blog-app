@@ -103,7 +103,7 @@ console.log(values);
 
           <Typography
             variant="body2"
-            sx={{ color: "red", cursor: "pointer" }}
+            sx={{ color: "blue", cursor: "pointer", textDecoration: "underline" }}
             onClick={() => navigate("/register")}
           >
             Sign Up
