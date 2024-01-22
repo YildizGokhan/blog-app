@@ -23,7 +23,6 @@ const AppRouter = () => {
         </Route>
         <Route path="detail" element={<PrivateRouter />} >
           <Route path=":id" element={<Detail />} />
-
         </Route>
       </Routes>
     </BrowserRouter>

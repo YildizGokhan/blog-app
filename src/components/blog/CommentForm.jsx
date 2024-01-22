@@ -23,11 +23,11 @@ export default function CommentForm() {
   const handleComment = () => {
     setCommentArea(!commentArea);
   }
-  
+
 
   return (
     <>
-      <Card sx={{ maxWidth: "60%"}}>
+      <Card sx={{ maxWidth: "60%" }}>
         <CardMedia
           component="img"
           alt=""
