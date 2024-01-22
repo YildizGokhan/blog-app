@@ -25,7 +25,6 @@ const DashBoard = () => {
     <Grid container justifyContent={"center"} gap={2} mt={5}>
       {blogs?.map((blog) => (
         <CardBlog key={blog.id}
-        //  info={info} setInfo={setInfo}
           blog={blog} />
       ))}
 

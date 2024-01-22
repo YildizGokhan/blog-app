@@ -1,8 +1,8 @@
 import axios from 'axios'
-import { useSelector} from "react-redux"
+import { useSelector } from "react-redux"
 
 const useAxios = () => {
-    const { token} = useSelector(state => state.auth)
+    const { token } = useSelector(state => state.auth)
     //login için
     const axiosPublic = axios.create({
         baseURL: `${process.env.REACT_APP_BASE_URL}`
@@ -10,10 +10,10 @@ const useAxios = () => {
     //register ve diğer işlemlerde token kullanılacağı zaman
     const axiosWithToken = axios.create({
         baseURL: `${process.env.REACT_APP_BASE_URL}`,
-        headers: {Authorization : `Token ${token}`}
+        headers: { Authorization: `Token ${token}` }
     })
 
-    return  {axiosPublic, axiosWithToken }
+    return { axiosPublic, axiosWithToken }
 }
 
 export default useAxios

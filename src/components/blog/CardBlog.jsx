@@ -16,13 +16,6 @@ import { useNavigate } from 'react-router-dom';
 export default function CardBlog({ blog }) {
   const navigate = useNavigate()
 
-  // const handleReadMore = () => {
-  //   if (user) {
-  //     navigate("/detail")
-  //   } else {
-  //     navigate("/login")
-  //   }
-  // }
 
   return (
     <Card sx={{ maxWidth: 345 }}>
@@ -64,8 +57,11 @@ export default function CardBlog({ blog }) {
         </Box>
 
         <Button variant="contained" sx={{ color: "cyan", backgroundColor: "black", cursor: "pointer", "&:hover": { background: "darkslateblue", color: "white", transform: "scale(1.1)" } }}
-          onClick={() => navigate(`/detail/${blog._id}`, { state: { blog } })}
-        >
+          onClick={() => {
+          navigate(`/detail/${blog._id}`,
+           { state: { blog }}
+          )}
+        } >
           Read More</Button>
       </CardActions>
     </Card>

@@ -1,84 +1,89 @@
 import * as React from 'react';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import CommentIcon from '@mui/icons-material/Comment';
-import IconButton from '@mui/material/IconButton';
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import { Avatar, Box, CardHeader } from '@mui/material';
-import { useLocation } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import CommentArea from './CommentArea';
-
+import Box from '@mui/joy/Box';
+import Button from '@mui/joy/Button';
+import FormControl from '@mui/joy/FormControl';
+import FormLabel from '@mui/joy/FormLabel';
+import Textarea from '@mui/joy/Textarea';
+import IconButton from '@mui/joy/IconButton';
+import Menu from '@mui/joy/Menu';
+import MenuItem from '@mui/joy/MenuItem';
+import ListItemDecorator from '@mui/joy/ListItemDecorator';
+import FormatBold from '@mui/icons-material/FormatBold';
+import FormatItalic from '@mui/icons-material/FormatItalic';
+import KeyboardArrowDown from '@mui/icons-material/KeyboardArrowDown';
+import Check from '@mui/icons-material/Check';
 
 export default function CommentForm() {
-  const { image } = useSelector(state => state.auth);
-  const location = useLocation();
-  const blog = location.state?.blog;
-  const [commentArea, setCommentArea] = React.useState(false);
-
-  const handleComment = () => {
-    setCommentArea(!commentArea);
-  }
-
-
+  const [italic, setItalic] = React.useState(false);
+  const [fontWeight, setFontWeight] = React.useState('normal');
+  const [anchorEl, setAnchorEl] = React.useState(null);
   return (
-    <>
-      <Card sx={{ maxWidth: "60%" }}>
-        <CardMedia
-          component="img"
-          alt=""
-          height="50%"
-          image={blog?.image}
-          sx={{ objectFit: "contain" }}
-        />
-        <CardHeader
-          avatar={
-            <Avatar sx={{ bgcolor: "red[500]" }} aria-label="recipe">
-              <CardMedia
-                component="img"
-                alt=""
-                height="140"
-                image={image ? image : ""}
-                sx={{ objectFit: "contain" }}
-              />
-            </Avatar>
-          }
-          title={blog?.title}
-          subheader={new Date(blog?.createdAt).toLocaleString("tr-TR")}
-        />
-        <CardContent>
-          <Typography variant="body2" >
-            {blog.title}
-          </Typography>
-          <Typography color="text.secondary" gutterBottom variant="h5" component="div" sx={{ mt: 1, mb: 1.5, fontSize: "0.8rem", fontFamily: "Roboto, Helvetica, Arial, sans-serif;", fontWeight: "400" }}>
-            {blog?.content}
-          </Typography>
-
-          <hr />
-          <Typography variant="body2" color="text.secondary">
-            Published Date:
-            {new Date(blog?.createdAt).toLocaleString("tr-TR")}
-          </Typography>
-        </CardContent>
-        <CardActions disableSpacing sx={{ justifyContent: "space-between" }}>
-          <Box>
-            <IconButton aria-label="add to favorites">
-              <FavoriteIcon />
+    <FormControl>
+      <FormLabel>Your comment</FormLabel>
+      <Textarea
+        placeholder="Type something here…"
+        minWidth={"50%"}
+        endDecorator={
+          <Box
+            sx={{
+              display: 'flex',
+              gap: 'var(--Textarea-paddingBlock)',
+              pt: 'var(--Textarea-paddingBlock)',
+              borderTop: '1px solid',
+              borderColor: 'divider',
+              flex: 'auto',
+            }}
+          >
+            <IconButton
+              variant="plain"
+              color="neutral"
+              onClick={(event) => setAnchorEl(event.currentTarget)}
+            >
+              <FormatBold />
+              <KeyboardArrowDown fontSize="md" />
             </IconButton>
-            <IconButton aria-label="comment">
-              <CommentIcon onClick={handleComment} />
+            <Menu
+              anchorEl={anchorEl}
+              open={Boolean(anchorEl)}
+              onClose={() => setAnchorEl(null)}
+              size="sm"
+              placement="bottom-start"
+              sx={{ '--ListItemDecorator-size': '24px' }}
+            >
+              {['200', 'normal', 'bold'].map((weight) => (
+                <MenuItem
+                  key={weight}
+                  selected={fontWeight === weight}
+                  onClick={() => {
+                    setFontWeight(weight);
+                    setAnchorEl(null);
+                  }}
+                  sx={{ fontWeight: weight }}
+                >
+                  <ListItemDecorator>
+                    {fontWeight === weight && <Check fontSize="sm" />}
+                  </ListItemDecorator>
+                  {weight === '200' ? 'lighter' : weight}
+                </MenuItem>
+              ))}
+            </Menu>
+            <IconButton
+              variant={italic ? 'soft' : 'plain'}
+              color={italic ? 'primary' : 'neutral'}
+              aria-pressed={italic}
+              onClick={() => setItalic((bool) => !bool)}
+            >
+              <FormatItalic />
             </IconButton>
-            <IconButton aria-label="visible">
-              <VisibilityIcon />
-            </IconButton>
+            <Button sx={{ ml: 'auto' }}>Send</Button>
           </Box>
-        </CardActions>
-      </Card>
-      {commentArea && <CommentArea />}
-    </>
+        }
+        sx={{
+          minWidth: 300,
+          fontWeight,
+          fontStyle: italic ? 'italic' : 'initial',
+        }}
+      />
+    </FormControl>
   );
 }
