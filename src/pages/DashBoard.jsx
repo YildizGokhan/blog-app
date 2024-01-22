@@ -5,12 +5,13 @@ import CardBlog from '../components/blog/CardBlog'
 import { Grid } from '@mui/material'
 
 const DashBoard = () => {
-  const {blogs} = useSelector(state=>state.blog)
-  const {getBlogs} = useBlogCalls()
+  const { blogs } = useSelector(state => state.blog)
+  const { getBlogs } = useBlogCalls()
   useEffect(() => {
     getBlogs()
   }, [])
-  
+  console.log(blogs);
+
   return (
     <Grid container gap={3} mt={3} justifyContent={"center"}>
       {blogs.map((blog) => (

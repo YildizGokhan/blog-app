@@ -12,7 +12,7 @@ import useAuthCalls from "../hooks/useAuthCalls";
 const defaultTheme = createTheme();
 
 export default function Login() {
-  const { login} = useAuthCalls()
+  const { login } = useAuthCalls()
 
   return (
     <ThemeProvider theme={defaultTheme}>

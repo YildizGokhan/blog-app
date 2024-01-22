@@ -43,7 +43,7 @@ const LoginForm = (
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
-console.log(values);
+
   return (
     <Form>
       <Box noValidate sx={{ mt: 1 }}>

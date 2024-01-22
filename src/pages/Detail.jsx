@@ -12,19 +12,26 @@ import IconButton from '@mui/material/IconButton';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { Avatar, Box, CardHeader } from '@mui/material';
 import { useSelector } from 'react-redux';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import CommentForm from '../components/blog/CommentForm';
+import useBlogCalls from '../hooks/useBlogCalls';
+import CommentCard from '../components/blog/CommentCard';
 
 const Detail = () => {
   const [commentArea, setCommentArea] = useState(false);
   const { image } = useSelector(state => state.auth)
 
+  const { getDetailBlogs} = useBlogCalls()
+  const location = useLocation();
+  const { blog } = location.state;
+  
+  useEffect(() => {
+    getDetailBlogs(blog._id)
+  }, [blog])
+
   const handleComment = () => {
     setCommentArea(!commentArea);
   }
-
-  const location = useLocation();
-  const { blog } = location.state;
 
   return (
     <Stack sx={{ mt: 5, justifyContent: "center", alignItems: "center" }} >
@@ -65,24 +72,35 @@ const Detail = () => {
             {new Date(blog?.createdAt).toLocaleString("tr-TR")}
           </Typography>
         </CardContent>
-        <CardActions disableSpacing sx={{ justifyContent: "space-between" }}>
+        <CardActions sx={{ justifyContent: "space-between" }}>
           <Box>
             <IconButton aria-label="add to favorites">
               <FavoriteIcon />
+              <Typography>
+                {blog?.likes?.length}
+              </Typography>
             </IconButton>
-            <IconButton aria-label="comment">
-              <CommentIcon onClick={handleComment} />
+            <IconButton aria-label="comment" onClick={handleComment}>
+              <CommentIcon  />
+              <Typography>
+                {blog?.comments?.length}
+              </Typography>
             </IconButton>
             <IconButton aria-label="visible">
               <VisibilityIcon />
               <Typography>
-                {blog.countOfVisitors}
+                {blog?.countOfVisitors}
               </Typography>
             </IconButton>
           </Box>
         </CardActions>
       </Card>
-      {commentArea && <CommentForm />}
+      {commentArea && (
+        <>
+        <CommentForm />
+        <CommentCard />
+        </>
+        )}
     </Stack>
   );
 }

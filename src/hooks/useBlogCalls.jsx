@@ -3,6 +3,7 @@ import useAxios from './useAxios'
 import { useDispatch } from 'react-redux'
 import { fetchFail, fetchStart } from '../features/authSlice'
 import { getBlogsSuccess, getDetailBlogsSuccess } from '../features/blogSlice'
+import { toastErrorNotify, toastSuccessNotify } from '../helper/ToastNotify'
 
 const useBlogCalls = () => {
     const { axiosPublic, axiosWithToken } = useAxios()
@@ -11,22 +12,41 @@ const useBlogCalls = () => {
     const getBlogs = async () => {
         dispatch(fetchStart())
         try {
-            const { data } = await axiosPublic.get('/blogs')
+            const { data } = await axiosPublic("/blogs")
             dispatch(getBlogsSuccess(data))
+            toastSuccessNotify("Blogs fetched successfully")
         } catch (error) {
             dispatch(fetchFail())
+            toastErrorNotify("Blogs fetch failed")
         }
     }
-    const getDetailBlogs = async (item) => {
+    const getDetailBlogs = async (id) => {
         dispatch(fetchStart())
         try {
-            const { data } = await axiosWithToken.get(`/blogs/${item}`)
+            const { data } = await axiosWithToken.get(`/blogs/${id}`)
             dispatch(getDetailBlogsSuccess(data))
+            getBlogs()
+            toastSuccessNotify("Blogs details fetched successfully")
         } catch (error) {
             dispatch(fetchFail())
+            toastErrorNotify("Blogs details fetch failed")
         }
     }
-    return { getBlogs, getDetailBlogs }
+
+    const postComment = async (info) => {
+        dispatch(fetchStart())
+        try {
+            const { data } = await axiosWithToken.post("/comments",info)
+            getDetailBlogs()
+            toastSuccessNotify("Comment sent succesfully")
+        } catch (error) {
+            dispatch(fetchFail())
+            toastErrorNotify("Comment sent failed")
+        }
+    }
+    return { getBlogs, getDetailBlogs,
+         postComment 
+        }
 }
 
 export default useBlogCalls

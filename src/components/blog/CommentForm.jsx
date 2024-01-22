@@ -1,4 +1,3 @@
-import * as React from 'react';
 import Box from '@mui/joy/Box';
 import Button from '@mui/joy/Button';
 import FormControl from '@mui/joy/FormControl';
@@ -12,19 +11,52 @@ import FormatBold from '@mui/icons-material/FormatBold';
 import FormatItalic from '@mui/icons-material/FormatItalic';
 import KeyboardArrowDown from '@mui/icons-material/KeyboardArrowDown';
 import Check from '@mui/icons-material/Check';
+import { useState } from 'react';
+import useBlogCalls from '../../hooks/useBlogCalls';
+import { useSelector } from 'react-redux';
 
 export default function CommentArea() {
-  const [italic, setItalic] = React.useState(false);
-  const [fontWeight, setFontWeight] = React.useState('normal');
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const { postComment } = useBlogCalls();
+  const [italic, setItalic] = useState(false);
+  const [fontWeight, setFontWeight] = useState('normal');
+  const [anchorEl, setAnchorEl] = useState(null);
+  const { detail} = useSelector(state => state.blog)
+
+  const [info, setInfo] = useState({
+    blogId: detail._id,
+    comment: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setInfo((prevInfo) => ({
+      ...prevInfo,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    postComment(info);
+  };
+
+  console.log(info)
+
   return (
-    <FormControl sx={{
-      width: '60%'
-    }}>
+    <FormControl
+      component="form"
+      onSubmit={handleSubmit}
+      sx={{
+        width: '60%',
+      }}
+    >
       <FormLabel>Your comment</FormLabel>
       <Textarea
         placeholder="Type something here…"
-        minRows={3}      
+        minRows={3}
+        onChange={handleChange}
+        name="comment"
+        defaultValue={info.comment}
         endDecorator={
           <Box
             sx={{
@@ -77,7 +109,9 @@ export default function CommentArea() {
             >
               <FormatItalic />
             </IconButton>
-            <Button sx={{ ml: 'auto', px: 8 }}>Send</Button>
+            <Button type="submit" sx={{ ml: 'auto', px: 8 }}>
+              Send
+            </Button>
           </Box>
         }
         sx={{

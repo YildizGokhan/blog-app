@@ -12,16 +12,18 @@ import IconButton from '@mui/material/IconButton';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { Box } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import useBlogCalls from '../../hooks/useBlogCalls';
+import { useEffect, useState } from 'react';
 
-import { useState } from 'react';
 
-export default function CardBlog({ blog, detail }) {
+
+
+
+export default function CardBlog({ blog }) {
   const navigate = useNavigate()
-  const [count, setCount] = useState(4)
+  const [count, setCount] = useState(0)
 
-
-
-
+  
 
   return (
     <Card sx={{ maxWidth: 345 }}>
@@ -53,14 +55,20 @@ export default function CardBlog({ blog, detail }) {
         <Box>
           <IconButton aria-label="add to favorites">
             <FavoriteIcon />
+            <Typography >
+              {blog.likes.length}
+            </Typography>
           </IconButton>
           <IconButton aria-label="comment">
             <CommentIcon />
+            <Typography >
+              {blog.comments.length}
+            </Typography>
           </IconButton>
           <IconButton aria-label="visible">
             <VisibilityIcon />
             <Typography >
-              {blog.count}
+              {blog.countOfVisitors}
             </Typography>
           </IconButton>
         </Box>
@@ -68,7 +76,6 @@ export default function CardBlog({ blog, detail }) {
         <Button variant="contained" sx={{ color: "cyan", backgroundColor: "black", cursor: "pointer", "&:hover": { background: "darkslateblue", color: "white", transform: "scale(1.1)" } }}
           onClick={() => {
             navigate(`/detail/${blog._id}`, { state: { blog } })
-            setCount(count => count + 1)
           }} >
           Read More</Button>
       </CardActions>
