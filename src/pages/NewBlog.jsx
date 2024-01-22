@@ -26,10 +26,10 @@ export default function NewBlog() {
     setStatus(event.target.value);
   };
 
-  // Handle form submission
+  
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Form submission logic
+   
   };
 
   return (

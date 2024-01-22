@@ -13,16 +13,18 @@ import FormatItalic from '@mui/icons-material/FormatItalic';
 import KeyboardArrowDown from '@mui/icons-material/KeyboardArrowDown';
 import Check from '@mui/icons-material/Check';
 
-export default function CommentForm() {
+export default function CommentArea() {
   const [italic, setItalic] = React.useState(false);
   const [fontWeight, setFontWeight] = React.useState('normal');
   const [anchorEl, setAnchorEl] = React.useState(null);
   return (
-    <FormControl>
+    <FormControl sx={{
+      width: '60%'
+    }}>
       <FormLabel>Your comment</FormLabel>
       <Textarea
         placeholder="Type something here…"
-        minWidth={"50%"}
+        minRows={3}      
         endDecorator={
           <Box
             sx={{
@@ -75,7 +77,7 @@ export default function CommentForm() {
             >
               <FormatItalic />
             </IconButton>
-            <Button sx={{ ml: 'auto' }}>Send</Button>
+            <Button sx={{ ml: 'auto', px: 8 }}>Send</Button>
           </Box>
         }
         sx={{

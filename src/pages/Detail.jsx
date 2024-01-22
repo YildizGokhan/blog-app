@@ -15,16 +15,14 @@ import { useSelector } from 'react-redux';
 import { useState } from 'react';
 import CommentForm from '../components/blog/CommentForm';
 
-
 const Detail = () => {
   const [commentArea, setCommentArea] = useState(false);
-  const { image} = useSelector(state => state.auth)
+  const { image } = useSelector(state => state.auth)
 
   const handleComment = () => {
     setCommentArea(!commentArea);
   }
 
-  
   const location = useLocation();
   const { blog } = location.state;
 
@@ -33,7 +31,7 @@ const Detail = () => {
       <Card sx={{ maxWidth: "60%" }}>
         <CardMedia
           component="img"
-          alt=""
+          alt={blog?.title}
           height="50%"
           image={blog?.image}
           sx={{ objectFit: "contain" }}
@@ -77,11 +75,14 @@ const Detail = () => {
             </IconButton>
             <IconButton aria-label="visible">
               <VisibilityIcon />
+              <Typography>
+                {blog.countOfVisitors}
+              </Typography>
             </IconButton>
           </Box>
         </CardActions>
       </Card>
-      {commentArea && <CommentForm/>}
+      {commentArea && <CommentForm />}
     </Stack>
   );
 }

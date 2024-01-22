@@ -17,10 +17,10 @@ const useBlogCalls = () => {
             dispatch(fetchFail())
         }
     }
-    const getDetailBlogs = async (id) => {
+    const getDetailBlogs = async (item) => {
         dispatch(fetchStart())
         try {
-            const { data } = await axiosWithToken.get(`/blogs/${id}`)
+            const { data } = await axiosWithToken.get(`/blogs/${item}`)
             dispatch(getDetailBlogsSuccess(data))
         } catch (error) {
             dispatch(fetchFail())
