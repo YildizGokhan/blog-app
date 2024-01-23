@@ -6,6 +6,7 @@ const initialState = {
     error: false,
     token: "",
     detail: [],
+    categories: [],
 }
 
 const blogSlice = createSlice({
@@ -19,6 +20,7 @@ const blogSlice = createSlice({
         getBlogsSuccess: (state, { payload }) => {
             state.loading = false
             state.blogs = payload.data
+            state.categories = payload.data
         },
         getDetailBlogsSuccess: (state, { payload }) => {
             state.loading = false

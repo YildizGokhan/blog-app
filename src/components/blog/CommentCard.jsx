@@ -15,7 +15,7 @@ export default function CommentCard() {
   console.log("user", _id);
 
   return (
-    <div>
+    <Stack sx={{width: '100%'}}>
       {detail?.comments?.map((comment) => (
         <Box key={comment._id} sx={{ mt: 2 }}>
           <Card
@@ -56,6 +56,6 @@ export default function CommentCard() {
           </Card>
         </Box>
       ))}
-    </div>
+    </Stack>
   );
 }

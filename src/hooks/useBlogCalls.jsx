@@ -20,6 +20,19 @@ const useBlogCalls = () => {
             toastErrorNotify("Blogs fetch failed")
         }
     }
+
+    const getCategories = async () => {
+        dispatch(fetchStart())
+        try {
+            const { data } = await axiosPublic("/categories")
+            dispatch(getBlogsSuccess(data))
+            toastSuccessNotify("Category fetched successfully")
+        } catch (error) {
+            dispatch(fetchFail())
+            toastErrorNotify("Category fetch failed")
+        }
+    }
+
     const getDetailBlogs = async (id) => {
         dispatch(fetchStart())
         try {
@@ -44,6 +57,20 @@ const useBlogCalls = () => {
             toastErrorNotify("Comment sent failed")
         }
     }
+
+    const postBlog = async (info) => {
+        dispatch(fetchStart())
+        try {
+            const { data } = await axiosWithToken.post("/blogs", info)
+            getDetailBlogs()
+            toastSuccessNotify("Blog sent succesfully")
+
+        } catch (error) {
+            dispatch(fetchFail())
+            toastErrorNotify("Blog sent failed")
+        }
+    }
+
     const postLike = async (id) => {
         dispatch(fetchStart())
         try {
@@ -59,7 +86,7 @@ const useBlogCalls = () => {
 
     return {
         getBlogs, getDetailBlogs,
-        postComment, postLike
+        postComment, postLike, getCategories, postBlog
     }
 }
 

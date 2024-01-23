@@ -34,7 +34,7 @@ const Detail = () => {
       getDetailBlogs(blog._id);
     } else {
       postLike(blog?._id);
-      getDetailBlogs(blog._id);
+      getDetailBlogs(blog?._id);
     }
   };
 
@@ -44,7 +44,7 @@ const Detail = () => {
   }
 
   useEffect(() => {
-    getDetailBlogs(blog._id)
+    getDetailBlogs(blog?._id)
   }, [])
 
   return (
