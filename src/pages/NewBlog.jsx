@@ -12,6 +12,7 @@ import {
 import { useSelector } from 'react-redux';
 import useBlogCalls from '../hooks/useBlogCalls';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const statuses = ['Draft', 'Published'];
 
@@ -24,6 +25,7 @@ const renderSelectOptions = (options, isCategory = true) => {
 };
 
 const NewBlog = () => {
+  const navigate = useNavigate()
   const { categories } = useSelector((state) => state.blog);
   const { getCategories, postBlog } = useBlogCalls();
   const [formData, setFormData] = useState({
@@ -40,21 +42,35 @@ const NewBlog = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    postBlog({
-      title: formData?.title,
-      content: formData?.content,
-      image: formData?.image,
-      categoryId: formData?.category,
-      isPublished: formData?.status === 'Published',
-    });
+    if (formData?.status === 'Published') {
+      postBlog({
+        title: formData?.title,
+        content: formData?.content,
+        image: formData?.image,
+        categoryId: formData?.category,
+        isPublish: true,
+      });
+    } else {
+      setFormData({
+        title: formData?.title,
+        content: formData?.content,
+        image: formData?.image,
+        categoryId: formData?.category,
+        isPublish: false,
+      });
+      postBlog(formData)
+      navigate("/my-blogs", { state: { formData } })
+    }
+    console.log(formData)
   };
+  
 
   useEffect(() => {
     getCategories();
   }, []);
 
   return (
-    <Stack sx={{ mt: 5}}>
+    <Stack sx={{ mt: 5 }}>
       <Box
         sx={{
           '& .MuiTextField-root, & .MuiFormControl-root': {

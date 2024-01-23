@@ -8,6 +8,7 @@ import { CssBaseline } from '@mui/material'
 import PrivateRouter from './PrivateRouter'
 import NewBlog from '../pages/NewBlog'
 import Detail from '../pages/Detail'
+import MyBlog from '../pages/MyBlog'
 
 const AppRouter = () => {
   return (
@@ -24,6 +25,7 @@ const AppRouter = () => {
         <Route path="detail" element={<PrivateRouter />} >
           <Route path=":id" element={<Detail />} />
         </Route>
+        <Route path="my-blogs" element={<MyBlog />} />
       </Routes>
     </BrowserRouter>
   )

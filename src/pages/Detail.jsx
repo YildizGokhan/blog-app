@@ -22,8 +22,9 @@ const Detail = () => {
   const { image } = useSelector(state => state.auth)
   const { getDetailBlogs } = useBlogCalls()
   const location = useLocation();
+  const blog  = location.state?.blog;
   const { detail } = useSelector(state => state.blog)
-  const { blog } = location.state;
+
   console.log("detail", detail);
   const { postLike } = useBlogCalls()
   const { _id } = useSelector(state => state.auth);
