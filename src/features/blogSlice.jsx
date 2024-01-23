@@ -24,10 +24,6 @@ const blogSlice = createSlice({
             state.loading = false
             state.detail = payload.data
         },
-        // postCommentSuccess: (state, { payload }) => {
-        //     state.loading = false
-        //     state.detail = payload.data
-        // },
         fetchFail: (state) => {
             state.loading = false
             state.error = true

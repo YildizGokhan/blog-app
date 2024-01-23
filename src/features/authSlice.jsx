@@ -6,6 +6,7 @@ const initialState = {
     error: false,
     token: "",
     image: "",
+    _id: "",
 }
 
 const authSlice = createSlice({
@@ -18,6 +19,7 @@ const authSlice = createSlice({
         loginSuccess: (state, { payload }) => {
             state.loading = false
             state.user = payload.user.username
+            state._id= payload.user._id
             state.token = payload.token
             state.image = payload.user.image
         },

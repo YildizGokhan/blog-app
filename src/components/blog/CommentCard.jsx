@@ -10,13 +10,13 @@ import { Box } from '@mui/joy';
 
 export default function CommentCard() {
   const { detail } = useSelector(state => state.blog);
-  const { user } = useSelector(state => state.auth);
+  const { _id } = useSelector(state => state.auth);
   console.log("detail", detail);
-  console.log("user", user);
+  console.log("user", _id);
 
   return (
     <div>
-      {detail?.comments.map((comment) => (
+      {detail?.comments?.map((comment) => (
         <Box key={comment._id} sx={{ mt: 2 }}>
           <Card
             invertedColors
@@ -38,7 +38,7 @@ export default function CommentCard() {
               <Stack level="body-md">
                 <Box>
                   <Typography>{comment.comment}</Typography>
-                  {comment.userId._id === user._id ? (
+                  {comment.userId._id === _id ? (
                     <CardActions>
                       <Button variant="solid" color='success'>
                         Edit
@@ -48,7 +48,7 @@ export default function CommentCard() {
                       </Button>
                     </CardActions>
                   ) : (
-                   ""
+                    ""
                   )}
                 </Box>
               </Stack>

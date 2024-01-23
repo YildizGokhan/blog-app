@@ -14,6 +14,7 @@ import { Box } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import useBlogCalls from '../../hooks/useBlogCalls';
 import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 
 
 
@@ -21,9 +22,19 @@ import { useEffect, useState } from 'react';
 
 export default function CardBlog({ blog }) {
   const navigate = useNavigate()
-  const [count, setCount] = useState(0)
+  const { postLike } = useBlogCalls()
+  const { _id } = useSelector(state => state.auth);
+  const [like, setLike] = useState(blog.likes.includes(_id))
+  const handleLike =  () => {
+    if(blog.likes.includes(_id)){
+      setLike(false)
+      postLike(blog._id)
+    }else{
+      setLike(true)
+      postLike(blog._id)
+    }
+  };
 
-  
 
   return (
     <Card sx={{ maxWidth: 345 }}>
@@ -53,29 +64,29 @@ export default function CardBlog({ blog }) {
       </CardContent>
       <CardActions disableSpacing sx={{ justifyContent: "space-between" }}>
         <Box>
-          <IconButton aria-label="add to favorites">
-            <FavoriteIcon />
+          <IconButton onClick={handleLike}   aria-label="add to favorites">
+            <FavoriteIcon  color={like ? "error" : ""} />
             <Typography >
-              {blog.likes.length}
+              {blog?.likes?.length}
             </Typography>
           </IconButton>
           <IconButton aria-label="comment">
             <CommentIcon />
             <Typography >
-              {blog.comments.length}
+              {blog?.comments?.length}
             </Typography>
           </IconButton>
           <IconButton aria-label="visible">
             <VisibilityIcon />
             <Typography >
-              {blog.countOfVisitors}
+              {blog?.countOfVisitors}
             </Typography>
           </IconButton>
         </Box>
 
         <Button variant="contained" sx={{ color: "cyan", backgroundColor: "black", cursor: "pointer", "&:hover": { background: "darkslateblue", color: "white", transform: "scale(1.1)" } }}
           onClick={() => {
-            navigate(`/detail/${blog._id}`, { state: { blog } })
+            navigate(`/detail/${blog?._id}`, { state: { blog } })
           }} >
           Read More</Button>
       </CardActions>

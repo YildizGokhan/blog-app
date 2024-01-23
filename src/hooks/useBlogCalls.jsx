@@ -44,9 +44,23 @@ const useBlogCalls = () => {
             toastErrorNotify("Comment sent failed")
         }
     }
-    return { getBlogs, getDetailBlogs,
-         postComment 
+    const postLike = async (id) => {
+        dispatch(fetchStart())
+        try {
+            const { data } = await axiosWithToken.post(`/blogs/${id}/postLike`)
+            dispatch(getDetailBlogsSuccess(data))
+            toastSuccessNotify("Like sent succesfully")
+            window.location.reload()
+        } catch (error) {
+            dispatch(fetchFail())
+            toastErrorNotify("Like sent failed")
         }
+    }
+
+    return {
+        getBlogs, getDetailBlogs,
+        postComment, postLike
+    }
 }
 
 export default useBlogCalls

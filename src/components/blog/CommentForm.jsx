@@ -56,7 +56,7 @@ export default function CommentArea() {
         minRows={3}
         onChange={handleChange}
         name="comment"
-        defaultValue={info.comment}
+        defaultValue={info?.comment}
         endDecorator={
           <Box
             sx={{
