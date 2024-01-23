@@ -23,6 +23,7 @@ const blogSlice = createSlice({
         getDetailBlogsSuccess: (state, { payload }) => {
             state.loading = false
             state.detail = payload.data
+            state.blogs = payload.data
         },
         fetchFail: (state) => {
             state.loading = false

@@ -20,27 +20,41 @@ import CommentCard from '../components/blog/CommentCard';
 const Detail = () => {
   const [commentArea, setCommentArea] = useState(false);
   const { image } = useSelector(state => state.auth)
-
-  const { getDetailBlogs} = useBlogCalls()
+  const { getDetailBlogs } = useBlogCalls()
   const location = useLocation();
+  const { detail } = useSelector(state => state.blog)
   const { blog } = location.state;
-  
-  useEffect(() => {
-    getDetailBlogs(blog._id)
-  }, [blog])
+  console.log("detail", detail);
+  const { postLike } = useBlogCalls()
+  const { _id } = useSelector(state => state.auth);
+
+  const handleLike = () => {
+    if (detail?.likes?.includes(_id)) {   
+      postLike(blog?._id);
+      getDetailBlogs(blog._id);
+    } else {
+      postLike(blog?._id);
+      getDetailBlogs(blog._id);
+    }
+  };
+
 
   const handleComment = () => {
     setCommentArea(!commentArea);
   }
+
+  useEffect(() => {
+    getDetailBlogs(blog._id)
+  }, [])
 
   return (
     <Stack sx={{ mt: 5, justifyContent: "center", alignItems: "center" }} >
       <Card sx={{ maxWidth: "60%" }}>
         <CardMedia
           component="img"
-          alt={blog?.title}
+          alt={detail?.title}
           height="50%"
-          image={blog?.image}
+          image={detail?.image}
           sx={{ objectFit: "contain" }}
         />
         <CardHeader
@@ -55,41 +69,41 @@ const Detail = () => {
               />
             </Avatar>
           }
-          title={blog?.title}
-          subheader={new Date(blog?.createdAt).toLocaleString("tr-TR")}
+          title={detail?.title}
+          subheader={new Date(detail?.createdAt).toLocaleString("tr-TR")}
         />
         <CardContent>
           <Typography variant="body2" >
-            {blog.title}
+            {detail?.title}
           </Typography>
           <Typography color="text.secondary" gutterBottom variant="h5" component="div" sx={{ mt: 1, mb: 1.5, fontSize: "0.8rem", fontFamily: "Roboto, Helvetica, Arial, sans-serif;", fontWeight: "400" }}>
-            {blog?.content}
+            {detail?.content}
           </Typography>
 
           <hr />
           <Typography variant="body2" color="text.secondary">
             Published Date:
-            {new Date(blog?.createdAt).toLocaleString("tr-TR")}
+            {new Date(detail?.createdAt).toLocaleString("tr-TR")}
           </Typography>
         </CardContent>
         <CardActions sx={{ justifyContent: "space-between" }}>
           <Box>
-            <IconButton aria-label="add to favorites">
-              <FavoriteIcon />
+            <IconButton onClick={handleLike} aria-label="add to favorites">
+              <FavoriteIcon color={detail?.likes?.includes(_id) ? "error" : ""} />
               <Typography>
-                {blog?.likes?.length}
+                {detail?.likes?.length}
               </Typography>
             </IconButton>
             <IconButton aria-label="comment" onClick={handleComment}>
-              <CommentIcon  />
+              <CommentIcon />
               <Typography>
-                {blog?.comments?.length}
+                {detail?.comments?.length}
               </Typography>
             </IconButton>
             <IconButton aria-label="visible">
               <VisibilityIcon />
               <Typography>
-                {blog?.countOfVisitors}
+                {detail?.countOfVisitors}
               </Typography>
             </IconButton>
           </Box>
@@ -97,10 +111,10 @@ const Detail = () => {
       </Card>
       {commentArea && (
         <>
-        <CommentForm />
-        <CommentCard />
+          <CommentForm />
+          <CommentCard />
         </>
-        )}
+      )}
     </Stack>
   );
 }

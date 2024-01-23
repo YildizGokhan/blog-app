@@ -25,7 +25,6 @@ const useBlogCalls = () => {
         try {
             const { data } = await axiosWithToken.get(`/blogs/${id}`)
             dispatch(getDetailBlogsSuccess(data))
-            getBlogs()
             toastSuccessNotify("Blogs details fetched successfully")
         } catch (error) {
             dispatch(fetchFail())
@@ -36,9 +35,10 @@ const useBlogCalls = () => {
     const postComment = async (info) => {
         dispatch(fetchStart())
         try {
-            const { data } = await axiosWithToken.post("/comments",info)
+            const { data } = await axiosWithToken.post("/comments", info)
             getDetailBlogs()
             toastSuccessNotify("Comment sent succesfully")
+            window.location.reload()
         } catch (error) {
             dispatch(fetchFail())
             toastErrorNotify("Comment sent failed")
