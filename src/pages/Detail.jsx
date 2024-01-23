@@ -38,7 +38,6 @@ const Detail = () => {
     }
   };
 
-
   const handleComment = () => {
     setCommentArea(!commentArea);
   }
@@ -48,7 +47,7 @@ const Detail = () => {
   }, [])
 
   return (
-    <Stack sx={{ mt: 5, justifyContent: "center", alignItems: "center" }} >
+    <Stack sx={{ mt: 5, justifyContent: "center", alignItems: "center"}} >
       <Card sx={{ maxWidth: "60%" }}>
         <CardMedia
           component="img"

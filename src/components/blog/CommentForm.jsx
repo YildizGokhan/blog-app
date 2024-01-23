@@ -23,7 +23,7 @@ export default function CommentArea() {
   const { detail} = useSelector(state => state.blog)
 
   const [info, setInfo] = useState({
-    blogId: detail._id,
+    blogId: detail?._id,
     comment: "",
   });
 

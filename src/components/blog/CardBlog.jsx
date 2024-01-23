@@ -20,10 +20,10 @@ export default function CardBlog({ blog }) {
   const { _id } = useSelector(state => state.auth);
  
   const handleLike = () => {
-    if (blog.likes.includes(_id)) {
-      postLike(blog._id)
+    if (blog?.likes?.includes(_id)) {
+      postLike(blog?._id)
     } else {
-      postLike(blog._id)
+      postLike(blog?._id)
     }
   };
 
@@ -56,7 +56,7 @@ export default function CardBlog({ blog }) {
       <CardActions disableSpacing sx={{ justifyContent: "space-between" }}>
         <Box>
           <IconButton onClick={handleLike} aria-label="add to favorites">
-            <FavoriteIcon color={blog.likes.includes(_id) ? "error" : ""} />
+            <FavoriteIcon color={blog?.likes?.includes(_id) ? "error" : ""} />
             <Typography >
               {blog?.likes?.length}
             </Typography>

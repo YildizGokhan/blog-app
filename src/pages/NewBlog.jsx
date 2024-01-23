@@ -54,7 +54,7 @@ const NewBlog = () => {
   }, []);
 
   return (
-    <Stack>
+    <Stack sx={{ mt: 5}}>
       <Box
         sx={{
           '& .MuiTextField-root, & .MuiFormControl-root': {
