@@ -1,6 +1,6 @@
 
 import { useLocation } from 'react-router-dom';
-import { Stack } from '@mui/material';
+import { Button, Stack } from '@mui/material';
 import { CardActions } from '@mui/joy';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -16,21 +16,22 @@ import { useEffect, useState } from 'react';
 import CommentForm from '../components/blog/CommentForm';
 import useBlogCalls from '../hooks/useBlogCalls';
 import CommentCard from '../components/blog/CommentCard';
+import UpdateModal from '../components/blog/UpdateModal';
 
 const Detail = () => {
   const [commentArea, setCommentArea] = useState(false);
   const { image } = useSelector(state => state.auth)
-  const { getDetailBlogs } = useBlogCalls()
   const location = useLocation();
-  const blog  = location.state?.blog;
+  const blog = location.state?.blog;
+  const { getDetailBlogs } = useBlogCalls()
   const { detail } = useSelector(state => state.blog)
 
   console.log("detail", detail);
   const { postLike } = useBlogCalls()
   const { _id } = useSelector(state => state.auth);
-
+  console.log(_id)
   const handleLike = () => {
-    if (detail?.likes?.includes(_id)) {   
+    if (detail?.likes?.includes(_id)) {
       postLike(blog?._id);
       getDetailBlogs(blog._id);
     } else {
@@ -43,12 +44,16 @@ const Detail = () => {
     setCommentArea(!commentArea);
   }
 
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   useEffect(() => {
     getDetailBlogs(blog?._id)
   }, [])
 
   return (
-    <Stack sx={{ mt: 5, justifyContent: "center", alignItems: "center"}} >
+    <Stack sx={{ mt: 5, justifyContent: "center", alignItems: "center" }} >
       <Card sx={{ maxWidth: "60%" }}>
         <CardMedia
           component="img"
@@ -115,6 +120,10 @@ const Detail = () => {
           <CommentCard />
         </>
       )}
+      {detail?.likes?.includes(_id) ? (
+        <Button onClick={handleOpen}>Open modal</Button>
+      ) : ""}
+      <UpdateModal open={open} handleClose={handleClose} />
     </Stack>
   );
 }

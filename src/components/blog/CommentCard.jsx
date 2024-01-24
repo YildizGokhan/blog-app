@@ -30,10 +30,10 @@ export default function CommentCard() {
               {comment.userId.firstName} {comment.userId.lastName}
             </Typography>
             <CardContent>
-              <Typography level="title-xs">
-                {comment.createdAt && new Date(comment.createdAt).toLocaleString("tr-TR")}
+              <Typography level="title-xs" sx={{ fontWeight: 200, fontSize: "12px" }}>
+               Published Date: {comment.createdAt && new Date(comment.createdAt).toLocaleString("tr-TR")}
               </Typography>
-              <Stack level="body-md">
+              <Stack level="body-md" sx={{ mt: 2, fontWeight: 700 }}>
                 <Box>
                   <Typography>{comment.comment}</Typography>
                   {comment.userId._id === _id ? (

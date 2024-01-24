@@ -50,7 +50,7 @@ export default function CommentArea() {
         width: '60%',
       }}
     >
-      <FormLabel>Your comment</FormLabel>
+      <FormLabel sx={{ color: "##000010", mt: 2, mx: 2 , fontSize: "20px"}}>Your comment</FormLabel>
       <Textarea
         placeholder="Type something here…"
         minRows={3}
