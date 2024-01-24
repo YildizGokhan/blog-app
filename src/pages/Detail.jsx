@@ -29,7 +29,7 @@ const Detail = () => {
   console.log("detail", detail);
   const { postLike } = useBlogCalls()
   const { _id } = useSelector(state => state.auth);
-  console.log(_id)
+
   const handleLike = () => {
     if (detail?.likes?.includes(_id)) {
       postLike(blog?._id);
@@ -121,7 +121,15 @@ const Detail = () => {
         </>
       )}
       {detail?.likes?.includes(_id) ? (
-        <Button onClick={handleOpen}>Open modal</Button>
+        <CardActions>
+          <Button sx={{ width: "10%" }} variant="outlined" color='primary' onClick={handleOpen}>
+            Edit
+          </Button>
+          <Button sx={{ width: "10%" }} variant="outlined" color='success'>
+            Delete
+          </Button>
+        </CardActions>
+
       ) : ""}
       <UpdateModal open={open} handleClose={handleClose} />
     </Stack>

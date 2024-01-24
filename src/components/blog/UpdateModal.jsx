@@ -1,4 +1,4 @@
-import * as React from 'react';
+
 import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
@@ -6,9 +6,9 @@ import Fade from '@mui/material/Fade';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { FormControl, InputLabel, MenuItem, Select, Stack, TextField } from '@mui/material';
-// import { TextField } from '@mui/joy';
 import { useSelector } from 'react-redux';
 import useBlogCalls from '../../hooks/useBlogCalls';
+import { useEffect, useState } from 'react';
 
 const style = {
   position: 'absolute',
@@ -23,64 +23,110 @@ const style = {
 };
 
 export default function UpdateModal({ open, handleClose }) {
-  const { categories } = useSelector((state) => state.blog);
-  const { getCategories, getDetailBlogs } = useBlogCalls();
-  const { detail } = useSelector(state => state.blog)
+  const { categories, blogs, detail } = useSelector((state) => state.blog);
+  const { getCategories, getDetailBlogs, putBlog, getBlogs } = useBlogCalls();
   const statuses = ['Draft', 'Published'];
 
+  //hazır yapı
   const renderSelectOptions = (options, isCategory = true) => {
-    return options.map((item) => (
-      <MenuItem key={item._id} value={isCategory ? item._id : item}>
-        {isCategory ? item.name : item}
+    return options?.map((item) => (
+      <MenuItem key={item?._id} value={isCategory ? item?._id : item}>
+        {isCategory ? item?.name : item}
       </MenuItem>
     ));
   };
 
-  const [formData, setFormData] = React.useState({
-    category: detail.categoryId,
-    status: detail.status,
-    title: detail.title,
-    image: detail.image,
-    content: detail.content,
+  const [formData, setFormData] = useState({
+    category: detail.categoryId || '',
+    status: detail.status || '',
+    title: detail.title || '',
+    image: detail.image || '',
+    content: detail.content || '',
+    isPublish: true,
+    _id: detail?._id || '',
+    userId: detail?.userId?._id || '',
   });
+
+
+  //modal açıldığında ekran boyutundaki oynamalardan kaynaklı gelen hatayı gidermek için.
+  const [windowSize, setWindowSize] = useState({
+    width: window.innerWidth,
+    height: window.innerHeight,
+  });
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowSize({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+
+  useEffect(() => {
+    getCategories();
+  }, []);
+
+  useEffect(() => {
+    if (blogs._id) {
+      getDetailBlogs(blogs._id);
+    }
+  }, [blogs._id]);
+
+  useEffect(() => {
+    
+      setFormData({
+        category: detail.categoryId || '',
+        status: detail.status || '',
+        title: detail.title || '',
+        image: detail.image || '',
+        content: detail.content || '',
+        isPublish: true,
+        _id: detail?._id || '',
+        userId: detail?.userId?._id || '',
+      });
+    
+  }, [ detail]);
+
+
 
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  React.useEffect(() => {
-    getCategories()
-  }, [])
-  console.log(detail)
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    await putBlog({ id: blogs._id, data: formData });
+    handleClose();
+    console.log("Blog güncellendi, yeni verilerle! 🎉", formData);
+  };
+
   return (
-    <Stack sx={{ mt: 5, }}>
+    <Stack sx={{ mt: 6, justifyContent: "center", alignItems: "center" }} >
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
         open={open}
         onClose={handleClose}
         closeAfterTransition
-
-        slots={{ backdrop: Backdrop }}
-        slotProps={{
-          backdrop: {
-            timeout: 500,
-          },
-        }}
-        sx={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-
-        }}
         BackdropComponent={Backdrop}
         BackdropProps={{
           timeout: 500,
-          sx: { backgroundColor: 'rgba(255, 255, 255, 0.1)', }
+          sx: { backgroundColor: 'rgba(255, 255, 255, 0.1)' }
         }}
       >
         <Fade in={open}>
-          <Stack sx={{ mt: 5, margin: "auto", width: "80%", justifyContent: "center", alignItems: "center" }} >
+          <Stack sx={{
+            mt: "10%", width: "80%", justifyContent: "center", alignItems: "center",
+            width: windowSize.width > 400 ? '80%' : '90%',
+          }}>
             <Box
               sx={{
                 '& .MuiTextField-root, & .MuiFormControl-root': {
@@ -94,12 +140,11 @@ export default function UpdateModal({ open, handleClose }) {
                 borderRadius: '12px',
                 boxShadow: 3,
                 margin: "auto"
-
               }}
               noValidate
               autoComplete="off"
               component="form"
-            // onSubmit={handleSubmit}
+              onSubmit={handleSubmit}
             >
               <Typography variant="h4" gutterBottom sx={{ textAlign: "center", mt: 2 }}>
                 Update Blog
@@ -111,7 +156,7 @@ export default function UpdateModal({ open, handleClose }) {
                 label="Title"
                 margin="normal"
                 type="text"
-                value={detail?.title}
+                value={formData.title}
                 onChange={handleInputChange}
               />
               <TextField
@@ -121,7 +166,7 @@ export default function UpdateModal({ open, handleClose }) {
                 label="Image"
                 margin="normal"
                 type="url"
-                value={detail?.image}
+                value={formData.image}
                 onChange={handleInputChange}
               />
               <FormControl fullWidth>
@@ -131,7 +176,7 @@ export default function UpdateModal({ open, handleClose }) {
                   id="category"
                   name="category"
                   label="Category *"
-                  value={detail?.category}
+                  value={formData.category._id || ''}
                   onChange={handleInputChange}
                 >
                   {renderSelectOptions(categories)}
@@ -144,7 +189,7 @@ export default function UpdateModal({ open, handleClose }) {
                   id="status"
                   name="status"
                   label="Status *"
-                  value={detail?.status}
+                  value={formData.status || ""}
                   onChange={handleInputChange}
                 >
                   {renderSelectOptions(statuses, false)}
@@ -159,7 +204,7 @@ export default function UpdateModal({ open, handleClose }) {
                 multiline
                 minRows={4}
                 onChange={handleInputChange}
-                value={detail?.content}
+                value={formData.content}
               />
               <Button
                 type="submit"
