@@ -37,7 +37,7 @@ export default function UpdateModal({ open, handleClose }) {
   };
 
   const [formData, setFormData] = useState({
-    category: detail.categoryId || '',
+    categoryId: detail.categoryId || '',
     status: detail.status || '',
     title: detail.title || '',
     image: detail.image || '',
@@ -75,19 +75,16 @@ export default function UpdateModal({ open, handleClose }) {
   }, []);
 
   useEffect(() => {
-    if (blogs._id) {
-      getDetailBlogs(blogs._id);
-    }
-  }, [blogs._id]);
+      getDetailBlogs(detail?._id);
+  }, []);
 
-  useEffect(() => {
-    
+  useEffect(() => { 
       setFormData({
-        category: detail.categoryId || '',
-        status: detail.status || '',
-        title: detail.title || '',
-        image: detail.image || '',
-        content: detail.content || '',
+        categoryId: detail?.categoryId || '',
+        status: detail?.status || '',
+        title: detail?.title || '',
+        image: detail?.image || '',
+        content: detail?.content || '',
         isPublish: true,
         _id: detail?._id || '',
         userId: detail?.userId?._id || '',
@@ -103,7 +100,7 @@ export default function UpdateModal({ open, handleClose }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await putBlog({ id: blogs._id, data: formData });
+    await putBlog({ id: formData._id, data: formData });
     handleClose();
     console.log("Blog güncellendi, yeni verilerle! 🎉", formData);
   };
@@ -173,10 +170,10 @@ export default function UpdateModal({ open, handleClose }) {
                 <InputLabel id="category-label">Category</InputLabel>
                 <Select
                   labelId="category-label"
-                  id="category"
-                  name="category"
+                  id="categoryId"
+                  name="categoryId"
                   label="Category *"
-                  value={formData.category._id || ''}
+                  value={formData.categoryId._id || ''}
                   onChange={handleInputChange}
                 >
                   {renderSelectOptions(categories)}

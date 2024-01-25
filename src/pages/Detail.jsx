@@ -52,6 +52,7 @@ const Detail = () => {
     getDetailBlogs(blog?._id)
   }, [])
 
+  console.log(detail?.likes?.includes(_id))
   return (
     <Stack sx={{ mt: 5, justifyContent: "center", alignItems: "center" }} >
       <Card sx={{ maxWidth: "60%" }}>
@@ -120,7 +121,7 @@ const Detail = () => {
           <CommentCard />
         </>
       )}
-      {detail?.likes?.includes(_id) ? (
+      {detail?.userId?._id?.includes(_id) ? (
         <CardActions>
           <Button sx={{ width: "10%" }} variant="outlined" color='primary' onClick={handleOpen}>
             Edit

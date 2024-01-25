@@ -84,18 +84,18 @@ const useBlogCalls = () => {
         }
     }
 
-    const putBlog = async ({id, info}) => {
+    const putBlog = async ({ id, data }) => {
         dispatch(fetchStart());
         try {
-          const { data } = await axiosWithToken.put(`/blogs/${id}`, info);
-          await getBlogs(id);
-          await dispatch(getDetailBlogsSuccess(data))
-          toastSuccessNotify("Blogs edited successfully");
-        } catch (error) { 
-          dispatch(fetchFail());
-          toastErrorNotify("Blogs edited failed");
+            const { data: updatedData } = await axiosWithToken.put(`/blogs/${id}`, data);
+            await getBlogs();
+            await dispatch(getDetailBlogsSuccess(updatedData));
+            toastSuccessNotify("Blog başarıyla güncellendi");
+        } catch (error) {
+            dispatch(fetchFail());
+            toastErrorNotify("Blog güncelleme başarısız");
         }
-      };
+    };
 
     return {
         getBlogs, getDetailBlogs, getCategories,
