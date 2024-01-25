@@ -21,13 +21,17 @@ const DashBoard = () => {
 
   return (
     <Grid container gap={3} mt={1} justifyContent={"center"} sx={{ backgroundColor: "#f5f5f5" }}>
-      {blogs?.map((blog) => (
-        <Grid item key={blog?._id}>
-          <CardBlog blog={blog} />
-        </Grid>
-      ))}
+      {blogs && blogs.length > 0 ? (
+        blogs.map((blog) => (
+          <Grid item key={blog?._id}>
+            <CardBlog blog={blog} />
+          </Grid>
+        ))
+      ) : (
+        <p>No blogs available</p>
+      )}
     </Grid>
-  )
+  );
 }
 
 export default DashBoard
