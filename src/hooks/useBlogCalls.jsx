@@ -45,6 +45,18 @@ const useBlogCalls = () => {
         }
     }
 
+    const getSingleComments = async (id) => {
+        dispatch(fetchStart())
+        try {
+            const { data } = await axiosWithToken.get(`/comments/${id}`)
+            dispatch(getDetailBlogsSuccess(data))
+            toastSuccessNotify("Blogs details fetched successfully")
+        } catch (error) {
+            dispatch(fetchFail())
+            toastErrorNotify("Blogs details fetch failed")
+        }
+    }
+
     const postComment = async (info) => {
         dispatch(fetchStart())
         try {
@@ -97,6 +109,20 @@ const useBlogCalls = () => {
         }
     };
 
+    const putComment = async ({ id, data }) => {
+        dispatch(fetchStart());
+        try {
+            const { data: updatedData } = await axiosWithToken.put(`/comments/${id}`, data);
+            await getBlogs();
+            await dispatch(getDetailBlogsSuccess(updatedData));
+            toastSuccessNotify("Blog başarıyla güncellendi");
+        } catch (error) {
+            dispatch(fetchFail());
+            toastErrorNotify("Blog güncelleme başarısız");
+        }
+    };
+
+
     const deleteBlog = async (id) => {
         dispatch(fetchStart())
         try {
@@ -110,9 +136,9 @@ const useBlogCalls = () => {
     }
 
     return {
-        getBlogs, getDetailBlogs, getCategories,
+        getBlogs, getDetailBlogs, getCategories,getSingleComments,
         postComment, postLike, postBlog,
-        putBlog,
+        putBlog, putComment,
         deleteBlog
     }
 }

@@ -61,7 +61,6 @@ const Detail = () => {
     }
   }
 
-  console.log(detail?.likes?.includes(_id))
   return (
     <Stack sx={{ mt: 5, justifyContent: "center", alignItems: "center" }} >
       <Card sx={{ maxWidth: "60%" }}>
