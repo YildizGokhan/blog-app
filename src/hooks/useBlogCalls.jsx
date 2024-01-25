@@ -97,10 +97,23 @@ const useBlogCalls = () => {
         }
     };
 
+    const deleteBlog = async (id) => {
+        dispatch(fetchStart())
+        try {
+            await axiosWithToken.delete(`/blogs/${id}`)
+            toastSuccessNotify("Blog başarıyla silindi")
+            window.location.reload()
+        } catch (error) {
+            dispatch(fetchFail())
+            toastErrorNotify("Blog silme başarısız")
+        }
+    }
+
     return {
         getBlogs, getDetailBlogs, getCategories,
         postComment, postLike, postBlog,
-        putBlog
+        putBlog,
+        deleteBlog
     }
 }
 

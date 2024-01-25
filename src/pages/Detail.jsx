@@ -1,5 +1,5 @@
 
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Button, Stack } from '@mui/material';
 import { CardActions } from '@mui/joy';
 import Card from '@mui/material/Card';
@@ -23,8 +23,9 @@ const Detail = () => {
   const { image } = useSelector(state => state.auth)
   const location = useLocation();
   const blog = location.state?.blog;
-  const { getDetailBlogs } = useBlogCalls()
+  const { getDetailBlogs, deleteBlog } = useBlogCalls()
   const { detail } = useSelector(state => state.blog)
+  const navigate = useNavigate()
 
   console.log("detail", detail);
   const { postLike } = useBlogCalls()
@@ -51,6 +52,14 @@ const Detail = () => {
   useEffect(() => {
     getDetailBlogs(blog?._id)
   }, [])
+
+  const handleDelete = () => {
+    const confirmed = window.confirm(`Are you sure you want to delete ${detail?.title}?`);
+    if(confirmed) {
+      deleteBlog(blog?._id)
+      navigate("/")
+    }
+  }
 
   console.log(detail?.likes?.includes(_id))
   return (
@@ -122,11 +131,12 @@ const Detail = () => {
         </>
       )}
       {detail?.userId?._id?.includes(_id) ? (
-        <CardActions>
-          <Button sx={{ width: "10%" }} variant="outlined" color='primary' onClick={handleOpen}>
+        <CardActions sx={{ m: 2 }}>
+          <Button sx={{ width: "10%", m: 2 }} variant="contained" color='success' onClick={handleOpen}>
             Edit
           </Button>
-          <Button sx={{ width: "10%" }} variant="outlined" color='success'>
+          <Button sx={{ width: "10%" }} variant="contained" color='error'
+          onClick={handleDelete}>
             Delete
           </Button>
         </CardActions>

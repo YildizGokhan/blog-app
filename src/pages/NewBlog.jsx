@@ -13,6 +13,7 @@ import { useSelector } from 'react-redux';
 import useBlogCalls from '../hooks/useBlogCalls';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { toastErrorNotify } from '../helper/ToastNotify';
 
 const statuses = ['Draft', 'Published'];
 
@@ -42,6 +43,13 @@ const NewBlog = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    // content min 1  satır olsun yoksa düzen bozuluyor
+    if (formData?.content.length < 100) {
+      toastErrorNotify("This blog is too short to published.");
+      return;
+    }
+
     if (formData?.status === 'Published') {
       postBlog({
         title: formData?.title,
@@ -50,6 +58,7 @@ const NewBlog = () => {
         categoryId: formData?.category,
         isPublish: true,
       });
+      navigate("/")
     } else {
       setFormData({
         title: formData?.title,
@@ -63,14 +72,13 @@ const NewBlog = () => {
     }
     console.log(formData)
   };
-  
 
   useEffect(() => {
     getCategories();
   }, []);
 
   return (
-    <Stack sx={{ mt: 5 }}>
+    <Stack sx={{ mt: 2, height: '80vh' }} >
       <Box
         sx={{
           '& .MuiTextField-root, & .MuiFormControl-root': {
@@ -145,7 +153,7 @@ const NewBlog = () => {
           margin="normal"
           value={formData?.content}
           multiline
-          minRows={4}
+          inputProps={{ minLength: 100 }}
           onChange={handleInputChange}
         />
         <Button

@@ -1,4 +1,3 @@
-
 import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
@@ -9,25 +8,15 @@ import { FormControl, InputLabel, MenuItem, Select, Stack, TextField } from '@mu
 import { useSelector } from 'react-redux';
 import useBlogCalls from '../../hooks/useBlogCalls';
 import { useEffect, useState } from 'react';
+import { toastErrorNotify } from '../../helper/ToastNotify';
 
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 24,
-  p: 4,
-};
+
 
 export default function UpdateModal({ open, handleClose }) {
-  const { categories, blogs, detail } = useSelector((state) => state.blog);
-  const { getCategories, getDetailBlogs, putBlog, getBlogs } = useBlogCalls();
+  const { categories,detail } = useSelector((state) => state.blog);
+  const { getCategories, getDetailBlogs, putBlog} = useBlogCalls();
   const statuses = ['Draft', 'Published'];
 
-  //hazır yapı
   const renderSelectOptions = (options, isCategory = true) => {
     return options?.map((item) => (
       <MenuItem key={item?._id} value={isCategory ? item?._id : item}>
@@ -47,8 +36,6 @@ export default function UpdateModal({ open, handleClose }) {
     userId: detail?.userId?._id || '',
   });
 
-
-  //modal açıldığında ekran boyutundaki oynamalardan kaynaklı gelen hatayı gidermek için.
   const [windowSize, setWindowSize] = useState({
     width: window.innerWidth,
     height: window.innerHeight,
@@ -69,30 +56,27 @@ export default function UpdateModal({ open, handleClose }) {
     };
   }, []);
 
-
   useEffect(() => {
     getCategories();
   }, []);
 
   useEffect(() => {
-      getDetailBlogs(detail?._id);
+    getDetailBlogs(detail?._id);
   }, []);
 
-  useEffect(() => { 
-      setFormData({
-        categoryId: detail?.categoryId || '',
-        status: detail?.status || '',
-        title: detail?.title || '',
-        image: detail?.image || '',
-        content: detail?.content || '',
-        isPublish: true,
-        _id: detail?._id || '',
-        userId: detail?.userId?._id || '',
-      });
-    
-  }, [ detail]);
+  useEffect(() => {
+    setFormData({
+      categoryId: detail?.categoryId || '',
+      status: detail?.status || '',
+      title: detail?.title || '',
+      image: detail?.image || '',
+      content: detail?.content || '',
+      isPublish: true,
+      _id: detail?._id || '',
+      userId: detail?.userId?._id || '',
+    });
 
-
+  }, [detail]);
 
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -100,13 +84,18 @@ export default function UpdateModal({ open, handleClose }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await putBlog({ id: formData._id, data: formData });
-    handleClose();
-    console.log("Blog güncellendi, yeni verilerle! 🎉", formData);
+    if (formData?.content.length < 100) {
+      toastErrorNotify("This blog is too short to be published.");
+      return;
+    }
+    if (formData?.status === 'Published') {
+      await putBlog({ id: formData._id, data: formData });
+      handleClose();
+    }
   };
 
   return (
-    <Stack sx={{ mt: 6, justifyContent: "center", alignItems: "center" }} >
+    <Stack sx={{ mt: 6, justifyContent: 'center', alignItems: 'center' }}>
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
@@ -116,13 +105,16 @@ export default function UpdateModal({ open, handleClose }) {
         BackdropComponent={Backdrop}
         BackdropProps={{
           timeout: 500,
-          sx: { backgroundColor: 'rgba(255, 255, 255, 0.1)' }
+          sx: { backgroundColor: 'rgba(255, 255, 255, 0.1)' },
         }}
       >
         <Fade in={open}>
           <Stack sx={{
-            mt: "10%", width: "80%", justifyContent: "center", alignItems: "center",
-            width: windowSize.width > 400 ? '80%' : '90%',
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            width: windowSize.width > 600 ? '60%' : '90%',
           }}>
             <Box
               sx={{
@@ -136,14 +128,15 @@ export default function UpdateModal({ open, handleClose }) {
                 color: '#000000',
                 borderRadius: '12px',
                 boxShadow: 3,
-                margin: "auto"
+                margin: 'auto',
+                overflowY: 'auto',
               }}
               noValidate
               autoComplete="off"
               component="form"
               onSubmit={handleSubmit}
             >
-              <Typography variant="h4" gutterBottom sx={{ textAlign: "center", mt: 2 }}>
+              <Typography variant="h6" gutterBottom sx={{ textAlign: 'center', mt: 2 }}>
                 Update Blog
               </Typography>
               <TextField
@@ -199,7 +192,8 @@ export default function UpdateModal({ open, handleClose }) {
                 label="Content"
                 margin="normal"
                 multiline
-                minRows={4}
+                inputProps={{ minLength: 100 }}
+                sx={{ overflowY: 'scroll', maxHeight: '200px' }}
                 onChange={handleInputChange}
                 value={formData.content}
               />
@@ -210,8 +204,8 @@ export default function UpdateModal({ open, handleClose }) {
                 sx={{
                   mx: 1,
                   my: 1,
-                  px: 8,
-                  backgroundColor: 'black',
+                  px: 3,
+                  backgroundColor: '#000010',
                   cursor: 'pointer',
                   '&:hover': {
                     background: 'darkslateblue',

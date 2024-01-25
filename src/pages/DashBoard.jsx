@@ -10,11 +10,12 @@ const DashBoard = () => {
 
   useEffect(() => {
     // sürekli map hatası alıyordum. Bu sebepele asenkron yapı ekledim.
-    const fetchData = async () => {
-      await getBlogs()
-    }
+    // const fetchData = async () => {
+    //   await getBlogs()
+    // }
 
-    fetchData()
+    // fetchData()
+    getBlogs()
   }, [])
 
   console.log(blogs);

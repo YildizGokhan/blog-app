@@ -9,6 +9,8 @@ import PrivateRouter from './PrivateRouter'
 import NewBlog from '../pages/NewBlog'
 import Detail from '../pages/Detail'
 import MyBlog from '../pages/MyBlog'
+import About from '../pages/About'
+import Footer from '../components/Footer'
 
 const AppRouter = () => {
   return (
@@ -26,7 +28,9 @@ const AppRouter = () => {
           <Route path=":id" element={<Detail />} />
         </Route>
         <Route path="my-blogs" element={<MyBlog />} />
+        <Route path='about' element={<About />}/>
       </Routes>
+      <Footer />
     </BrowserRouter>
   )
 }
