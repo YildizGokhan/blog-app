@@ -16,7 +16,7 @@ export default function CommentCard() {
   const { detail } = useSelector(state => state.blog);
   const { _id } = useSelector(state => state.auth);
   const [open, setOpen] = useState(false);
-  const { getSingleComments } = useBlogCalls()
+  const { getSingleComments, deleteComment } = useBlogCalls()
   const [commentId, setCommentId] = useState('');
 
 
@@ -29,7 +29,9 @@ export default function CommentCard() {
     setOpen(false);
   };
 
-
+const handleDelete = (id) => {
+  deleteComment(id)
+}
 
   return (
     <Stack sx={{ width: '100%' }}>
@@ -53,6 +55,11 @@ export default function CommentCard() {
               <Typography level="title-xs" sx={{ fontWeight: 200, fontSize: "12px" }}>
                 Published Date: {comment?.createdAt && new Date(comment?.createdAt).toLocaleString("tr-TR")}
               </Typography>
+              {comment?.updatedAt && (
+                <Typography level="title-xs" sx={{ fontWeight: 200, fontSize: "12px" }}>
+                  Updated Date: {new Date(comment?.updatedAt).toLocaleString("tr-TR")}
+                </Typography>
+              )}
               <Stack level="body-md" sx={{ mt: 2, fontWeight: 700 }}>
                 <Box>
                   <Typography>{comment?.comment}</Typography>
@@ -62,7 +69,7 @@ export default function CommentCard() {
                         Edit
                       </Button>
 
-                      <Button sx={{ width: "10%" }} variant="solid" color='danger'>
+                      <Button onClick={() => handleDelete(comment?._id)} sx={{ width: "10%" }} variant="solid" color='danger'>
                         Delete
                       </Button>
                     </CardActions>

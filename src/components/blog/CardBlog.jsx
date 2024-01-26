@@ -52,6 +52,11 @@ export default function CardBlog({ blog }) {
         <Typography variant="body2" color="text.secondary">
           Published Date: {new Date(blog?.createdAt).toLocaleString("tr-TR")}
         </Typography>
+        {blog?.updatedAt && (
+          <Typography variant="body2" color="text.secondary">
+            Updated Date: {new Date(blog?.updatedAt).toLocaleString("tr-TR")}
+          </Typography>
+        )}
       </CardContent>
       <CardActions disableSpacing sx={{ justifyContent: "space-between" }}>
         <Box>

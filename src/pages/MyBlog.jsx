@@ -9,101 +9,102 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import CommentIcon from '@mui/icons-material/Comment';
 import IconButton from '@mui/material/IconButton';
 import VisibilityIcon from '@mui/icons-material/Visibility';
-import { useLocation } from 'react-router-dom';
-import { Box } from '@mui/material';
+import { Box, Grid } from '@mui/material';
 import { useSelector } from 'react-redux';
 import useBlogCalls from '../hooks/useBlogCalls';
+import { useNavigate } from 'react-router-dom';
 
 const MyBlog = () => {
-  const location = useLocation();
-  const formData = location.state?.formData;
-  const { detail, blogs } = useSelector((state) => state.blog);
-  const { getBlogs, getDetailBlogs } = useBlogCalls();
+  const { myblogs } = useSelector((state) => state.blog);
+  const { getUserBlogs, postLike, getDetailBlogs } = useBlogCalls();
   const { _id } = useSelector((state) => state.auth);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    if (formData) {
-      getBlogs();
-      // Eğer status 'Draft' ise sadece detayları al, ama tüm blogları almasına gerek yok
-      if (formData.isPublish !== false) {
-        getDetailBlogs(formData?.categoryId);
-      }
-    }
-  }, [formData]);
+    getUserBlogs(_id);
+  }, [_id]);
 
-  if (!formData) {
-    return (
-      <div>
-        <p>No blog data found!</p>
-      </div>
-    );
-  }
+  const handleLike = (blogId) => {
+    postLike(blogId);
+  };
+
+  const handleReadMore = async (blogId) => {
+    await getDetailBlogs(blogId);
+    navigate(`/detail/${blogId}`);
+  };
 
   return (
-    <Card sx={{ maxWidth: 345 }}>
-      <CardMedia
-        component="img"
-        alt={formData?.title}
-        height="140"
-        image={formData?.image}
-      />
-      <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
-          {formData?.title}
-        </Typography>
-        <Typography
-          variant="body2"
-          color="text.secondary"
-          sx={{
-            overflow: 'hidden',
-            display: '-webkit-box',
-            WebkitBoxOrient: 'vertical',
-            WebkitLineClamp: 3,
-          }}
-        >
-          {formData?.content}
-        </Typography>
-
-        <hr />
-        <Typography variant="body2" color="text.secondary">
-          Published Date: {new Date(formData?.createdAt).toLocaleString('tr-TR')}
-        </Typography>
-      </CardContent>
-      <CardActions disableSpacing sx={{ justifyContent: 'space-between' }}>
-        <Box>
-          <IconButton aria-label="add to favorites">
-            <FavoriteIcon
-              color={formData?.likes?.includes(_id) ? 'error' : ''}
+    <Grid container gap={3} mt={1} justifyContent={"center"} sx={{ backgroundColor: "#f5f5f5", marginBottom: 5 }}>
+      {myblogs.map((myblog) => (
+        <Grid item key={myblog?._id}>
+          <Card sx={{ maxWidth: 345 }}>
+            <CardMedia
+              component="img"
+              alt={myblog?.title}
+              height="140"
+              image={myblog?.image}
             />
-            <Typography>{formData?.likes?.length}</Typography>
-          </IconButton>
-          <IconButton aria-label="comment">
-            <CommentIcon />
-            <Typography>{formData?.comments?.length}</Typography>
-          </IconButton>
-          <IconButton aria-label="visible">
-            <VisibilityIcon />
-            <Typography>{formData?.countOfVisitors}</Typography>
-          </IconButton>
-        </Box>
+            <CardContent>
+              <Typography gutterBottom variant="h5" component="div">
+                {myblog?.title}
+              </Typography>
+              <Typography
+                variant="body2"
+                color="text.secondary"
+                sx={{
+                  overflow: 'hidden',
+                  display: '-webkit-box',
+                  WebkitBoxOrient: 'vertical',
+                  WebkitLineClamp: 3,
+                }}
+              >
+                {myblog?.content}
+              </Typography>
 
-        <Button
-          variant="contained"
-          sx={{
-            color: 'cyan',
-            backgroundColor: 'black',
-            cursor: 'pointer',
-            '&:hover': {
-              background: 'darkslateblue',
-              color: 'white',
-              transform: 'scale(1.1)',
-            },
-          }}
-        >
-          Read More
-        </Button>
-      </CardActions>
-    </Card>
+              <hr />
+              <Typography variant="body2" color="text.secondary">
+                Published Date: {new Date(myblog?.createdAt).toLocaleString('tr-TR')}
+              </Typography>
+            </CardContent>
+            <CardActions disableSpacing sx={{ justifyContent: 'space-between' }}>
+              <Box>
+                <IconButton onClick={() => handleLike(myblog?._id)} aria-label="add to favorites">
+                  <FavoriteIcon
+                    color={myblog?.likes?.includes(_id) ? 'error' : ''}
+                  />
+                  <Typography>{myblog?.likes?.length}</Typography>
+                </IconButton>
+                <IconButton aria-label="comment">
+                  <CommentIcon />
+                  <Typography>{myblog?.comments?.length}</Typography>
+                </IconButton>
+                <IconButton aria-label="visible">
+                  <VisibilityIcon />
+                  <Typography>{myblog?.countOfVisitors}</Typography>
+                </IconButton>
+              </Box>
+
+              <Button
+                onClick={() => handleReadMore(myblog?._id)}
+                variant="contained"
+                sx={{
+                  color: 'cyan',
+                  backgroundColor: 'black',
+                  cursor: 'pointer',
+                  '&:hover': {
+                    background: 'darkslateblue',
+                    color: 'white',
+                    transform: 'scale(1.1)',
+                  },
+                }}
+              >
+                Read More
+              </Button>
+            </CardActions>
+          </Card>
+        </Grid>
+      ))}
+    </Grid>
   );
 };
 

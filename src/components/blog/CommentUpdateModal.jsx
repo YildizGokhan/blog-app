@@ -11,7 +11,7 @@ import { Check, FormatBold, FormatItalic, KeyboardArrowDown } from '@mui/icons-m
 export default function CommentUpdateModal({ open, handleClose, commentId }) {
   const { detail, comment } = useSelector(state => state.blog);
   const { _id } = useSelector(state => state.auth);
-  const { putComment, getDetailBlogs, getSingleComments } = useBlogCalls()
+  const { putComment, getDetailBlogs, getSingleComments,  } = useBlogCalls()
   const [italic, setItalic] = useState(false);
   const [fontWeight, setFontWeight] = useState('normal');
   const [anchorEl, setAnchorEl] = useState(null);

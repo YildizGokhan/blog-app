@@ -11,6 +11,7 @@ import Detail from '../pages/Detail'
 import MyBlog from '../pages/MyBlog'
 import About from '../pages/About'
 import Footer from '../components/Footer'
+import Profile from '../pages/Profile'
 
 const AppRouter = () => {
   return (
@@ -29,6 +30,7 @@ const AppRouter = () => {
         </Route>
         <Route path="my-blogs" element={<MyBlog />} />
         <Route path='about' element={<About />}/>
+        <Route path='profile' element={<Profile />}/>
       </Routes>
       <Footer />
     </BrowserRouter>

@@ -2,7 +2,7 @@
 import useAxios from './useAxios'
 import { useDispatch } from 'react-redux'
 import { fetchFail, fetchStart } from '../features/authSlice'
-import { getBlogsSuccess, getCommentSuccess, getDetailBlogsSuccess } from '../features/blogSlice'
+import { getBlogsSuccess, getCommentSuccess, getDetailBlogsSuccess, getUserBlogsSuccess } from '../features/blogSlice'
 import { toastErrorNotify, toastSuccessNotify } from '../helper/ToastNotify'
 
 const useBlogCalls = () => {
@@ -20,6 +20,20 @@ const useBlogCalls = () => {
             toastErrorNotify("Blogs fetch failed")
         }
     }
+
+    const getUserBlogs = async (id) => {
+        dispatch(fetchStart())
+        try {
+            const { data } = await axiosWithToken.get(`/blogs?author=${id}`)
+            dispatch(getUserBlogsSuccess(data))
+            toastSuccessNotify("Blogs details fetched successfully")
+        } catch (error) {
+            dispatch(fetchFail())
+            toastErrorNotify("Blogs details fetch failed")
+            console.log(error)
+        }
+    }
+
 
     const getCategories = async () => {
         dispatch(fetchStart())
@@ -109,7 +123,7 @@ const useBlogCalls = () => {
         }
     };
 
-    const putComment = async ( id, data ) => {
+    const putComment = async (id, data) => {
         dispatch(fetchStart());
         try {
             const { data: updatedData } = await axiosWithToken.put(`/comments/${id}`, data);
@@ -136,11 +150,23 @@ const useBlogCalls = () => {
         }
     }
 
+    const deleteComment = async (id) => {
+        dispatch(fetchStart())
+        try {
+            await axiosWithToken.delete(`/comments/${id}`)
+            toastSuccessNotify("Yorum başarıyla silindi")
+            window.location.reload()
+        } catch (error) {
+            dispatch(fetchFail())
+            toastErrorNotify("Yorum silme başarısız")
+            console.log(error);
+        }
+    }
     return {
-        getBlogs, getDetailBlogs, getCategories,getSingleComments,
+        getBlogs, getDetailBlogs, getCategories, getSingleComments, getUserBlogs,
         postComment, postLike, postBlog,
         putBlog, putComment,
-        deleteBlog
+        deleteBlog, deleteComment
     }
 }
 
