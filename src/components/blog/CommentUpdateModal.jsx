@@ -2,23 +2,23 @@ import React, { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Button from '@mui/material/Button';
-import { Card, CardActions, CardContent, FormControl, FormLabel, IconButton, Menu, MenuItem, Stack, Typography } from '@mui/material';
+import { FormControl, FormLabel, IconButton, Menu, MenuItem } from '@mui/material';
 import { useSelector } from 'react-redux';
 import useBlogCalls from '../../hooks/useBlogCalls';
 import { ListItemDecorator, Textarea } from '@mui/joy';
 import { Check, FormatBold, FormatItalic, KeyboardArrowDown } from '@mui/icons-material';
 
-export default function CommentUpdateModal({ open, handleClose, comment, commentId }) {
-  const { detail } = useSelector(state => state.blog);
+export default function CommentUpdateModal({ open, handleClose, commentId }) {
+  const { detail, comment } = useSelector(state => state.blog);
   const { _id } = useSelector(state => state.auth);
-  const { putComment, getComments, getDetailBlogs, getSingleComments } = useBlogCalls()
+  const { putComment, getDetailBlogs, getSingleComments } = useBlogCalls()
   const [italic, setItalic] = useState(false);
   const [fontWeight, setFontWeight] = useState('normal');
   const [anchorEl, setAnchorEl] = useState(null);
 
   const [commentData, setCommentData] = useState({
-    blogId: detail?._id,
-    comment: detail?.comments?.comment,
+    blogId: comment?._id,
+    comment: comment.comment,
   })
 
   const handleChange = (e) => {
@@ -31,19 +31,19 @@ export default function CommentUpdateModal({ open, handleClose, comment, comment
 
   useEffect(() => {
     if (commentId) {
-      getSingleComments(commentId);
+      getSingleComments(comment._id);
       getDetailBlogs(detail._id)
-      setCommentData({
-        blogId: detail?._id,
-        comment: detail?.comments?.comment,
-      })
+      setCommentData((prevInfo) => ({
+        ...prevInfo,
+        comment: comment.comment,
+      }));
     }
-  }, [commentId]);
+  }, [comment?._id]);
 
-  console.log(commentData)
+  console.log(commentData, commentId)
   const handleSubmit = (e) => {
     e.preventDefault();
-    putComment(detail.blogId, commentData);
+    putComment(commentId, commentData);
   };
 
   return (

@@ -21,7 +21,7 @@ const DashBoard = () => {
   console.log(blogs);
 
   return (
-    <Grid container gap={3} mt={1} justifyContent={"center"} sx={{ backgroundColor: "#f5f5f5" }}>
+    <Grid container gap={3} mt={1} justifyContent={"center"} sx={{ backgroundColor: "#f5f5f5", marginBottom: 5 }}>
       {blogs && blogs.length > 0 ? (
         blogs.map((blog) => (
           <Grid item key={blog?._id}>

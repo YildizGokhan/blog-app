@@ -12,7 +12,7 @@ import { toastErrorNotify } from '../../helper/ToastNotify';
 
 
 
-export default function UpdateModal({ open, handleClose }) {
+export default function UpdateModal({ open, handleClose,  }) {
   const { categories,detail } = useSelector((state) => state.blog);
   const { getCategories, getDetailBlogs, putBlog} = useBlogCalls();
   const statuses = ['Draft', 'Published'];

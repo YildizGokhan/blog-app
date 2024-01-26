@@ -8,9 +8,9 @@ import { useSelector } from 'react-redux';
 import { Stack } from '@mui/material';
 import { Box } from '@mui/joy';
 import CommentUpdateModal from './CommentUpdateModal';
-import Comment from '@mui/icons-material/Comment';
+// import useBlogCalls from '../../hooks/useBlogCalls';
+import {  useState } from 'react';
 import useBlogCalls from '../../hooks/useBlogCalls';
-import { useEffect, useState } from 'react';
 
 export default function CommentCard() {
   const { detail } = useSelector(state => state.blog);
@@ -23,6 +23,7 @@ export default function CommentCard() {
   const handleOpen = (commentId) => {
     setCommentId(commentId);
     setOpen(true);
+    getSingleComments(commentId)
   };
   const handleClose = () => {
     setOpen(false);
@@ -33,7 +34,7 @@ export default function CommentCard() {
   return (
     <Stack sx={{ width: '100%' }}>
       {detail?.comments?.map((comment) => (
-        <Box key={comment._id} sx={{ mt: 2 }}>
+        <Box key={comment?._id} sx={{ mt: 2 }}>
           
           <Card
             invertedColors
@@ -46,18 +47,18 @@ export default function CommentCard() {
             }}
           >
             <Typography level="h4">
-              {comment.userId.firstName} {comment.userId.lastName}
+              {comment?.userId?.firstName} {comment?.userId?.lastName}
             </Typography>
             <CardContent>
               <Typography level="title-xs" sx={{ fontWeight: 200, fontSize: "12px" }}>
-                Published Date: {comment.createdAt && new Date(comment.createdAt).toLocaleString("tr-TR")}
+                Published Date: {comment?.createdAt && new Date(comment?.createdAt).toLocaleString("tr-TR")}
               </Typography>
               <Stack level="body-md" sx={{ mt: 2, fontWeight: 700 }}>
                 <Box>
-                  <Typography>{comment.comment}</Typography>
-                  {comment.userId._id === _id ? (
+                  <Typography>{comment?.comment}</Typography>
+                  {comment?.userId?._id === _id ? (
                     <CardActions>
-                      <Button sx={{ width: "10%" }} variant="outlined" color='primary' onClick={() => handleOpen(comment._id)}>
+                      <Button sx={{ width: "10%" }} variant="outlined" color='primary' onClick={() => handleOpen(comment?._id)}>
                         Edit
                       </Button>
 

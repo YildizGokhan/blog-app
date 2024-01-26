@@ -2,7 +2,7 @@
 import useAxios from './useAxios'
 import { useDispatch } from 'react-redux'
 import { fetchFail, fetchStart } from '../features/authSlice'
-import { getBlogsSuccess, getDetailBlogsSuccess } from '../features/blogSlice'
+import { getBlogsSuccess, getCommentSuccess, getDetailBlogsSuccess } from '../features/blogSlice'
 import { toastErrorNotify, toastSuccessNotify } from '../helper/ToastNotify'
 
 const useBlogCalls = () => {
@@ -49,7 +49,7 @@ const useBlogCalls = () => {
         dispatch(fetchStart())
         try {
             const { data } = await axiosWithToken.get(`/comments/${id}`)
-            dispatch(getDetailBlogsSuccess(data))
+            dispatch(getCommentSuccess(data))
             toastSuccessNotify("Blogs details fetched successfully")
         } catch (error) {
             dispatch(fetchFail())
@@ -101,7 +101,7 @@ const useBlogCalls = () => {
         try {
             const { data: updatedData } = await axiosWithToken.put(`/blogs/${id}`, data);
             await getBlogs();
-            await dispatch(getDetailBlogsSuccess(updatedData));
+            dispatch(getDetailBlogsSuccess(updatedData))
             toastSuccessNotify("Blog başarıyla güncellendi");
         } catch (error) {
             dispatch(fetchFail());
@@ -114,11 +114,12 @@ const useBlogCalls = () => {
         try {
             const { data: updatedData } = await axiosWithToken.put(`/comments/${id}`, data);
             await getBlogs();
-            await dispatch(getDetailBlogsSuccess(updatedData));
-            toastSuccessNotify("Blog başarıyla güncellendi");
+            dispatch(getDetailBlogsSuccess(updatedData))
+            toastSuccessNotify("Yorum başarıyla güncellendi");
         } catch (error) {
             dispatch(fetchFail());
-            toastErrorNotify("Blog güncelleme başarısız");
+            toastErrorNotify("Yorum güncelleme başarısız");
+            console.log(error)
         }
     };
 
