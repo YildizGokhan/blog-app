@@ -84,14 +84,13 @@ export default function UpdateModal({ open, handleClose, }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (formData?.content.length < 100) {
+    if (formData?.content?.length < 100) {
       toastErrorNotify("This blog is too short to be published.");
       return;
     }
-    if (formData?.status === 'Published') {
-      await putBlog({ id: formData._id, data: formData });
-      handleClose();
-    }
+    const isPublish = formData?.status === 'Published';
+    await putBlog({ id: formData?._id, data: { ...formData, isPublish } });
+    handleClose();
   };
 
   return (
@@ -202,7 +201,7 @@ export default function UpdateModal({ open, handleClose, }) {
                 variant="contained"
                 color="primary"
                 sx={{
-                  mx: 1,
+                  mx: 2,
                   my: 1,
                   px: 3,
                   backgroundColor: '#000010',
