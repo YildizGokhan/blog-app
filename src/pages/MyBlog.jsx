@@ -85,7 +85,10 @@ const MyBlog = () => {
               </Box>
 
               <Button
-                onClick={() => handleReadMore(myblog?._id)}
+                onClick={() => {
+                  getDetailBlogs(myblog?._id)
+                  navigate(`/detail/${myblog?._id}`, { state : {myblog}})
+                  } }
                 variant="contained"
                 sx={{
                   color: 'cyan',

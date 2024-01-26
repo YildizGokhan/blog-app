@@ -23,6 +23,7 @@ const Detail = () => {
   const { image } = useSelector(state => state.auth)
   const location = useLocation();
   const blog = location.state?.blog;
+  const myblog = location.state?.myblog;
   const { getDetailBlogs, deleteBlog } = useBlogCalls()
   const { detail } = useSelector(state => state.blog)
   const navigate = useNavigate()
@@ -50,13 +51,13 @@ const Detail = () => {
   const handleClose = () => setOpen(false);
 
   useEffect(() => {
-    getDetailBlogs(blog?._id)
+    getDetailBlogs(blog?._id || myblog?._id);
   }, [])
 
   const handleDelete = () => {
     const confirmed = window.confirm(`Are you sure you want to delete ${detail?.title}?`);
     if (confirmed) {
-      deleteBlog(blog?._id)
+      deleteBlog(blog?._id || myblog?._id);
       navigate("/")
     }
   }
