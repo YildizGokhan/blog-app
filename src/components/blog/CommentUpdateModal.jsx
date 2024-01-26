@@ -23,10 +23,12 @@ export default function CommentUpdateModal({ open, handleClose, commentId }) {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setCommentData((prevInfo) => ({
-      ...prevInfo,
-      [name]: value,
-    }));
+    if (value.length <= 500) {
+      setCommentData((prevInfo) => ({
+        ...prevInfo,
+        [name]: value,
+      }));
+    }
   };
 
   useEffect(() => {
@@ -40,10 +42,11 @@ export default function CommentUpdateModal({ open, handleClose, commentId }) {
     }
   }, [comment?._id]);
 
-  console.log(comment?._id,commentData)
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    putComment(comment?._id,commentData);
+    await putComment(comment?._id, commentData);
+    getDetailBlogs(detail?._id);
+    handleClose()
   };
 
   return (
@@ -58,12 +61,16 @@ export default function CommentUpdateModal({ open, handleClose, commentId }) {
           component="form"
           onSubmit={handleSubmit}
           sx={{
-            width: '60%',
+            margin: 'auto',
+            mt: "20%",
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
           }}
         >
           <FormLabel sx={{ color: "##000010", mt: 2, mx: 2, fontSize: "20px" }}>Your comment</FormLabel>
           <Textarea
-            placeholder="Type something here…"
+            placeholder="Type something here in 500 characters"
             minRows={3}
             onChange={handleChange}
             name="comment"
@@ -77,6 +84,9 @@ export default function CommentUpdateModal({ open, handleClose, commentId }) {
                   borderTop: '1px solid',
                   borderColor: 'divider',
                   flex: 'auto',
+                  maxHeight: '150px',
+                  overflowY: 'auto',
+                  overflowX: 'hidden',
                 }}
               >
                 <IconButton
@@ -129,6 +139,9 @@ export default function CommentUpdateModal({ open, handleClose, commentId }) {
               minWidth: 300,
               fontWeight,
               fontStyle: italic ? 'italic' : 'initial',
+              maxHeight: '250px',
+              overflowY: 'auto',
+              overflowX: 'hidden',
             }}
           />
         </FormControl>

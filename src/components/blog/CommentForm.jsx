@@ -20,7 +20,7 @@ export default function CommentArea() {
   const [italic, setItalic] = useState(false);
   const [fontWeight, setFontWeight] = useState('normal');
   const [anchorEl, setAnchorEl] = useState(null);
-  const { detail} = useSelector(state => state.blog)
+  const { detail } = useSelector(state => state.blog)
 
   const [info, setInfo] = useState({
     blogId: detail?._id,
@@ -29,12 +29,13 @@ export default function CommentArea() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setInfo((prevInfo) => ({
-      ...prevInfo,
-      [name]: value,
-    }));
+    if (value.length <= 500) {
+      setInfo((prevInfo) => ({
+        ...prevInfo,
+        [name]: value,
+      }));
+    }
   };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     postComment(info);
@@ -50,9 +51,9 @@ export default function CommentArea() {
         width: '60%',
       }}
     >
-      <FormLabel sx={{ color: "##000010", mt: 2, mx: 2 , fontSize: "20px"}}>Your comment</FormLabel>
+      <FormLabel sx={{ color: "##000010", mt: 2, mx: 2, fontSize: "20px" }}>Your comment</FormLabel>
       <Textarea
-        placeholder="Type something here…"
+        placeholder="Type something here in 500 characters"
         minRows={3}
         onChange={handleChange}
         name="comment"

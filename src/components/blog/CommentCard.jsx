@@ -9,7 +9,7 @@ import { Stack } from '@mui/material';
 import { Box } from '@mui/joy';
 import CommentUpdateModal from './CommentUpdateModal';
 // import useBlogCalls from '../../hooks/useBlogCalls';
-import {  useState } from 'react';
+import { useState } from 'react';
 import useBlogCalls from '../../hooks/useBlogCalls';
 
 export default function CommentCard() {
@@ -35,7 +35,7 @@ export default function CommentCard() {
     <Stack sx={{ width: '100%' }}>
       {detail?.comments?.map((comment) => (
         <Box key={comment?._id} sx={{ mt: 2 }}>
-          
+
           <Card
             invertedColors
             sx={{
@@ -58,7 +58,7 @@ export default function CommentCard() {
                   <Typography>{comment?.comment}</Typography>
                   {comment?.userId?._id === _id ? (
                     <CardActions>
-                      <Button sx={{ width: "10%" }} variant="outlined" color='primary' onClick={() => handleOpen(comment?._id)}>
+                      <Button sx={{ width: "10%" }} variant="soft" color='success' onClick={() => handleOpen(comment?._id)}>
                         Edit
                       </Button>
 
