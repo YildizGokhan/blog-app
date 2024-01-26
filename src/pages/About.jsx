@@ -18,16 +18,11 @@ import {
   LinkedIn,
   Email,
 } from "@mui/icons-material";
-import Footer from "../components/Footer";
+import { useSelector } from "react-redux";
 
-const listItemButtonStyle = {
-  "&:hover": {
-    backgroundColor: "primary.light",
-  },
-  width: "5%",
-};
 
 const About = () => {
+  const { email } = useSelector(state => state.auth)
   return (
     <Stack sx={{ mt: 5, minHeight: "80vh" }}>
       <Grid container justifyContent="center">
@@ -75,21 +70,24 @@ const About = () => {
               </List>
               <Box className="buttons" mt={2}>
                 <Button variant="contained" color="primary" sx={{ px: 4 }}>
-                  <Link
-                    href="https://www.linkedin.com/in/gokhan-a-yildiz-/"
+                  <a
+                    href={'mailto:gygokhanyildiz1@gmail.com'}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-decoration-none text-black"
-                    sx={{
+                    style={{
                       textDecoration: "none",
                       color: "lightblue",
                       "&:hover": {
                         color: "aquamarine",
                       },
+                      display: "inline-block",
+                      width: "100%",
+                      height: "100%",
                     }}
                   >
                     Contact
-                  </Link>
+                  </a>
                 </Button>
               </Box>
             </Box>
