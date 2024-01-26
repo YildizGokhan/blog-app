@@ -17,7 +17,7 @@ export default function CommentUpdateModal({ open, handleClose, commentId }) {
   const [anchorEl, setAnchorEl] = useState(null);
 
   const [commentData, setCommentData] = useState({
-    blogId: comment?._id,
+    blogId: comment?.blogId,
     comment: comment.comment,
   })
 
@@ -40,10 +40,10 @@ export default function CommentUpdateModal({ open, handleClose, commentId }) {
     }
   }, [comment?._id]);
 
-  console.log(commentData, commentId)
+  console.log(comment?._id,commentData)
   const handleSubmit = (e) => {
     e.preventDefault();
-    putComment(commentId, commentData);
+    putComment(comment?._id,commentData);
   };
 
   return (

@@ -109,7 +109,7 @@ const useBlogCalls = () => {
         }
     };
 
-    const putComment = async ({ id, data }) => {
+    const putComment = async ( id, data ) => {
         dispatch(fetchStart());
         try {
             const { data: updatedData } = await axiosWithToken.put(`/comments/${id}`, data);
