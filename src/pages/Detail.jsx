@@ -55,7 +55,7 @@ const Detail = () => {
 
   const handleDelete = () => {
     const confirmed = window.confirm(`Are you sure you want to delete ${detail?.title}?`);
-    if(confirmed) {
+    if (confirmed) {
       deleteBlog(blog?._id)
       navigate("/")
     }
@@ -78,7 +78,7 @@ const Detail = () => {
                 component="img"
                 alt=""
                 height="140"
-                image={_id === detail?.userId?._id ? image : detail?.userId?.username.charAt(0)}
+                image={_id === detail?.userId?._id ? image : ""}
                 sx={{ objectFit: "contain" }}
               />
             </Avatar>
@@ -99,7 +99,7 @@ const Detail = () => {
             Published Date:
             {new Date(detail?.createdAt).toLocaleString("tr-TR")}
           </Typography>
-          {}
+          { }
         </CardContent>
         <CardActions sx={{ justifyContent: "space-between" }}>
           <Box>
@@ -136,7 +136,7 @@ const Detail = () => {
             Edit
           </Button>
           <Button sx={{ width: "10%" }} variant="contained" color='error'
-          onClick={handleDelete}>
+            onClick={handleDelete}>
             Delete
           </Button>
         </CardActions>
