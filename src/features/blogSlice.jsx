@@ -31,8 +31,7 @@ const blogSlice = createSlice({
         },
         getUserBlogsSuccess: (state, { payload }) => {
             state.loading = false
-            state.myblogs = payload.data
-            
+            state.myblogs = payload.data         
         },
         getCommentSuccess: (state, { payload }) => {
             state.loading = false

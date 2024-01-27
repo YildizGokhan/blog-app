@@ -16,7 +16,7 @@ import { useNavigate } from 'react-router-dom';
 
 const MyBlog = () => {
   const { myblogs } = useSelector((state) => state.blog);
-  const { getUserBlogs, postLike, getDetailBlogs } = useBlogCalls();
+  const { getUserBlogs, postLike } = useBlogCalls();
   const { _id } = useSelector((state) => state.auth);
   const navigate = useNavigate();
 
@@ -82,7 +82,6 @@ const MyBlog = () => {
 
               <Button
                 onClick={() => {
-                  getDetailBlogs(myblog?._id)
                   navigate(`/detail/${myblog?._id}`, { state : {myblog}})
                   } }
                 variant="contained"

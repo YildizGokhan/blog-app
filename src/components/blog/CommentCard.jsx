@@ -8,7 +8,6 @@ import { useSelector } from 'react-redux';
 import { Stack } from '@mui/material';
 import { Box } from '@mui/joy';
 import CommentUpdateModal from './CommentUpdateModal';
-// import useBlogCalls from '../../hooks/useBlogCalls';
 import { useState } from 'react';
 import useBlogCalls from '../../hooks/useBlogCalls';
 

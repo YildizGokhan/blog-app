@@ -34,7 +34,6 @@ export default function CommentUpdateModal({ open, handleClose, commentId }) {
   useEffect(() => {
     if (commentId) {
       getSingleComments(comment._id);
-      getDetailBlogs(detail._id)
       setCommentData((prevInfo) => ({
         ...prevInfo,
         comment: comment.comment,
