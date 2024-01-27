@@ -28,10 +28,6 @@ const MyBlog = () => {
     postLike(blogId);
   };
 
-  const handleReadMore = async (blogId) => {
-    await getDetailBlogs(blogId);
-    navigate(`/detail/${blogId}`);
-  };
 
   return (
     <Grid container gap={3} mt={1} justifyContent={"center"} sx={{ backgroundColor: "#f5f5f5", marginBottom: 5 }}>

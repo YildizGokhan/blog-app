@@ -9,16 +9,9 @@ const DashBoard = () => {
   const { getBlogs } = useBlogCalls()
 
   useEffect(() => {
-    // sürekli map hatası alıyordum. Bu sebepele asenkron yapı ekledim.
-    // const fetchData = async () => {
-    //   await getBlogs()
-    // }
-
-    // fetchData()
     getBlogs()
   }, [])
 
-  console.log(blogs);
 
   return (
     <Grid container gap={3} mt={1} justifyContent={"center"} sx={{ backgroundColor: "#f5f5f5", marginBottom: 5 }}>

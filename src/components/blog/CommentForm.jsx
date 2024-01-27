@@ -41,7 +41,6 @@ export default function CommentArea() {
     postComment(info);
   };
 
-  console.log(info)
 
   return (
     <FormControl
@@ -53,7 +52,7 @@ export default function CommentArea() {
     >
       <FormLabel sx={{ color: "##000010", mt: 2, mx: 2, fontSize: "20px" }}>Your comment</FormLabel>
       <Textarea
-        placeholder="Type something here in 500 characters"
+        placeholder="Write your comment here with max 500 characters..."
         minRows={3}
         onChange={handleChange}
         name="comment"

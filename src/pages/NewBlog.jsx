@@ -1,18 +1,9 @@
-import {
-  TextField,
-  Button,
-  Box,
-  Typography,
-  Select,
-  MenuItem,
-  FormControl,
-  InputLabel,
-  Stack,
-} from '@mui/material';
+import { TextField, Button, Box, Typography, Select, MenuItem, FormControl, InputLabel, Stack, } from '@mui/material';
 import { useSelector } from 'react-redux';
 import useBlogCalls from '../hooks/useBlogCalls';
 import { useEffect, useState } from 'react';
 import { toastErrorNotify } from '../helper/ToastNotify';
+import { useNavigate } from 'react-router';
 
 const statuses = ['Draft', 'Published'];
 
@@ -27,6 +18,7 @@ const renderSelectOptions = (options, isCategory = true) => {
 const NewBlog = () => {
   const { categories } = useSelector((state) => state.blog);
   const { getCategories, postBlog } = useBlogCalls();
+  const navigate = useNavigate()
   const [formData, setFormData] = useState({
     category: '',
     status: '',
@@ -54,7 +46,7 @@ const NewBlog = () => {
       categoryId: formData?.category,
       status: formData.status
     })
-    console.log(formData)
+    navigate("/")
   };
 
   useEffect(() => {
@@ -75,7 +67,7 @@ const NewBlog = () => {
           boxShadow: 3,
           borderRadius: '12px',
         }}
-        noValidate
+        required
         autoComplete="off"
         component="form"
         onSubmit={handleSubmit}
@@ -109,6 +101,7 @@ const NewBlog = () => {
             labelId="category-label"
             id="category"
             name="category"
+            required
             value={formData?.category}
             label="Category *"
             onChange={handleInputChange}
@@ -122,6 +115,7 @@ const NewBlog = () => {
             labelId="status-label"
             id="status"
             name="status"
+            required
             value={formData?.status}
             label="Status *"
             onChange={handleInputChange}

@@ -48,7 +48,7 @@ const handleDelete = (id) => {
               m: "auto",
             }}
           >
-            <Typography level="h4">
+            <Typography level="h5" sx={{ fontWeight: 700 }}>
               {comment?.userId?.firstName} {comment?.userId?.lastName}
             </Typography>
             <CardContent>
@@ -60,9 +60,9 @@ const handleDelete = (id) => {
                   Updated Date: {new Date(comment?.updatedAt).toLocaleString("tr-TR")}
                 </Typography>
               )}
-              <Stack level="body-md" sx={{ mt: 2, fontWeight: 700 }}>
+              <Stack level="body-md" sx={{ mt: 2, fontWeight: 500 }}>
                 <Box>
-                  <Typography>{comment?.comment}</Typography>
+                  <Typography sx={{fontFamily: "arial"}}>{comment?.comment}</Typography>
                   {comment?.userId?._id === _id ? (
                     <CardActions>
                       <Button sx={{ width: "10%" }} variant="soft" color='success' onClick={() => handleOpen(comment?._id)}>

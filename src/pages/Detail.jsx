@@ -20,17 +20,15 @@ import UpdateModal from '../components/blog/UpdateModal';
 
 const Detail = () => {
   const [commentArea, setCommentArea] = useState(false);
-  const { image } = useSelector(state => state.auth)
+  const { image, _id } = useSelector(state => state.auth)
+  const { detail } = useSelector(state => state.blog)
+  const navigate = useNavigate()
+  const { getDetailBlogs, deleteBlog, postLike } = useBlogCalls()
+
   const location = useLocation();
   const blog = location.state?.blog;
   const myblog = location.state?.myblog;
-  const { getDetailBlogs, deleteBlog } = useBlogCalls()
-  const { detail } = useSelector(state => state.blog)
-  const navigate = useNavigate()
-
-  console.log("detail", detail);
-  const { postLike } = useBlogCalls()
-  const { _id } = useSelector(state => state.auth);
+  
 
   const handleLike = () => {
     if (detail?.likes?.includes(_id)) {
