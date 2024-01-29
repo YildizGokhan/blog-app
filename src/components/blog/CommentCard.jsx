@@ -15,14 +15,14 @@ export default function CommentCard() {
   const { detail } = useSelector(state => state.blog);
   const { _id } = useSelector(state => state.auth);
   const [open, setOpen] = useState(false);
-  const { getSingleComments, deleteComment } = useBlogCalls()
-  const [commentId, setCommentId] = useState('');
+  const {  deleteComment } = useBlogCalls()
+  const [commentData, setCommentData] = useState('');
 
 
-  const handleOpen = (commentId) => {
-    setCommentId(commentId);
+  const handleOpen = (comment) => {
+    setCommentData(comment);
     setOpen(true);
-    getSingleComments(commentId)
+
   };
   const handleClose = () => {
     setOpen(false);
@@ -64,7 +64,7 @@ const handleDelete = (id) => {
                   <Typography sx={{fontFamily: "arial"}}>{comment?.comment}</Typography>
                   {comment?.userId?._id === _id ? (
                     <CardActions>
-                      <Button sx={{ width: "10%" }} variant="soft" color='success' onClick={() => handleOpen(comment?._id)}>
+                      <Button sx={{ width: "10%" }} variant="soft" color='success' onClick={() => handleOpen(comment)}>
                         Edit
                       </Button>
 
@@ -83,7 +83,7 @@ const handleDelete = (id) => {
         </Box>
 
       ))}
-      <CommentUpdateModal open={open} commentId={commentId} handleClose={handleClose} />
+      <CommentUpdateModal open={open} commentData={commentData} handleClose={handleClose} />
     </Stack>
   );
 }

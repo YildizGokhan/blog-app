@@ -20,11 +20,7 @@ export default function CardBlog({ blog }) {
   const { _id } = useSelector(state => state.auth);
  
   const handleLike = () => {
-    if (blog?.likes?.includes(_id)) {
-      postLike(blog?._id)
-    } else {
-      postLike(blog?._id)
-    }
+      postLike(blog?._id,true)
   };
 
   return (
@@ -82,7 +78,7 @@ export default function CardBlog({ blog }) {
 
         <Button variant="contained" sx={{ color: "cyan", backgroundColor: "black", cursor: "pointer", "&:hover": { background: "darkslateblue", color: "white", transform: "scale(1.1)" } }}
           onClick={() => {
-            navigate(`/detail/${blog?._id}`, { state: { blog } })
+            navigate(`/detail/${blog?._id}`)
           }} >
           Read More</Button>
       </CardActions>

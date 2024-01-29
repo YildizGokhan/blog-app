@@ -1,5 +1,5 @@
 
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate,useParams } from 'react-router-dom';
 import { Button, Stack } from '@mui/material';
 import { CardActions } from '@mui/joy';
 import Card from '@mui/material/Card';
@@ -24,20 +24,17 @@ const Detail = () => {
   const { detail } = useSelector(state => state.blog)
   const navigate = useNavigate()
   const { getDetailBlogs, deleteBlog, postLike } = useBlogCalls()
+  const {id} = useParams()
 
-  const location = useLocation();
-  const blog = location.state?.blog;
-  const myblog = location.state?.myblog;
+  // const location = useLocation();
+  // const blog = location.state?.blog;
+  // const myblog = location.state?.myblog;
   
 
   const handleLike = () => {
-    if (detail?.likes?.includes(_id)) {
-      postLike(blog?._id);
-      getDetailBlogs(blog._id);
-    } else {
-      postLike(blog?._id);
-      getDetailBlogs(blog?._id);
-    }
+      postLike(id);
+      //if else gerek yok yine aynı fonksiyon çalışacak. getDetailBlogs u like işleminden sonra çağırdık.
+   
   };
 
   const handleComment = () => {
@@ -49,14 +46,13 @@ const Detail = () => {
   const handleClose = () => setOpen(false);
 
   useEffect(() => {
-    getDetailBlogs(blog?._id || myblog?._id);
+    getDetailBlogs(id);
   }, [])
 
   const handleDelete = () => {
     const confirmed = window.confirm(`Are you sure you want to delete ${detail?.title}?`);
     if (confirmed) {
-      deleteBlog(blog?._id || myblog?._id);
-      navigate("/")
+      deleteBlog(id);
     }
   }
 

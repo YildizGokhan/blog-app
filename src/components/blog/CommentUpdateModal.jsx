@@ -8,23 +8,19 @@ import useBlogCalls from '../../hooks/useBlogCalls';
 import { ListItemDecorator, Textarea } from '@mui/joy';
 import { Check, FormatBold, FormatItalic, KeyboardArrowDown } from '@mui/icons-material';
 
-export default function CommentUpdateModal({ open, handleClose, commentId }) {
-  const { detail, comment } = useSelector(state => state.blog);
-  const { _id } = useSelector(state => state.auth);
-  const { putComment, getDetailBlogs, getSingleComments,  } = useBlogCalls()
+export default function CommentUpdateModal({ open, handleClose, commentData }) {
+  const { detail } = useSelector(state => state.blog);
+  const { putComment, getDetailBlogs,   } = useBlogCalls()
   const [italic, setItalic] = useState(false);
   const [fontWeight, setFontWeight] = useState('normal');
   const [anchorEl, setAnchorEl] = useState(null);
 
-  const [commentData, setCommentData] = useState({
-    blogId: comment?.blogId,
-    comment: comment.comment,
-  })
+  const [comment, setComment] = useState(commentData)
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     if (value.length <= 500) {
-      setCommentData((prevInfo) => ({
+      setComment((prevInfo) => ({
         ...prevInfo,
         [name]: value,
       }));
@@ -32,18 +28,12 @@ export default function CommentUpdateModal({ open, handleClose, commentId }) {
   };
 
   useEffect(() => {
-    if (commentId) {
-      getSingleComments(comment._id);
-      setCommentData((prevInfo) => ({
-        ...prevInfo,
-        comment: comment.comment,
-      }));
-    }
-  }, [comment?._id]);
+    setComment(commentData)
+  }, [commentData]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await putComment(comment?._id, commentData);
+    await putComment(comment?._id, comment);
     getDetailBlogs(detail?._id);
     handleClose()
   };

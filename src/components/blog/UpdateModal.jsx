@@ -12,7 +12,7 @@ import { toastErrorNotify } from '../../helper/ToastNotify';
 
 export default function UpdateModal({ open, handleClose, }) {
   const { categories, detail } = useSelector((state) => state.blog);
-  const { getCategories, getDetailBlogs, putBlog } = useBlogCalls();
+  const { getCategories,  putBlog } = useBlogCalls();
   const statuses = ['Draft', 'Published'];
 
   const renderSelectOptions = (options, isCategory = true) => {
@@ -56,9 +56,6 @@ export default function UpdateModal({ open, handleClose, }) {
     getCategories();
   }, []);
 
-  useEffect(() => {
-    getDetailBlogs(detail?._id);
-  }, []);
 
   useEffect(() => {
     setFormData({

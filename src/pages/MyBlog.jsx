@@ -25,7 +25,7 @@ const MyBlog = () => {
   }, [_id]);
 
   const handleLike = (blogId) => {
-    postLike(blogId);
+    postLike(blogId,true);
   };
 
 
@@ -82,7 +82,7 @@ const MyBlog = () => {
 
               <Button
                 onClick={() => {
-                  navigate(`/detail/${myblog?._id}`, { state : {myblog}})
+                  navigate(`/detail/${myblog?._id}`)
                   } }
                 variant="contained"
                 sx={{

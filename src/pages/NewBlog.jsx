@@ -33,7 +33,8 @@ const NewBlog = () => {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault()
+    console.log("first")
     // content min 1  satır olsun yoksa düzen bozuluyor
     if (formData?.content.length < 100) {
       toastErrorNotify("This blog is too short to published.");
@@ -67,8 +68,6 @@ const NewBlog = () => {
           boxShadow: 3,
           borderRadius: '12px',
         }}
-        required
-        autoComplete="off"
         component="form"
         onSubmit={handleSubmit}
       >

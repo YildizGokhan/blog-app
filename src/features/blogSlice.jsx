@@ -8,8 +8,7 @@ const initialState = {
     detail: [],
     categories: [],
     comment: [],
-    myblogs: [],
-    details: []
+    myblogs: []
 }
 
 const blogSlice = createSlice({
@@ -24,12 +23,11 @@ const blogSlice = createSlice({
             state.loading = false
             state.blogs = payload.data
             state.categories = payload.data
-            state.details = payload.details
         },
         getDetailBlogsSuccess: (state, { payload }) => {
             state.loading = false
             state.detail = payload.data
-            state.blogs = payload.details
+            state.blogs = payload.data
         },
         getUserBlogsSuccess: (state, { payload }) => {
             state.loading = false
