@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import useBlogCalls from '../hooks/useBlogCalls';
 import CardBlog from '../components/blog/CardBlog';
@@ -25,7 +25,7 @@ const DashBoard = () => {
 
   return (
     <div style={{ paddingBottom: '50px' }}>
-      <Grid container gap={3} mt={1} justifyContent={"center"} sx={{ backgroundColor: "#f5f5f5", marginBottom: 5 }} >
+      <Grid container gap={3} mt={1} justifyContent={"center"} sx={{ backgroundColor: "#f5f5f5", marginBottom: 5 }}>
         {displayedBlogs && displayedBlogs.length > 0 ? (
           displayedBlogs.map((blog) => (
             <Grid item key={blog?._id}>
@@ -36,7 +36,7 @@ const DashBoard = () => {
           <p>No blogs available</p>
         )}
       </Grid>
-      <Stack spacing={2} direction="row" justifyContent="center" alignItems="center">
+      <Stack spacing={2} direction="column" justifyContent="center" alignItems="center">
         <Pagination
           count={pageCount}
           page={currentPage}
