@@ -22,19 +22,13 @@ const Detail = () => {
   const [commentArea, setCommentArea] = useState(false);
   const { image, _id } = useSelector(state => state.auth)
   const { detail } = useSelector(state => state.blog)
-  const navigate = useNavigate()
+
   const { getDetailBlogs, deleteBlog, postLike } = useBlogCalls()
   const {id} = useParams()
-
-  // const location = useLocation();
-  // const blog = location.state?.blog;
-  // const myblog = location.state?.myblog;
   
-
+console.log(id)
   const handleLike = () => {
       postLike(id);
-      //if else gerek yok yine aynı fonksiyon çalışacak. getDetailBlogs u like işleminden sonra çağırdık.
-   
   };
 
   const handleComment = () => {
@@ -127,10 +121,10 @@ const Detail = () => {
       )}
       {detail?.userId?._id?.includes(_id) ? (
         <CardActions sx={{ m: 2 }}>
-          <Button sx={{ width: "10%", m: 2 }} variant="contained" color='success' onClick={handleOpen}>
+          <Button sx={{ width: "10%", m: 2, backgroundColor: "#9DBC98" }} variant="contained" color='success' onClick={handleOpen}>
             Edit
           </Button>
-          <Button sx={{ width: "10%" }} variant="contained" color='error'
+          <Button sx={{ width: "10%", backgroundColor: "#BF3131" }} variant="contained" color='error'
             onClick={handleDelete}>
             Delete
           </Button>

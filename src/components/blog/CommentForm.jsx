@@ -39,6 +39,10 @@ export default function CommentArea() {
   const handleSubmit = (e) => {
     e.preventDefault();
     postComment(info);
+    setInfo({
+      blogId: detail?._id,
+      comment: "",
+    });
   };
 
 

@@ -18,7 +18,6 @@ export default function CommentCard() {
   const {  deleteComment } = useBlogCalls()
   const [commentData, setCommentData] = useState('');
 
-
   const handleOpen = (comment) => {
     setCommentData(comment);
     setOpen(true);
@@ -68,7 +67,7 @@ const handleDelete = (id) => {
                         Edit
                       </Button>
 
-                      <Button onClick={() => handleDelete(comment?._id)} sx={{ width: "10%" }} variant="solid" color='danger'>
+                      <Button onClick={() => handleDelete(comment)} sx={{ width: "10%" }} variant="solid" color='danger'>
                         Delete
                       </Button>
                     </CardActions>

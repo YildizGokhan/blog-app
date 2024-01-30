@@ -7,10 +7,12 @@ import { useNavigate } from 'react-router';
 
 const statuses = ['Draft', 'Published'];
 
+
+
 const renderSelectOptions = (options, isCategory = true) => {
-  return options.map((item) => (
-    <MenuItem key={item._id} value={isCategory ? item._id : item}>
-      {isCategory ? item.name : item}
+  return options?.map((item) => (
+    <MenuItem key={item?._id} value={isCategory ? item?._id : item}>
+      {isCategory ? item?.name : item}
     </MenuItem>
   ));
 };
@@ -49,13 +51,13 @@ const NewBlog = () => {
     })
     navigate("/")
   };
-
   useEffect(() => {
     getCategories();
   }, []);
+ 
 
   return (
-    <Stack sx={{ mt: 2, height: '80vh' }} >
+    <Stack sx={{ mt: "20%", height: '80vh'  }} >
       <Box
         sx={{
           '& .MuiTextField-root, & .MuiFormControl-root': {
@@ -71,7 +73,7 @@ const NewBlog = () => {
         component="form"
         onSubmit={handleSubmit}
       >
-        <Typography variant="h4" gutterBottom>
+        <Typography variant="h4" gutterBottom textAlign={"center"}>
           New Blog
         </Typography>
         <TextField
@@ -139,7 +141,8 @@ const NewBlog = () => {
           color="primary"
           sx={{
             mt: 2,
-            px: 8,
+            px: 7,
+            marginLeft: 5,
             backgroundColor: 'black',
             cursor: 'pointer',
             '&:hover': {

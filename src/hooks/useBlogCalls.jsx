@@ -2,6 +2,7 @@ import useAxios from "./useAxios";
 import { useDispatch } from "react-redux";
 import { fetchFail, fetchStart } from "../features/authSlice";
 import {
+  getBlogsListSuccess,
   getBlogsSuccess,
   getCommentSuccess,
   getDetailBlogsSuccess,
@@ -14,11 +15,25 @@ const useBlogCalls = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate()
 
-  const getBlogs = async () => {
+  const getBlogs = async (url) => {
     dispatch(fetchStart());
     try {
-      const { data } = await axiosPublic("/blogs");
-      dispatch(getBlogsSuccess(data));
+      const { data } = await axiosPublic(url);
+      const pagination = data.details
+      const apiData = data.data
+      dispatch(getBlogsSuccess({pagination, apiData}));
+      toastSuccessNotify("Blogs fetched successfully");
+    } catch (error) {
+      dispatch(fetchFail());
+      toastErrorNotify("Blogs fetch failed");
+    }
+  };
+
+  const getBlogsList = async (url) => {
+    dispatch(fetchStart());
+    try {
+      const { data } = await axiosPublic(url);
+      dispatch(getBlogsListSuccess(data));
       toastSuccessNotify("Blogs fetched successfully");
     } catch (error) {
       dispatch(fetchFail());
@@ -91,7 +106,7 @@ const useBlogCalls = () => {
     dispatch(fetchStart());
     try {
       const { data } = await axiosWithToken.post("/blogs", info);
-      getBlogs();
+      getBlogs("blogs");
       toastSuccessNotify("Blog sent succesfully");
     } catch (error) {
       dispatch(fetchFail());
@@ -103,9 +118,8 @@ const useBlogCalls = () => {
     dispatch(fetchStart());
     try {
       const { data } = await axiosWithToken.post(`/blogs/${id}/postLike`);
-      // dispatch(getDetailBlogsSuccess(data))
       if (card) {//! fonksiyon dashboarddan yada myblogtan çağırılırsa
-        getBlogs();
+        getBlogs("blogs");
       } else {
         getDetailBlogs(id);
       }
@@ -138,8 +152,6 @@ const useBlogCalls = () => {
         `/comments/${id}`,
         data
       );
-        getDetailBlogs(data.blogId)
-    //   dispatch(getDetailBlogsSuccess(updatedData));
       toastSuccessNotify("Yorum başarıyla güncellendi");
     } catch (error) {
       dispatch(fetchFail());
@@ -160,24 +172,26 @@ const useBlogCalls = () => {
     }
   };
 
-  const deleteComment = async (id) => {
+  const deleteComment = async (info) => {
     dispatch(fetchStart());
     try {
-      await axiosWithToken.delete(`/comments/${id}`);
-      toastSuccessNotify("Yorum başarıyla silindi");
-      window.location.reload();
+      await axiosWithToken.delete(`/comments/${info._id}`);
+      getDetailBlogs(info.blogId)
+      toastSuccessNotify("silme başarılı");
     } catch (error) {
       dispatch(fetchFail());
-      toastErrorNotify("Yorum silme başarısız");
+      toastErrorNotify("silme başarısız");
       console.log(error);
     }
   };
+
   return {
     getBlogs,
     getDetailBlogs,
     getCategories,
     getSingleComments,
     getUserBlogs,
+    getBlogsList,
     postComment,
     postLike,
     postBlog,

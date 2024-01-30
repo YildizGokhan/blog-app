@@ -15,27 +15,23 @@ export default function CommentUpdateModal({ open, handleClose, commentData }) {
   const [fontWeight, setFontWeight] = useState('normal');
   const [anchorEl, setAnchorEl] = useState(null);
 
-  const [comment, setComment] = useState(commentData)
+  const [editedCommentText, setEditedCommentText] = useState('');
+  
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    if (value.length <= 500) {
-      setComment((prevInfo) => ({
-        ...prevInfo,
-        [name]: value,
-      }));
-    }
+    setEditedCommentText(e.target.value);
   };
 
   useEffect(() => {
-    setComment(commentData)
+    setEditedCommentText(commentData.comment);
   }, [commentData]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await putComment(comment?._id, comment);
+
+    await putComment(commentData?._id, { comment: editedCommentText });
     getDetailBlogs(detail?._id);
-    handleClose()
+    handleClose();
   };
 
   return (
@@ -63,7 +59,7 @@ export default function CommentUpdateModal({ open, handleClose, commentData }) {
             minRows={3}
             onChange={handleChange}
             name="comment"
-            value={commentData.comment}
+            value={editedCommentText}
             endDecorator={
               <Box
                 sx={{

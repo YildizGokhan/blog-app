@@ -1,4 +1,3 @@
-
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -15,72 +14,75 @@ import useBlogCalls from '../../hooks/useBlogCalls';
 import { useSelector } from 'react-redux';
 
 export default function CardBlog({ blog }) {
-  const navigate = useNavigate()
-  const { postLike } = useBlogCalls()
-  const { _id } = useSelector(state => state.auth);
- 
+  const navigate = useNavigate();
+  const { postLike } = useBlogCalls();
+  const { _id } = useSelector((state) => state.auth);
+
   const handleLike = () => {
-      postLike(blog?._id,true)
+    postLike(blog?._id, true);
   };
 
   return (
-    <Card sx={{ maxWidth: 345 }}>
-      <CardMedia
-        component="img"
-        alt={blog?.title}
-        height="140"
-        image={blog?.image}
-      />
-      <CardContent>
+    <Card sx={{ maxWidth: 345, maxHeight: 500, display: 'flex', flexDirection: 'column' }}>
+      <CardMedia component="img" alt={blog?.title} height="140" image={blog?.image} />
+      <CardContent sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
         <Typography gutterBottom variant="h5" component="div">
           {blog?.title}
         </Typography>
-        <Typography variant="body2" color="text.secondary" sx={{
-          overflow: 'hidden',
-          display: '-webkit-box',
-          WebkitBoxOrient: 'vertical',
-          WebkitLineClamp: 3,
-        }}>
+        <Typography
+          variant="body2"
+          color="text.secondary"
+          sx={{
+            overflow: 'hidden',
+            display: '-webkit-box',
+            WebkitBoxOrient: 'vertical',
+            WebkitLineClamp: 3,
+            flex: '1', // Kart içeriğinin büyüklüğüne uyum sağlamak için
+          }}
+        >
           {blog?.content}
         </Typography>
 
         <hr />
         <Typography variant="body2" color="text.secondary">
-          Published Date: {new Date(blog?.createdAt).toLocaleString("tr-TR")}
+          Published Date: {new Date(blog?.createdAt).toLocaleString('tr-TR')}
         </Typography>
         {blog?.updatedAt && (
           <Typography variant="body2" color="text.secondary">
-            Updated Date: {new Date(blog?.updatedAt).toLocaleString("tr-TR")}
+            Updated Date: {new Date(blog?.updatedAt).toLocaleString('tr-TR')}
           </Typography>
         )}
       </CardContent>
-      <CardActions disableSpacing sx={{ justifyContent: "space-between" }}>
-        <Box>
+      <CardActions disableSpacing sx={{ justifyContent: 'space-between' }}>
+        <Box sx={{ display: 'flex', alignItems: 'center' }}>
           <IconButton onClick={handleLike} aria-label="add to favorites">
-            <FavoriteIcon color={blog?.likes?.includes(_id) ? "error" : ""} />
-            <Typography >
-              {blog?.likes?.length}
-            </Typography>
+            <FavoriteIcon color={blog?.likes?.includes(_id) ? 'error' : ''} />
+            <Typography>{blog?.likes?.length}</Typography>
           </IconButton>
           <IconButton aria-label="comment">
             <CommentIcon />
-            <Typography >
-              {blog?.comments?.length}
-            </Typography>
+            <Typography>{blog?.comments?.length}</Typography>
           </IconButton>
           <IconButton aria-label="visible">
             <VisibilityIcon />
-            <Typography >
-              {blog?.countOfVisitors}
-            </Typography>
+            <Typography>{blog?.countOfVisitors}</Typography>
           </IconButton>
         </Box>
 
-        <Button variant="contained" sx={{ color: "cyan", backgroundColor: "black", cursor: "pointer", "&:hover": { background: "darkslateblue", color: "white", transform: "scale(1.1)" } }}
+        <Button
+          variant="contained"
+          sx={{
+            color: '#EBD9B4',
+            backgroundColor: '#000010',
+            cursor: 'pointer',
+            "&:hover": { background: "darkslateblue", color: "white", transform: "scale(1.1)" },
+          }}
           onClick={() => {
-            navigate(`/detail/${blog?._id}`)
-          }} >
-          Read More</Button>
+            navigate(`/detail/${blog?._id}`);
+          }}
+        >
+          Read More
+        </Button>
       </CardActions>
     </Card>
   );

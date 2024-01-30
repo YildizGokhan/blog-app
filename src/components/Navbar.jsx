@@ -77,10 +77,19 @@ function Navbar() {
     setAnchorElUser(null);
   };
 
+  
   return (
-    <AppBar position="static" sx={{ backgroundColor: "#000010" }}>
-      <Container maxWidth="xxl" >
+    <AppBar
+  
+      sx={{
+        backgroundColor: "#000010",
+        width: "100%",
+      }}
+    >
+    
+      <Container maxWidth="100%" >
         <Toolbar disableGutters>
+        
           <Box
             component="a"
             href="/"
