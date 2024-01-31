@@ -11,7 +11,7 @@ const statuses = ['Draft', 'Published'];
 
 const renderSelectOptions = (options, isCategory = true) => {
   return options?.map((item) => (
-    <MenuItem key={item?._id} value={isCategory ? item?._id : item}>
+    <MenuItem key={item?.id} value={isCategory ? item?._id : item}>
       {isCategory ? item?.name : item}
     </MenuItem>
   ));

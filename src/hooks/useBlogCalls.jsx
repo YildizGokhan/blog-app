@@ -34,7 +34,6 @@ const useBlogCalls = () => {
     try {
       const { data } = await axiosPublic(url);
       dispatch(getBlogsListSuccess(data));
-      toastSuccessNotify("Blogs fetched successfully");
     } catch (error) {
       dispatch(fetchFail());
       toastErrorNotify("Blogs fetch failed");
@@ -58,7 +57,7 @@ const useBlogCalls = () => {
     dispatch(fetchStart());
     try {
       const { data } = await axiosPublic("/categories");
-      dispatch(getBlogsSuccess(data));
+      dispatch(getDetailBlogsSuccess(data));
       toastSuccessNotify("Category fetched successfully");
     } catch (error) {
       dispatch(fetchFail());

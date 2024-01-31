@@ -25,17 +25,19 @@ const blogSlice = createSlice({
         getBlogsSuccess: (state, { payload }) => {
             state.loading = false
             state.blogs = payload.apiData
-            state.categories = payload.data
+            
             state.details = payload.pagination
         },
         getBlogsListSuccess: (state, { payload }) => {
             state.loading = false
             state.bloglist = payload.data
+            
         },
         getDetailBlogsSuccess: (state, { payload }) => {
             state.loading = false
             state.detail = payload.data
             state.blogs = payload
+            state.categories = payload.data
         },
         getUserBlogsSuccess: (state, { payload }) => {
             state.loading = false

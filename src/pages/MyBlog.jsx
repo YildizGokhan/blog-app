@@ -9,28 +9,31 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import CommentIcon from '@mui/icons-material/Comment';
 import IconButton from '@mui/material/IconButton';
 import VisibilityIcon from '@mui/icons-material/Visibility';
-import { Box, Grid } from '@mui/material';
+import { Box, Grid, Stack } from '@mui/material';
 import { useSelector } from 'react-redux';
 import useBlogCalls from '../hooks/useBlogCalls';
 import { useNavigate } from 'react-router-dom';
 
 const MyBlog = () => {
   const { myblogs } = useSelector((state) => state.blog);
-  const { getUserBlogs, postLike } = useBlogCalls();
+  const { getUserBlogs, postLike, getDetailBlogs } = useBlogCalls();
   const { _id } = useSelector((state) => state.auth);
   const navigate = useNavigate();
 
   useEffect(() => {
     getUserBlogs(_id);
+    
   }, [_id]);
 
-  const handleLike = (blogId) => {
-    postLike(blogId,true);
+  const handleLike = async (blogId) => {
+    await postLike(blogId);
+    getUserBlogs(_id);
   };
 
 
   return (
-    <Grid container gap={3} mt={1} justifyContent={"center"} sx={{ backgroundColor: "#f5f5f5", marginBottom: 5 }}>
+    <Stack sx={{ width: '100%', height: '100vh', backgroundColor: "#FDFAF6" }}>
+    <Grid container gap={3} mt={1} justifyContent={"center"} sx={{  marginBottom: 5, marginTop: 10 }}>
       {myblogs.map((myblog) => (
         <Grid item key={myblog?._id}>
           <Card sx={{ maxWidth: 345 }}>
@@ -103,6 +106,7 @@ const MyBlog = () => {
         </Grid>
       ))}
     </Grid>
+    </Stack>
   );
 };
 
