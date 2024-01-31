@@ -17,7 +17,7 @@ export default function FilterBlogs({ categories }) {
         .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
     return (
-        <>
+        <Stack sx={{marginRight: 2, }}>
             <Autocomplete
                 id="highlights-demo"
                 sx={{ width: 300 }}
@@ -81,6 +81,6 @@ export default function FilterBlogs({ categories }) {
                     ))}
                 </List>
             </Stack>
-        </>
+        </Stack>
     );
 }

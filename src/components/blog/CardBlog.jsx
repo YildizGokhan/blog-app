@@ -23,36 +23,42 @@ export default function CardBlog({ blog }) {
   };
 
   return (
-    <Card sx={{ maxWidth: 345, maxHeight: 500, display: 'flex', flexDirection: 'column' }}>
-      <CardMedia component="img" alt={blog?.title} height="140" image={blog?.image} />
-      <CardContent sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
-        <Typography gutterBottom variant="h5" component="div">
-          {blog?.title}
-        </Typography>
-        <Typography
-          variant="body2"
-          color="text.secondary"
-          sx={{
-            overflow: 'hidden',
-            display: '-webkit-box',
-            WebkitBoxOrient: 'vertical',
-            WebkitLineClamp: 3,
-            flex: '1', // Kart içeriğinin büyüklüğüne uyum sağlamak için
-          }}
-        >
-          {blog?.content}
-        </Typography>
+    <Card sx={{
+      maxWidth: "100%", maxHeight: 500, display: 'flex', flexDirection: 'column',  marginRight: 5, borderRadius: 5,
+      backgroundImage: "linear-gradient( 135deg, #E8D07A 10%, #5312D6 100%)",
+    }}>
+      <Box sx={{ display: 'flex', flexDirection: 'row' }}>
 
-        <hr />
-        <Typography variant="body2" color="text.secondary">
-          Published Date: {new Date(blog?.createdAt).toLocaleString('tr-TR')}
-        </Typography>
-        {blog?.updatedAt && (
-          <Typography variant="body2" color="text.secondary">
-            Updated Date: {new Date(blog?.updatedAt).toLocaleString('tr-TR')}
+        <CardMedia component="img" alt={blog?.title} image={blog?.image} sx={{ width: "33%", height: 300 }} />
+        <CardContent sx={{ flex: '1', display: 'flex', flexDirection: 'column', pl: 2 }}>
+          <Typography gutterBottom variant="h5" component="div">
+            {blog?.title}
           </Typography>
-        )}
-      </CardContent>
+          <Typography
+            variant="body2"
+            color="text.secondary"
+            sx={{
+              overflow: 'hidden',
+              display: '-webkit-box',
+              WebkitBoxOrient: 'vertical',
+              WebkitLineClamp: 3,
+              flex: '1', // Kart içeriğinin büyüklüğüne uyum sağlamak için
+            }}
+          >
+            {blog?.content}
+          </Typography>
+
+          <hr />
+          <Typography variant="body2" color="text.secondary">
+            Published Date: {new Date(blog?.createdAt).toLocaleString('tr-TR')}
+          </Typography>
+          {blog?.updatedAt && (
+            <Typography variant="body2" color="text.secondary">
+              Updated Date: {new Date(blog?.updatedAt).toLocaleString('tr-TR')}
+            </Typography>
+          )}
+        </CardContent>
+      </Box>
       <CardActions disableSpacing sx={{ justifyContent: 'space-between' }}>
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
           <IconButton onClick={handleLike} aria-label="add to favorites">
@@ -85,5 +91,6 @@ export default function CardBlog({ blog }) {
         </Button>
       </CardActions>
     </Card>
+
   );
 }

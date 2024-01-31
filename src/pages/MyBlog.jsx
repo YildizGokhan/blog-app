@@ -32,7 +32,8 @@ const MyBlog = () => {
 
 
   return (
-    <Stack sx={{ width: '100%', height: '100vh', backgroundColor: "#FDFAF6" }}>
+    <Stack sx={{ width: '100%', height: '100vh', backgroundColor: "#8EC5FC",
+    backgroundImage: "linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%)", }}>
     <Grid container gap={3} mt={1} justifyContent={"center"} sx={{  marginBottom: 5, marginTop: 10 }}>
       {myblogs.map((myblog) => (
         <Grid item key={myblog?._id}>

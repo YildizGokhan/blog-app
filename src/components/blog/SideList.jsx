@@ -12,7 +12,7 @@ import { Stack } from '@mui/material';
 export default function SideList({ blogList }) {
 
     return (
-        <List sx={{   bgcolor: '#FDFAF6', border: "2px solid #e1cfc0", borderRadius: "8px", marginLeft: "6px", marginTop: "12px" }} >
+        <List sx={{   bgcolor: '#FDFAF6', border: "2px solid #e1cfc0", borderRadius: "8px", marginLeft: "6px", marginTop: "12px", }} >
             {blogList.map((blog) => (
                 <React.Fragment key={blog._id}>
                     <ListItem alignItems="flex-start" sx={{ padding: '8px' }}>

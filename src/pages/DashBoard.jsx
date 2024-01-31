@@ -9,7 +9,7 @@ import FilterBlogs from '../components/blog/FilterBlogs';
 const DashBoard = () => {
   const { blogs, details, bloglist, categories } = useSelector((state) => state.blog);
   const { getBlogs, getBlogsList, getCategories } = useBlogCalls();
-  const limit = 8;
+  const limit = 4;
 
   useEffect(() => {
     getCategories();
@@ -33,21 +33,37 @@ const DashBoard = () => {
       alignItems={isMdScreen ? 'flex-start' : 'center'}
       sx={{
         paddingBottom: '40px',
-        backgroundColor: "#FDFAF6",
+        backgroundColor: "#8EC5FC",
+        backgroundImage: "linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%)",
         marginTop: "40px",
       }}
     >
-      <Stack style={{  width: '50%', maxWidth: "350px",minWidth: "300px", objectFit: "contain", marginTop: "70px" }}>
+      <Stack style={{ width: '50%', maxWidth: "350px", minWidth: "300px", objectFit: "contain", marginTop: "70px" }}>
         <Typography sx={{ textAlign: "center", fontWeight: "bold", mt: 2 }}>Most Visited Blogs</Typography>
         <SideList blogList={blogList} />
       </Stack>
 
       {isMdScreen && (
         <Stack style={{ marginLeft: '5%' }}>
+        <Typography
+  sx={{
+    marginTop: 8,
+    fontFamily: 'Roboto', // Örnek bir font ailesi
+    fontSize: '1.5rem',   // Örnek bir font boyutu
+    fontWeight: 'bold',   // Kalınlık
+    fontStyle: 'italic',   // İtalik stil
+    color: '#333',         // Renk
+    letterSpacing: '0.05em', // Harf aralığı
+    lineHeight: 1.5,        // Satır yüksekliği
+  }}
+>
+  Every word can turn into an adventure, every sentence can open a door. In this blog, embark on a journey into the enchanting world of words, explore stories, and freely roam your thoughts.
+</Typography>
+
           <Grid container gap={2} justifyContent={'center'} sx={{ marginBottom: 5, minHeight: '100vh', marginTop: "80px" }}>
             {blogs && blogs?.length > 0 ? (
               blogs?.map((blog) => (
-                <Grid item key={blog?._id}>
+                <Grid item key={blog?._id} lg={12} md={12} xs={12} sx={{width: "100%"}}>
                   <CardBlog blog={blog} />
                 </Grid>
               ))
@@ -55,7 +71,9 @@ const DashBoard = () => {
               <p>No blogs available</p>
             )}
           </Grid>
-          <Stack spacing={2} direction="column" justifyContent="center" alignItems="center" sx={{ backgroundColor: '#FDFAF6' }}>
+          <Stack spacing={2} direction="column" justifyContent="center" alignItems="center" sx={{ backgroundColor: "#8EC5FC",
+        backgroundImage: "linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%)",
+         }}>
             <Pagination
               count={Math.ceil(details?.totalRecords / limit)}
               page={details?.pages ? details?.pages?.current : 1}
@@ -67,7 +85,7 @@ const DashBoard = () => {
         </Stack>
       )}
 
-      <Stack sx={{ width: '50%', maxWidth: "350px",minWidth: "300px", objectFit: "contain", marginTop: "70px", alignItems: "center" }}>
+      <Stack sx={{ width: '50%', maxWidth: "350px", minWidth: "300px", objectFit: "contain", marginTop: "70px", alignItems: "center" }}>
         <FilterBlogs categories={categories} />
       </Stack>
 

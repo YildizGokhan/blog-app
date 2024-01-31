@@ -57,7 +57,8 @@ const NewBlog = () => {
  
 
   return (
-    <Stack sx={{ mt: "20%", height: '80vh'  }} >
+    <Stack sx={{ mt: "10px", height: '100vh' , backgroundColor: "#8EC5FC",
+    backgroundImage: "linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%)", }} >
       <Box
         sx={{
           '& .MuiTextField-root, & .MuiFormControl-root': {

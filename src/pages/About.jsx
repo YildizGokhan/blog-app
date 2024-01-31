@@ -24,9 +24,11 @@ import { useSelector } from "react-redux";
 const About = () => {
   const { email } = useSelector(state => state.auth)
   return (
-    <Stack sx={{ mt: 5, minHeight: "80vh" }}>
-      <Grid container justifyContent="center">
-        <Grid item xs={12} md={7}>
+    <Stack sx={{ mt: 8, minHeight: "100vh" , backgroundColor: "#8EC5FC",
+    backgroundImage: "linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%)",}}>
+      <Grid container justifyContent="center" sx={{marginTop: 10 }}>
+        <Grid item xs={12} md={7} sx={{backgroundColor: "#8EC5FC",
+        backgroundImage: "linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%)",}}>
           <Card sx={{ p: 3, py: 4 }}>
             <Box display="flex" justifyContent="center">
               <Avatar
