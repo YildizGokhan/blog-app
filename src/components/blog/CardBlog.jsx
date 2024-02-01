@@ -27,9 +27,9 @@ export default function CardBlog({ blog }) {
       maxWidth: "100%", maxHeight: 500, display: 'flex', flexDirection: 'column',  marginRight: 5, borderRadius: 5,
       backgroundImage: "linear-gradient( 135deg, #E8D07A 10%, #5312D6 100%)",
     }}>
-      <Box sx={{ display: 'flex', flexDirection: 'row' }}>
+      <Box sx={{ display: 'flex', flexDirection: 'row', flex: 1}}>
 
-        <CardMedia component="img" alt={blog?.title} image={blog?.image} sx={{ width: "33%", height: 300 }} />
+        <CardMedia component="img" alt={blog?.title} image={blog?.image} sx={{ width: "33%",height: "100%" , margin: "auto" }} />
         <CardContent sx={{ flex: '1', display: 'flex', flexDirection: 'column', pl: 2 }}>
           <Typography gutterBottom variant="h5" component="div">
             {blog?.title}
@@ -42,7 +42,7 @@ export default function CardBlog({ blog }) {
               display: '-webkit-box',
               WebkitBoxOrient: 'vertical',
               WebkitLineClamp: 3,
-              flex: '1', // Kart içeriğinin büyüklüğüne uyum sağlamak için
+              flex: '1', 
             }}
           >
             {blog?.content}

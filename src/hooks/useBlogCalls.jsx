@@ -4,6 +4,7 @@ import { fetchFail, fetchStart } from "../features/authSlice";
 import {
   getBlogsListSuccess,
   getBlogsSuccess,
+  getCategoriesSuccess,
   getCommentSuccess,
   getDetailBlogsSuccess,
   getUserBlogsSuccess,
@@ -57,7 +58,7 @@ const useBlogCalls = () => {
     dispatch(fetchStart());
     try {
       const { data } = await axiosPublic("/categories");
-      dispatch(getDetailBlogsSuccess(data));
+      dispatch(getCategoriesSuccess(data));
       toastSuccessNotify("Category fetched successfully");
     } catch (error) {
       dispatch(fetchFail());

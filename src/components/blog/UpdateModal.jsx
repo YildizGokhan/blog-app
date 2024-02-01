@@ -10,12 +10,15 @@ import useBlogCalls from '../../hooks/useBlogCalls';
 import { useEffect, useState } from 'react';
 import { toastErrorNotify } from '../../helper/ToastNotify';
 
-export default function UpdateModal({ open, handleClose, }) {
-  const { categories, detail } = useSelector((state) => state.blog);
-  const { getCategories,  putBlog } = useBlogCalls();
+export default function UpdateModal({ open, handleClose}) {
+  const { detail,categories } = useSelector((state) => state.blog);
+  const {   putBlog } = useBlogCalls();
   const statuses = ['Draft', 'Published'];
 
   const renderSelectOptions = (options, isCategory = true) => {
+ 
+    options = options || [];
+  
     return options?.map((item) => (
       <MenuItem key={item?._id} value={isCategory ? item?._id : item}>
         {isCategory ? item?.name : item}
@@ -50,10 +53,6 @@ export default function UpdateModal({ open, handleClose, }) {
     return () => {
       window.removeEventListener('resize', handleResize);
     };
-  }, []);
-
-  useEffect(() => {
-    getCategories();
   }, []);
 
 
@@ -138,7 +137,7 @@ export default function UpdateModal({ open, handleClose, }) {
                 label="Title"
                 margin="normal"
                 type="text"
-                value={formData.title}
+                value={formData?.title}
                 onChange={handleInputChange}
               />
               <TextField
@@ -148,7 +147,7 @@ export default function UpdateModal({ open, handleClose, }) {
                 label="Image"
                 margin="normal"
                 type="url"
-                value={formData.image}
+                value={formData?.image}
                 onChange={handleInputChange}
               />
               <FormControl fullWidth>
@@ -158,7 +157,7 @@ export default function UpdateModal({ open, handleClose, }) {
                   id="categoryId"
                   name="categoryId"
                   label="Category *"
-                  value={formData.categoryId._id || ''}
+                  value={formData?.categoryId?._id || ''}
                   onChange={handleInputChange}
                 >
                   {renderSelectOptions(categories)}
@@ -171,7 +170,7 @@ export default function UpdateModal({ open, handleClose, }) {
                   id="status"
                   name="status"
                   label="Status *"
-                  value={formData.status || ""}
+                  value={formData?.status || ""}
                   onChange={handleInputChange}
                 >
                   {renderSelectOptions(statuses, false)}
@@ -187,7 +186,7 @@ export default function UpdateModal({ open, handleClose, }) {
                 inputProps={{ minLength: 100 }}
                 sx={{ overflowY: 'scroll', maxHeight: '200px' }}
                 onChange={handleInputChange}
-                value={formData.content}
+                value={formData?.content}
               />
               <Button
                 type="submit"

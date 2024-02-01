@@ -36,10 +36,11 @@ const DashBoard = () => {
         backgroundColor: "#8EC5FC",
         backgroundImage: "linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%)",
         marginTop: "40px",
+        
       }}
     >
       <Stack style={{ width: '50%', maxWidth: "350px", minWidth: "300px", objectFit: "contain", marginTop: "70px" }}>
-        <Typography sx={{ textAlign: "center", fontWeight: "bold", mt: 2 }}>Most Visited Blogs</Typography>
+        <Typography sx={{ textAlign: "center", fontWeight: "bold", mt: 2 , fontFamily: "monospace", fontSize: "1.2rem"}}>Most Visited Blogs</Typography>
         <SideList blogList={blogList} />
       </Stack>
 
@@ -48,13 +49,13 @@ const DashBoard = () => {
         <Typography
   sx={{
     marginTop: 8,
-    fontFamily: 'Roboto', // Örnek bir font ailesi
-    fontSize: '1.5rem',   // Örnek bir font boyutu
-    fontWeight: 'bold',   // Kalınlık
-    fontStyle: 'italic',   // İtalik stil
-    color: '#333',         // Renk
-    letterSpacing: '0.05em', // Harf aralığı
-    lineHeight: 1.5,        // Satır yüksekliği
+    fontFamily: 'Roboto', 
+    fontSize: '1.5rem',   
+    fontWeight: 'bold',  
+    fontStyle: 'italic',  
+    color: '#333',   
+    letterSpacing: '0.05em', 
+    lineHeight: 1.5, 
   }}
 >
   Every word can turn into an adventure, every sentence can open a door. In this blog, embark on a journey into the enchanting world of words, explore stories, and freely roam your thoughts.

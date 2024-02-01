@@ -1,5 +1,5 @@
 
-import { useLocation, useNavigate,useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { Button, Stack } from '@mui/material';
 import { CardActions } from '@mui/joy';
 import Card from '@mui/material/Card';
@@ -21,14 +21,14 @@ import UpdateModal from '../components/blog/UpdateModal';
 const Detail = () => {
   const [commentArea, setCommentArea] = useState(false);
   const { image, _id } = useSelector(state => state.auth)
-  const { detail } = useSelector(state => state.blog)
+  const { detail,categories } = useSelector(state => state.blog)
 
-  const { getDetailBlogs, deleteBlog, postLike } = useBlogCalls()
-  const {id} = useParams()
-  
-console.log(id)
+  const { getDetailBlogs, deleteBlog, postLike, getCategories } = useBlogCalls()
+  const { id } = useParams()
+
+  console.log(id)
   const handleLike = () => {
-      postLike(id);
+    postLike(id);
   };
 
   const handleComment = () => {
@@ -41,7 +41,14 @@ console.log(id)
 
   useEffect(() => {
     getDetailBlogs(id);
+    getCategories()
   }, [])
+  
+
+  useEffect(() => {
+    console.log('Categories:', categories);
+    // Diğer işlemler...
+  }, [categories]);
 
   const handleDelete = () => {
     const confirmed = window.confirm(`Are you sure you want to delete ${detail?.title}?`);
@@ -131,7 +138,7 @@ console.log(id)
         </CardActions>
 
       ) : ""}
-      <UpdateModal open={open} handleClose={handleClose} />
+      <UpdateModal open={open} handleClose={handleClose} categories={categories} />
     </Stack>
   );
 }

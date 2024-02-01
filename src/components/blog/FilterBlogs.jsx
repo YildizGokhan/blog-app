@@ -11,13 +11,13 @@ export default function FilterBlogs({ categories }) {
     const { bloglist } = useSelector(state => state.blog);
     const [selectedValue, setSelectedValue] = React.useState(null);
 
-    // Filtrasyon ve sıralama işlemi
+   
     const filteredAndSortedBlogList = bloglist
         .filter(blog => !selectedValue || selectedValue?._id === blog.categoryId)
         .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
     return (
-        <Stack sx={{marginRight: 2, }}>
+        <Stack sx={{marginRight: 2,backgroundImage: "linear-gradient( 135deg, #a8D07A 10%, #5312D6 100%)", borderRadius: "8px"}}>
             <Autocomplete
                 id="highlights-demo"
                 sx={{ width: 300 }}
@@ -43,9 +43,9 @@ export default function FilterBlogs({ categories }) {
                     );
                 }}
             />
-            <Stack>
-            <Typography variant='h6' textAlign={"center"}>Latest Published Blog</Typography>
-                <List sx={{ width: '100%', bgcolor: '#FDFAF6', border: "2px solid #e1cfc0", borderRadius: "8px", marginLeft: "6px", marginTop: "12px" }} >
+            <Stack sx={{backgroundImage: "linear-gradient( 135deg, #a8D07A 10%, #5312D6 100%)"}}>
+            <Typography variant='h6' textAlign={"center"} sx={{fontFamily: "monospace", fontSize: "1.2rem"}}>Latest Published Blog</Typography>
+                <List sx={{ width: '100%',   borderRadius: "8px", marginLeft: "6px", marginTop: "12px" }} >
                     {filteredAndSortedBlogList.map((blog) => (
                         <React.Fragment key={blog._id}>
                             <ListItem alignItems="flex-start" sx={{ padding: '8px' }}>
