@@ -58,8 +58,12 @@ const Detail = () => {
   }
 
   return (
-    <Stack sx={{ mt: 5, justifyContent: "center", alignItems: "center" }} >
-      <Card sx={{ maxWidth: "60%" }}>
+    <Stack sx={{ mt: 5, justifyContent: "center", alignItems: "center" ,  background: "rgb(131,58,180)",
+    background: "linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,232,29,0.5803571428571428) 50%, rgba(252,176,69,1) 100%)",}} >
+      <Card sx={{ maxWidth: "60%",marginTop: 8, background: "rgb(131,58,180)",
+        background: "linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(252,176,69,1) 100%)", color: "whitesmoke", border: "1 solid #ff3342",
+        boxShadow: "-5px 4px 8px 20px rgba(0, 0, 0, 0.2)",
+         }}>
         <CardMedia
           component="img"
           alt={detail?.title}
@@ -86,7 +90,7 @@ const Detail = () => {
           <Typography variant="body2" >
             {detail?.title}
           </Typography>
-          <Typography color="text.secondary" gutterBottom variant="h5" component="div" sx={{ mt: 1, mb: 1.5, fontSize: "0.8rem", fontFamily: "Roboto, Helvetica, Arial, sans-serif;", fontWeight: "400" }}>
+          <Typography color="text.secondary" gutterBottom variant="h5" component="div" sx={{ mt: 1, mb: 1.5, fontSize: "1.1rem", fontFamily: "Roboto, Helvetica, Arial, sans-serif;", fontWeight: "400",color: "pink"}}>
             {detail?.content}
           </Typography>
 

@@ -17,7 +17,7 @@ export default function FilterBlogs({ categories }) {
         .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
     return (
-        <Stack sx={{marginRight: 2,backgroundImage: "linear-gradient( 135deg, #a8D07A 10%, #5312D6 100%)", borderRadius: "8px"}}>
+        <Stack sx={{marginRight: 2,backgroundImage: "linear-gradient( 135deg, #f8D07A 10%, #5312D6 100%)", borderRadius: "8px"}}>
             <Autocomplete
                 id="highlights-demo"
                 sx={{ width: 300 }}
@@ -43,7 +43,7 @@ export default function FilterBlogs({ categories }) {
                     );
                 }}
             />
-            <Stack sx={{backgroundImage: "linear-gradient( 135deg, #a8D07A 10%, #5312D6 100%)"}}>
+            <Stack sx={{backgroundImage: "linear-gradient( 135deg, #f8D07A 10%, #5312D6 100%)"}}>
             <Typography variant='h6' textAlign={"center"} sx={{fontFamily: "monospace", fontSize: "1.2rem"}}>Latest Published Blog</Typography>
                 <List sx={{ width: '100%',   borderRadius: "8px", marginLeft: "6px", marginTop: "12px" }} >
                     {filteredAndSortedBlogList.map((blog) => (

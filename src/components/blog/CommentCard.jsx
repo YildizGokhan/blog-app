@@ -15,7 +15,7 @@ export default function CommentCard() {
   const { detail } = useSelector(state => state.blog);
   const { _id } = useSelector(state => state.auth);
   const [open, setOpen] = useState(false);
-  const {  deleteComment } = useBlogCalls()
+  const { deleteComment } = useBlogCalls()
   const [commentData, setCommentData] = useState('');
 
   const handleOpen = (comment) => {
@@ -27,9 +27,9 @@ export default function CommentCard() {
     setOpen(false);
   };
 
-const handleDelete = (id) => {
-  deleteComment(id)
-}
+  const handleDelete = (id) => {
+    deleteComment(id)
+  }
 
   return (
     <Stack sx={{ width: '100%' }}>
@@ -44,6 +44,10 @@ const handleDelete = (id) => {
               overflow: 'auto',
               resize: 'horizontal',
               m: "auto",
+              background: "rgb(131,58,180)",
+              background: "linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(252,176,69,1) 100%)",
+              border: 1, borderColor: "#5312D6", borderStyle: "solid", padding: 1,
+              boxShadow: '-10px -5px 20px rgba(0, 0, 0, 0.8)',
             }}
           >
             <Typography level="h5" sx={{ fontWeight: 700 }}>
@@ -60,7 +64,7 @@ const handleDelete = (id) => {
               )}
               <Stack level="body-md" sx={{ mt: 2, fontWeight: 500 }}>
                 <Box>
-                  <Typography sx={{fontFamily: "arial"}}>{comment?.comment}</Typography>
+                  <Typography sx={{ fontFamily: "arial" }}>{comment?.comment}</Typography>
                   {comment?.userId?._id === _id ? (
                     <CardActions>
                       <Button sx={{ width: "10%" }} variant="soft" color='success' onClick={() => handleOpen(comment)}>

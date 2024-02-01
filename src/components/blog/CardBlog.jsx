@@ -24,12 +24,14 @@ export default function CardBlog({ blog }) {
 
   return (
     <Card sx={{
-      maxWidth: "100%", maxHeight: 500, display: 'flex', flexDirection: 'column',  marginRight: 5, borderRadius: 5,
+      maxWidth: "100%", maxHeight: 500, display: 'flex', flexDirection: 'column', marginRight: 5, borderRadius: 5,
       backgroundImage: "linear-gradient( 135deg, #E8D07A 10%, #5312D6 100%)",
+      border: 1, borderColor: "#5312D6", borderStyle: "solid", padding: 1,
+      boxShadow: '-10px -5px 20px rgba(0, 0, 0, 0.8)',
     }}>
-      <Box sx={{ display: 'flex', flexDirection: 'row', flex: 1}}>
+      <Box sx={{ display: 'flex', flexDirection: 'row', flex: 1 }}>
 
-        <CardMedia component="img" alt={blog?.title} image={blog?.image} sx={{ width: "33%",height: "100%" , margin: "auto" }} />
+        <CardMedia component="img" alt={blog?.title} image={blog?.image} sx={{ width: "33%", height: "100%", margin: "auto" }} />
         <CardContent sx={{ flex: '1', display: 'flex', flexDirection: 'column', pl: 2 }}>
           <Typography gutterBottom variant="h5" component="div">
             {blog?.title}
@@ -42,7 +44,7 @@ export default function CardBlog({ blog }) {
               display: '-webkit-box',
               WebkitBoxOrient: 'vertical',
               WebkitLineClamp: 3,
-              flex: '1', 
+              flex: '1',
             }}
           >
             {blog?.content}
@@ -52,11 +54,10 @@ export default function CardBlog({ blog }) {
           <Typography variant="body2" color="text.secondary">
             Published Date: {new Date(blog?.createdAt).toLocaleString('tr-TR')}
           </Typography>
-          {blog?.updatedAt && (
-            <Typography variant="body2" color="text.secondary">
-              Updated Date: {new Date(blog?.updatedAt).toLocaleString('tr-TR')}
-            </Typography>
-          )}
+          <Typography variant="body2" color="text.secondary">
+            Updated Date: {new Date(blog?.updatedAt).toLocaleString('tr-TR')}
+          </Typography>
+
         </CardContent>
       </Box>
       <CardActions disableSpacing sx={{ justifyContent: 'space-between' }}>
@@ -79,7 +80,8 @@ export default function CardBlog({ blog }) {
           variant="contained"
           sx={{
             color: '#EBD9B4',
-            backgroundColor: '#000010',
+            borderRadius: 5,
+            backgroundColor: "#5312D6",
             cursor: 'pointer',
             "&:hover": { background: "darkslateblue", color: "white", transform: "scale(1.1)" },
           }}

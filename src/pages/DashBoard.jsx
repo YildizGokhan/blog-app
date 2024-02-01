@@ -33,8 +33,8 @@ const DashBoard = () => {
       alignItems={isMdScreen ? 'flex-start' : 'center'}
       sx={{
         paddingBottom: '40px',
-        backgroundColor: "#8EC5FC",
-        backgroundImage: "linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%)",
+        background: "rgb(131,58,180)",
+background: "linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,232,29,0.5803571428571428) 50%, rgba(252,176,69,1) 100%)",
         marginTop: "40px",
         
       }}
@@ -72,8 +72,9 @@ const DashBoard = () => {
               <p>No blogs available</p>
             )}
           </Grid>
-          <Stack spacing={2} direction="column" justifyContent="center" alignItems="center" sx={{ backgroundColor: "#8EC5FC",
-        backgroundImage: "linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%)",
+          <Stack spacing={2} direction="column" justifyContent="center" alignItems="center" sx={{  background: "rgb(131,58,180)",
+background: "linear-gradient(90deg, rgba(253,232,29,0.5803571428571428) 0%, rgba(253,232,29,0.5803571428571428) 50%, rgba(252,176,69,1) 100%)",
+borderRadius: "15px",
          }}>
             <Pagination
               count={Math.ceil(details?.totalRecords / limit)}
@@ -99,7 +100,8 @@ const DashBoard = () => {
           ) : (
             <p>No blogs available</p>
           )}
-          <Stack spacing={2} direction="column" justifyContent="center" alignItems="center" sx={{ backgroundColor: '#FDFAF6' }}>
+          <Stack spacing={2} direction="column" justifyContent="center" alignItems="center" sx={{ background: "linear-gradient(90deg, rgba(253,232,29,0.5803571428571428) 0%, rgba(253,232,29,0.5803571428571428) 50%, rgba(252,176,69,1) 100%)",
+borderRadius: "15px", }}>
             <Pagination
               count={Math.ceil(details?.totalRecords / limit)}
               page={details?.pages ? details?.pages?.current : 1}
