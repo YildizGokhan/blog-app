@@ -20,7 +20,7 @@ export default function Register() {
   return (
     <ThemeProvider theme={defaultTheme}>
       <Stack sx={{
-        background: "linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,232,29,0.5803571428571428) 50%, rgba(252,176,69,1) 100%)", height: "100%", p: 1
+        background: "radial-gradient(circle, rgba(236,240,220,1) 3%, rgba(201,208,117,0.9753151260504201) 99%)", height: "100%", p: 1
       }}>
         <Container component="main" maxWidth="xs">
 

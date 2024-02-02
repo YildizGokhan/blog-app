@@ -73,7 +73,6 @@ const DashBoard = () => {
             )}
           </Grid>
           <Stack spacing={2} direction="column" justifyContent="center" alignItems="center" sx={{
-            background: "rgb(131,58,180)",
             background: "linear-gradient(90deg, rgba(253,232,29,0.5803571428571428) 0%, rgba(253,232,29,0.5803571428571428) 50%, rgba(252,176,69,1) 100%)",
             borderRadius: "15px",
           }}>
@@ -93,7 +92,7 @@ const DashBoard = () => {
       </Stack>
 
       {!isMdScreen && (
-        <Stack style={{ marginLeft: '5%' }}>
+        <Stack style={{ marginLeft: '5%', marginTop: 20, }}>
           {blogs && blogs?.length > 0 ? (
             blogs?.map((blog) => (
               <CardBlog key={blog?._id} blog={blog} />
