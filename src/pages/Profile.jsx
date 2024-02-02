@@ -11,11 +11,11 @@ export default function Profile() {
 
   return (
     <Stack sx={{
-      background: "linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,232,29,0.5803571428571428) 50%, rgba(252,176,69,1) 100%)", height: "100vh"
+     background: "radial-gradient(circle, rgba(236,240,220,1) 3%, rgba(201,208,117,0.9753151260504201) 99%)", height: "100vh"
     }}>
       <Card sx={{
         maxWidth: 400, margin: 'auto', marginTop: 15, boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.0)',
-        background: "linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,232,29,0.5803571428571428) 50%, rgba(252,176,69,1) 100%)",
+        background: "radial-gradient(circle, rgba(236,240,220,1) 3%, rgba(201,208,117,0.9753151260504201) 99%)",
       }}>
         <CardMedia
           component="img"
