@@ -13,7 +13,7 @@ export default function FilterBlogs({ categories }) {
 
    
     const filteredAndSortedBlogList = bloglist
-        .filter(blog => !selectedValue || selectedValue?._id === blog?.categoryId?._id)
+        .filter(blog => !selectedValue || selectedValue?._id === blog?.categoryId)
         .sort((a, b) => new Date(b?.createdAt) - new Date(a?.createdAt));
 
     return (

@@ -67,7 +67,7 @@ const NewBlog = () => {
           },
           maxWidth: '500px',
           mx: "auto",
-          marginTop: "10vhyarn start",
+          marginTop: "10vh",
           padding: '20px',
           boxShadow: 3,
           borderRadius: '12px',
