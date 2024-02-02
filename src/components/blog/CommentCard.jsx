@@ -5,7 +5,7 @@ import CardContent from '@mui/joy/CardContent';
 import CardActions from '@mui/joy/CardActions';
 import Typography from '@mui/joy/Typography';
 import { useSelector } from 'react-redux';
-import { Stack } from '@mui/material';
+import { Divider, Stack } from '@mui/material';
 import { Box } from '@mui/joy';
 import CommentUpdateModal from './CommentUpdateModal';
 import { useState } from 'react';
@@ -44,9 +44,7 @@ export default function CommentCard() {
               overflow: 'auto',
               resize: 'horizontal',
               m: "auto",
-              background: "rgb(131,58,180)",
-              background: "linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(252,176,69,1) 100%)",
-              border: 1, borderColor: "#5312D6", borderStyle: "solid", padding: 1,
+              background: "radial-gradient(circle, rgba(236,240,220,1) 3%, rgba(201,208,117,0.9753151260504201) 99%)",
               boxShadow: '-10px -5px 20px rgba(0, 0, 0, 0.8)',
             }}
           >
@@ -62,6 +60,7 @@ export default function CommentCard() {
                   Updated Date: {new Date(comment?.updatedAt).toLocaleString("tr-TR")}
                 </Typography>
               )}
+              <Divider />
               <Stack level="body-md" sx={{ mt: 2, fontWeight: 500 }}>
                 <Box>
                   <Typography sx={{ fontFamily: "arial" }}>{comment?.comment}</Typography>
