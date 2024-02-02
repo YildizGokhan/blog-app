@@ -1,5 +1,5 @@
 
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { Button, Stack } from '@mui/material';
 import { CardActions } from '@mui/joy';
 import Card from '@mui/material/Card';
@@ -91,10 +91,10 @@ const Detail = () => {
           subheader={new Date(detail?.createdAt).toLocaleString("tr-TR")}
         />
         <CardContent>
-          <Typography variant="body2" sx={{color: "darkblue", fontWeight: "bold"}} >
+          <Typography variant="body2" sx={{color: "#3C3633", fontWeight: "bold", fontSize: "1.1rem", textDecoration: "underline"}} >
             {detail?.title}
           </Typography>
-          <Typography color="text.secondary" gutterBottom variant="h5" component="div" sx={{ mt: 1, mb: 1.5, fontSize: "1.1rem", fontFamily: "Roboto, Helvetica, Arial, sans-serif;", fontWeight: "400", color: "chocolate" }}>
+          <Typography color="text.secondary" gutterBottom variant="h5" component="div" sx={{ mt: 1, mb: 1.5, fontSize: "1.1rem", fontFamily: "Roboto, Helvetica, Arial, sans-serif;", fontWeight: "700", color: "#747264" }}>
             {detail?.content}
           </Typography>
 
