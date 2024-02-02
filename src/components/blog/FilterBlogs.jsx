@@ -13,15 +13,15 @@ export default function FilterBlogs({ categories }) {
 
    
     const filteredAndSortedBlogList = bloglist
-        .filter(blog => !selectedValue || selectedValue?._id === blog.categoryId)
-        .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+        .filter(blog => !selectedValue || selectedValue?._id === blog?.categoryId?._id)
+        .sort((a, b) => new Date(b?.createdAt) - new Date(a?.createdAt));
 
     return (
         <Stack sx={{marginRight: 2,marginLeft: 2, borderRadius: "8px"}}>
             <Autocomplete
                 id="highlights-demo"               
                 options={categories}
-                getOptionLabel={(category) => category.name}
+                getOptionLabel={(category) => category?.name}
                 value={selectedValue}
                 onChange={(event, newValue) => {
                     setSelectedValue(newValue);
@@ -30,13 +30,13 @@ export default function FilterBlogs({ categories }) {
                     <TextField {...params} label="Select Blog's Category" margin="normal" />
                 )}
                 renderOption={(props, category, { inputValue }) => {
-                    const matches = match(category.name, inputValue, { insideWords: true });
-                    const parts = parse(category.name, matches);
+                    const matches = match(category?.name, inputValue, { insideWords: true });
+                    const parts = parse(category?.name, matches);
 
                     return (
                         <li {...props}>
                             <Stack>
-                                <Typography variant="h6">{category.name}</Typography>
+                                <Typography variant="h6">{category?.name}</Typography>
                             </Stack>
                         </li>
                     );
@@ -45,10 +45,10 @@ export default function FilterBlogs({ categories }) {
             <Stack >
             <Typography variant='h6' textAlign={"center"} sx={{fontFamily: "monospace", fontSize: "1.2rem"}}>Latest Published Blog</Typography>
                 <List sx={{ width: '100%',   borderRadius: "8px", marginLeft: "6px", marginTop: "12px" }} >
-                    {filteredAndSortedBlogList.map((blog) => (
-                        <React.Fragment key={blog._id}>
+                    {filteredAndSortedBlogList?.map((blog) => (
+                        <React.Fragment key={blog?._id}>
                             <ListItem alignItems="flex-start" sx={{ padding: '8px' }}>
-                                <Link to={`/detail/${blog._id}`} style={{ textDecoration: 'none', display: 'flex', alignItems: 'center' }}>
+                                <Link to={`/detail/${blog?._id}`} style={{ textDecoration: 'none', display: 'flex', alignItems: 'center' }}>
                                     <ListItemAvatar>
                                         <Avatar
                                             alt={blog.title}
@@ -57,7 +57,7 @@ export default function FilterBlogs({ categories }) {
                                         />
                                     </ListItemAvatar>
                                     <ListItemText
-                                        primary={blog.title}
+                                        primary={blog?.title}
                                         sx={{ color: "black" }}
                                         secondary={
                                             <Stack>
@@ -67,9 +67,9 @@ export default function FilterBlogs({ categories }) {
                                                     variant="body2"
                                                     color="text.primary"
                                                 >
-                                                    Görüntülenme Sayısı: {blog.countOfVisitors}
+                                                    Görüntülenme Sayısı: {blog?.countOfVisitors}
                                                 </Typography>
-                                                {`  ${new Date(blog.createdAt).toLocaleString('tr-TR')}`}
+                                                {`  ${new Date(blog?.createdAt).toLocaleString('tr-TR')}`}
                                             </Stack>
                                         }
                                     />

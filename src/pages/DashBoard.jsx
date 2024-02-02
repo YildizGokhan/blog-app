@@ -21,7 +21,7 @@ const DashBoard = () => {
     getBlogs(`blogs/?page=${newPage}&limit=${limit}`);
   };
 
-  const blogList = bloglist ? [...bloglist].sort((a, b) => b.countOfVisitors - a.countOfVisitors) : [];
+  const blogList = bloglist ? [...bloglist].sort((a, b) => b?.countOfVisitors - a?.countOfVisitors) : [];
 
 
   const theme = useTheme();
