@@ -1,35 +1,21 @@
 import React from "react";
-import {
-  Card,
-  Typography,
-  Button,
-  Box,
-  Link,
-  Avatar,
-  Grid,
-  List,
-  ListItem,
-  ListItemButton,
-  Stack,
-} from "@mui/material";
-import {
-  Facebook,
-  Instagram,
-  LinkedIn,
-  Email,
-} from "@mui/icons-material";
-import { useSelector } from "react-redux";
+import { Card, Typography, Button, Box, Link, Avatar, Grid, List, ListItem, ListItemButton, Stack, } from "@mui/material";
+import {Facebook,Instagram,LinkedIn,Email,} from "@mui/icons-material";
+
 
 
 const About = () => {
-  const { email } = useSelector(state => state.auth)
   return (
-    <Stack sx={{ mt: 8, minHeight: "100vh" ,  background: "rgb(131,58,180)",
-    background: "linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,232,29,0.5803571428571428) 50%, rgba(252,176,69,1) 100%)",}}>
-      <Grid container justifyContent="center" sx={{marginTop: 10 }}>
+    <Stack sx={{
+      mt: 8, minHeight: "100vh",
+      background: 'radial-gradient(circle, rgba(236, 240, 220, 1) 3%, rgba(201, 208, 117, 0.9753151260504201) 99%)',
+    }}>
+      <Grid container justifyContent="center" sx={{ marginTop: 10 }}>
         <Grid item xs={12} md={7}>
-          <Card sx={{ p: 3, py: 4 , background: "rgb(131,58,180)",
-background: "linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,232,29,0.5803571428571428) 50%, rgba(252,176,69,1) 100%)",}}>
+          <Card sx={{
+            p: 3, py: 4,
+            background: 'radial-gradient(circle, rgba(236, 240, 220, 1) 3%, rgba(201, 208, 117, 0.9753151260504201) 99%)',
+          }}>
             <Box display="flex" justifyContent="center">
               <Avatar
                 src="https://i.hizliresim.com/6f8brbh.png"

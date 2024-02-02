@@ -21,7 +21,7 @@ import UpdateModal from '../components/blog/UpdateModal';
 const Detail = () => {
   const [commentArea, setCommentArea] = useState(false);
   const { image, _id } = useSelector(state => state.auth)
-  const { detail,categories } = useSelector(state => state.blog)
+  const { detail, categories } = useSelector(state => state.blog)
 
   const { getDetailBlogs, deleteBlog, postLike, getCategories } = useBlogCalls()
   const { id } = useParams()
@@ -43,7 +43,7 @@ const Detail = () => {
     getDetailBlogs(id);
     getCategories()
   }, [])
-  
+
 
   useEffect(() => {
     console.log('Categories:', categories);
@@ -58,12 +58,16 @@ const Detail = () => {
   }
 
   return (
-    <Stack sx={{ mt: 5, justifyContent: "center", alignItems: "center" ,  background: "rgb(131,58,180)",
-    background: "linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,232,29,0.5803571428571428) 50%, rgba(252,176,69,1) 100%)",}} >
-      <Card sx={{ maxWidth: "60%",marginTop: 8, background: "rgb(131,58,180)",
-        background: "linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(252,176,69,1) 100%)", color: "whitesmoke", border: "1 solid #ff3342",
+    <Stack sx={{
+      mt: 5, justifyContent: "center", alignItems: "center",
+      background: "radial-gradient(circle, rgba(236,240,220,1) 3%, rgba(201,208,117,0.9753151260504201) 99%)",
+    }} >
+      <Card sx={{
+        maxWidth: "60%", marginTop: 8,
+        background: "radial-gradient(circle, rgba(236,240,220,1) 3%, rgba(201,208,117,0.9753151260504201) 99%)",
+        color: "black", border: "1 solid #ff3342",
         boxShadow: "-5px 4px 8px 20px rgba(0, 0, 0, 0.2)",
-         }}>
+      }}>
         <CardMedia
           component="img"
           alt={detail?.title}
@@ -79,7 +83,7 @@ const Detail = () => {
                 alt=""
                 height="140"
                 image={_id === detail?.userId?._id ? image : ""}
-                sx={{ objectFit: "contain" }}
+                sx={{ objectFit: "contain", }}
               />
             </Avatar>
           }
@@ -87,10 +91,10 @@ const Detail = () => {
           subheader={new Date(detail?.createdAt).toLocaleString("tr-TR")}
         />
         <CardContent>
-          <Typography variant="body2" >
+          <Typography variant="body2" sx={{color: "darkblue", fontWeight: "bold"}} >
             {detail?.title}
           </Typography>
-          <Typography color="text.secondary" gutterBottom variant="h5" component="div" sx={{ mt: 1, mb: 1.5, fontSize: "1.1rem", fontFamily: "Roboto, Helvetica, Arial, sans-serif;", fontWeight: "400",color: "pink"}}>
+          <Typography color="text.secondary" gutterBottom variant="h5" component="div" sx={{ mt: 1, mb: 1.5, fontSize: "1.1rem", fontFamily: "Roboto, Helvetica, Arial, sans-serif;", fontWeight: "400", color: "chocolate" }}>
             {detail?.content}
           </Typography>
 

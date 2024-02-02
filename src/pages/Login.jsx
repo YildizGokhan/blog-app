@@ -17,8 +17,7 @@ export default function Login() {
 
   return (
     <ThemeProvider theme={defaultTheme}>
-    <Stack sx={{ background: "rgb(131,58,180)",
-background: "linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,232,29,0.5803571428571428) 50%, rgba(252,176,69,1) 100%)", height: "100vh"}}>
+    <Stack sx={{ background: "linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,232,29,0.5803571428571428) 50%, rgba(252,176,69,1) 100%)", height: "100vh"}}>
       <Container component="main" maxWidth="xs" sx={{ border: 1, borderColor: "#5312D6", borderStyle: "solid", padding: 1,
       boxShadow: '-10px -5px 20px rgba(0, 0, 0, 0.8)',height: "50vh", margin: "auto", marginTop: 15 }}>
         <Box

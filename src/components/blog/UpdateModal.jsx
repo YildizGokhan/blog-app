@@ -12,7 +12,7 @@ import { toastErrorNotify } from '../../helper/ToastNotify';
 
 export default function UpdateModal({ open, handleClose}) {
   const { detail,categories } = useSelector((state) => state.blog);
-  const {   putBlog } = useBlogCalls();
+  const { putBlog } = useBlogCalls();
   const statuses = ['Draft', 'Published'];
 
   const renderSelectOptions = (options, isCategory = true) => {
@@ -27,11 +27,11 @@ export default function UpdateModal({ open, handleClose}) {
   };
 
   const [formData, setFormData] = useState({
-    categoryId: detail.categoryId || '',
-    status: detail.status || '',
-    title: detail.title || '',
-    image: detail.image || '',
-    content: detail.content || '',
+    categoryId: detail?.categoryId?._id || '',
+    status: detail?.status || '',
+    title: detail?.title || '',
+    image: detail?.image || '',
+    content: detail?.content || '',
     isPublish: true,
     _id: detail?._id || '',
     userId: detail?.userId?._id || '',
@@ -58,7 +58,7 @@ export default function UpdateModal({ open, handleClose}) {
 
   useEffect(() => {
     setFormData({
-      categoryId: detail?.categoryId || '',
+      categoryId: detail?.categoryId?._id || '',
       status: detail?.status || '',
       title: detail?.title || '',
       image: detail?.image || '',
@@ -157,7 +157,7 @@ export default function UpdateModal({ open, handleClose}) {
                   id="categoryId"
                   name="categoryId"
                   label="Category *"
-                  value={formData?.categoryId?._id || ''}
+                  value={formData?.categoryId?._id}
                   onChange={handleInputChange}
                 >
                   {renderSelectOptions(categories)}

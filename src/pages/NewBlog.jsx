@@ -57,7 +57,7 @@ const NewBlog = () => {
  
 
   return (
-    <Stack sx={{ mt: "10px", height: '100vh' , backgroundColor: "#8EC5FC",
+    <Stack sx={{ mt: "10px", height: '5000px' , 
     backgroundImage: "linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%)", }} >
       <Box
         sx={{
@@ -66,7 +66,8 @@ const NewBlog = () => {
             width: '100%',
           },
           maxWidth: '500px',
-          margin: 'auto',
+          mx: "auto",
+          marginTop: "10vh",
           padding: '20px',
           boxShadow: 3,
           borderRadius: '12px',

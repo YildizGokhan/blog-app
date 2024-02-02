@@ -24,14 +24,15 @@ export default function CardBlog({ blog }) {
 
   return (
     <Card sx={{
-      maxWidth: "100%", maxHeight: 500, display: 'flex', flexDirection: 'column', marginRight: 5, borderRadius: 5,
-      backgroundImage: "linear-gradient( 135deg, #E8D07A 10%, #5312D6 100%)",
-      border: 1, borderColor: "#5312D6", borderStyle: "solid", padding: 1,
+      maxWidth: "100%", maxHeight: 500, display: 'flex', flexDirection: 'column', marginRight: 5, borderRadius: 3,
+      background: "rgb(236,240,220)",
+      background: "radial-gradient(circle, rgba(236,240,220,1) 3%, rgba(201,208,117,0.9753151260504201) 99%)",
+      border: 1, borderColor: "#5312D6", borderStyle: "solid", borderWidth: 1,
       boxShadow: '-10px -5px 20px rgba(0, 0, 0, 0.8)',
     }}>
       <Box sx={{ display: 'flex', flexDirection: 'row', flex: 1 }}>
 
-        <CardMedia component="img" alt={blog?.title} image={blog?.image} sx={{ width: "33%", height: "100%", margin: "auto" }} />
+        <CardMedia component="img" alt={blog?.title} image={blog?.image} sx={{ width: "33%", height: "100%", margin: "auto", marginLeft: 1 }} />
         <CardContent sx={{ flex: '1', display: 'flex', flexDirection: 'column', pl: 2 }}>
           <Typography gutterBottom variant="h5" component="div">
             {blog?.title}
