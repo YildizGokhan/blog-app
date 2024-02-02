@@ -45,11 +45,6 @@ const Detail = () => {
   }, [])
 
 
-  useEffect(() => {
-    console.log('Categories:', categories);
-    // Diğer işlemler...
-  }, [categories]);
-
   const handleDelete = () => {
     const confirmed = window.confirm(`Are you sure you want to delete ${detail?.title}?`);
     if (confirmed) {
