@@ -46,7 +46,7 @@ const LoginForm = (
 
   return (
     <Form>
-      <Box noValidate sx={{ mt: 1 }}>
+      <Box noValidate >
         <TextField
           margin="normal"
           required
@@ -76,7 +76,7 @@ const LoginForm = (
           onBlur={handleBlur}
           InputProps={{
             endAdornment: (
-              <InputAdornment position="end">
+              <InputAdornment >
                 <IconButton
                   aria-label="toggle password visibility"
                   onClick={togglePasswordVisibility}
