@@ -20,7 +20,7 @@ export default function CommentArea() {
   const [italic, setItalic] = useState(false);
   const [fontWeight, setFontWeight] = useState('normal');
   const [anchorEl, setAnchorEl] = useState(null);
-  const { detail } = useSelector(state => state.blog)
+  const { detail } = useSelector(state => state.blog);
 
   const [info, setInfo] = useState({
     blogId: detail?._id,
@@ -36,6 +36,7 @@ export default function CommentArea() {
       }));
     }
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     postComment(info);
@@ -45,7 +46,6 @@ export default function CommentArea() {
     });
   };
 
-
   return (
     <FormControl
       component="form"
@@ -54,13 +54,19 @@ export default function CommentArea() {
         width: '60%',
       }}
     >
-      <FormLabel sx={{ color: "##000010", mt: 2, mx: 2, fontSize: "20px" }}>Your comment</FormLabel>
+      <FormLabel sx={{ color: "#000010", mt: 2, mx: 2, fontSize: "20px" }}>Your comment</FormLabel>
       <Textarea
         placeholder="Write your comment here with max 500 characters..."
         minRows={3}
         onChange={handleChange}
         name="comment"
         defaultValue={info?.comment}
+        sx={{
+          background: "radial-gradient(circle, rgba(236,240,220,1) 3%, rgba(201,208,117,0.9753151260504201) 99%)",
+          minWidth: 300,
+          fontWeight,
+          fontStyle: italic ? 'italic' : 'initial',
+        }}
         endDecorator={
           <Box
             sx={{
@@ -78,6 +84,12 @@ export default function CommentArea() {
               onClick={(event) => setAnchorEl(event.currentTarget)}
             >
               <FormatBold />
+            </IconButton>
+            <IconButton
+              variant="plain"
+              color="neutral"
+              onClick={(event) => setAnchorEl(event.currentTarget)}
+            >
               <KeyboardArrowDown fontSize="md" />
             </IconButton>
             <Menu
@@ -118,11 +130,6 @@ export default function CommentArea() {
             </Button>
           </Box>
         }
-        sx={{
-          minWidth: 300,
-          fontWeight,
-          fontStyle: italic ? 'italic' : 'initial',
-        }}
       />
     </FormControl>
   );

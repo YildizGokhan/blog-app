@@ -11,15 +11,14 @@ export default function FilterBlogs({ categories }) {
     const { bloglist } = useSelector(state => state.blog);
     const [selectedValue, setSelectedValue] = React.useState(null);
 
-   
     const filteredAndSortedBlogList = bloglist
         .filter(blog => !selectedValue || selectedValue?._id === blog?.categoryId)
         .sort((a, b) => new Date(b?.createdAt) - new Date(a?.createdAt));
 
     return (
-        <Stack sx={{marginRight: 2,marginLeft: 2, borderRadius: "8px"}}>
+        <Stack sx={{ marginRight: 2, marginLeft: 2, borderRadius: "8px" }}>
             <Autocomplete
-                id="highlights-demo"               
+                id="highlights-demo"
                 options={categories}
                 getOptionLabel={(category) => category?.name}
                 value={selectedValue}
@@ -34,17 +33,26 @@ export default function FilterBlogs({ categories }) {
                     const parts = parse(category?.name, matches);
 
                     return (
-                        <li {...props}>
-                            <Stack>
-                                <Typography variant="h6">{category?.name}</Typography>
-                            </Stack>
-                        </li>
+                        <ListItem {...props} alignItems="flex-start" sx={{ padding: '8px' }}>
+                            <Link to={`/detail/${category?._id}`} style={{ textDecoration: 'none', display: 'flex', alignItems: 'center' }}>
+                                <ListItemAvatar>
+                                    <Avatar
+                                        alt={category.name}
+                                        sx={{ width: '60px', height: '70px', borderRadius: '8px', marginRight: '10px' }}
+                                    />
+                                </ListItemAvatar>
+                                <ListItemText
+                                    primary={category?.name}
+                                    sx={{ color: "black" }}
+                                />
+                            </Link>
+                        </ListItem>
                     );
                 }}
             />
-            <Stack >
-            <Typography variant='h6' textAlign={"center"} sx={{fontFamily: "monospace", fontSize: "1.2rem"}}>Latest Published Blog</Typography>
-                <List sx={{ width: '100%',   borderRadius: "8px", marginLeft: "6px", marginTop: "12px" }} >
+            <Stack>
+                <Typography variant='h6' textAlign={"center"} sx={{ fontFamily: "monospace", fontSize: "1.2rem" }}>Latest Published Blog</Typography>
+                <List sx={{ width: '100%', borderRadius: "8px", marginLeft: "6px", marginTop: "12px" }} >
                     {filteredAndSortedBlogList?.map((blog) => (
                         <React.Fragment key={blog?._id}>
                             <ListItem alignItems="flex-start" sx={{ padding: '8px' }}>

@@ -23,7 +23,7 @@ const useBlogCalls = () => {
       const pagination = data.details
       const apiData = data.data
       dispatch(getBlogsSuccess({pagination, apiData}));
-      toastSuccessNotify("Blogs fetched successfully");
+      // toastSuccessNotify("Blogs fetched successfully");
     } catch (error) {
       dispatch(fetchFail());
       toastErrorNotify("Blogs fetch failed");
@@ -46,7 +46,7 @@ const useBlogCalls = () => {
     try {
       const { data } = await axiosWithToken.get(`/blogs?author=${id}`);
       dispatch(getUserBlogsSuccess(data));
-      toastSuccessNotify("Blogs details fetched successfully");
+      // toastSuccessNotify("Blogs details fetched successfully");
     } catch (error) {
       dispatch(fetchFail());
       toastErrorNotify("Blogs details fetch failed");
@@ -59,7 +59,7 @@ const useBlogCalls = () => {
     try {
       const { data } = await axiosPublic("/categories");
       dispatch(getCategoriesSuccess(data));
-      toastSuccessNotify("Category fetched successfully");
+      // toastSuccessNotify("Category fetched successfully");
     } catch (error) {
       dispatch(fetchFail());
       toastErrorNotify("Category fetch failed");
@@ -71,7 +71,7 @@ const useBlogCalls = () => {
     try {
       const { data } = await axiosWithToken.get(`/blogs/${id}`);
       dispatch(getDetailBlogsSuccess(data));
-      toastSuccessNotify("Blogs details fetched successfully");
+      // toastSuccessNotify("Blogs details fetched successfully");
     } catch (error) {
       dispatch(fetchFail());
       toastErrorNotify("Blogs details fetch failed");
@@ -83,7 +83,7 @@ const useBlogCalls = () => {
     try {
       const { data } = await axiosWithToken.get(`/comments/${id}`);
       dispatch(getCommentSuccess(data));
-      toastSuccessNotify("Blogs details fetched successfully");
+      // toastSuccessNotify("Blogs details fetched successfully");
     } catch (error) {
       dispatch(fetchFail());
       toastErrorNotify("Blogs details fetch failed");

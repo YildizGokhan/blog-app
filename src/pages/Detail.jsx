@@ -1,6 +1,6 @@
 
 import { useParams } from 'react-router-dom';
-import { Button, Stack } from '@mui/material';
+import { Button, Divider, Stack } from '@mui/material';
 import { CardActions } from '@mui/joy';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -73,22 +73,28 @@ const Detail = () => {
         <CardHeader
           avatar={
             <Avatar sx={{ bgcolor: "red[500]" }} aria-label="recipe">
-              <CardMedia
-                component="img"
-                alt=""
-                height="140"
-                image={_id === detail?.userId?._id ? image : ""}
-                sx={{ objectFit: "contain", }}
-              />
+              {detail?.userId?._id === _id ? (
+                <CardMedia
+                  component="img"
+                  alt=""
+                  height="140"
+                  image={image}
+                  sx={{ objectFit: "contain" }}
+                />
+              ) : (
+                detail?.userId?.firstName?.slice(0, 1)
+              )}
             </Avatar>
           }
           title={detail?.title}
           subheader={new Date(detail?.createdAt).toLocaleString("tr-TR")}
         />
         <CardContent>
-          <Typography variant="body2" sx={{color: "#3C3633", fontWeight: "bold", fontSize: "1.1rem"}} >
+          <Typography variant="body2" sx={{ color: "#3C3633", fontWeight: "bold", fontSize: "1.1rem" }} >
             {detail?.title}
+            <Typography variant="body1" sx={{ fontWeight: 600, fontSize: "0.8rem" }}>{detail?.userId?.firstName} {detail?.userId?.lastName}</Typography>
           </Typography>
+          <Divider />
           <Typography color="text.secondary" gutterBottom variant="h5" component="div" sx={{ mt: 1, mb: 1.5, fontSize: "1.1rem", fontFamily: "Roboto, Helvetica, Arial, sans-serif;", fontWeight: "700", color: "#747264" }}>
             {detail?.content}
           </Typography>
@@ -98,7 +104,11 @@ const Detail = () => {
             Published Date:
             {new Date(detail?.createdAt).toLocaleString("tr-TR")}
           </Typography>
-          { }
+          <Typography variant="body2" color="text.secondary">
+            Updated Date:
+            {new Date(detail?.updatedAt).toLocaleString("tr-TR")}
+          </Typography>
+
         </CardContent>
         <CardActions sx={{ justifyContent: "space-between" }}>
           <Box>

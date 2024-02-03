@@ -2,21 +2,23 @@ import React, { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Button from '@mui/material/Button';
-import { FormControl, FormLabel, IconButton, Menu, MenuItem } from '@mui/material';
-import { useSelector } from 'react-redux';
-import useBlogCalls from '../../hooks/useBlogCalls';
+import FormControl from '@mui/material/FormControl';
+import FormLabel from '@mui/material/FormLabel';
+import IconButton from '@mui/material/IconButton';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
 import { ListItemDecorator, Textarea } from '@mui/joy';
 import { Check, FormatBold, FormatItalic, KeyboardArrowDown } from '@mui/icons-material';
+import { useSelector } from 'react-redux';
+import useBlogCalls from '../../hooks/useBlogCalls';
 
 export default function CommentUpdateModal({ open, handleClose, commentData }) {
   const { detail } = useSelector(state => state.blog);
-  const { putComment, getDetailBlogs,   } = useBlogCalls()
+  const { putComment, getDetailBlogs } = useBlogCalls();
   const [italic, setItalic] = useState(false);
   const [fontWeight, setFontWeight] = useState('normal');
   const [anchorEl, setAnchorEl] = useState(null);
-
   const [editedCommentText, setEditedCommentText] = useState('');
-  
 
   const handleChange = (e) => {
     setEditedCommentText(e.target.value);
@@ -53,12 +55,21 @@ export default function CommentUpdateModal({ open, handleClose, commentData }) {
             alignItems: 'center',
           }}
         >
-          <FormLabel sx={{ color: "##000010", mt: 2, mx: 2, fontSize: "20px" }}>Your comment</FormLabel>
+          <FormLabel sx={{ color: "#000010", mt: 2, mx: 2, fontSize: "20px" }}>Your comment</FormLabel>
           <Textarea
             placeholder="Type something here in 500 characters"
             minRows={3}
             onChange={handleChange}
             name="comment"
+            sx={{
+              background: "radial-gradient(circle, rgba(236,240,220,1) 3%, rgba(201,208,117,0.9753151260504201) 99%)",
+              minWidth: 300,
+              fontWeight,
+              fontStyle: italic ? 'italic' : 'initial',
+              maxHeight: '250px',
+              overflowY: 'auto',
+              overflowX: 'hidden',
+            }}
             value={editedCommentText}
             endDecorator={
               <Box
@@ -80,6 +91,12 @@ export default function CommentUpdateModal({ open, handleClose, commentData }) {
                   onClick={(event) => setAnchorEl(event.currentTarget)}
                 >
                   <FormatBold />
+                </IconButton>
+                <IconButton
+                  variant="plain"
+                  color="neutral"
+                  onClick={(event) => setAnchorEl(event.currentTarget)}
+                >
                   <KeyboardArrowDown fontSize="md" />
                 </IconButton>
                 <Menu
@@ -120,14 +137,6 @@ export default function CommentUpdateModal({ open, handleClose, commentData }) {
                 </Button>
               </Box>
             }
-            sx={{
-              minWidth: 300,
-              fontWeight,
-              fontStyle: italic ? 'italic' : 'initial',
-              maxHeight: '250px',
-              overflowY: 'auto',
-              overflowX: 'hidden',
-            }}
           />
         </FormControl>
       </Modal>
