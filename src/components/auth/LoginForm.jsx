@@ -95,14 +95,14 @@ const LoginForm = (
         >
           Sign In
         </Button>
-        <Stack direction={"row"} >
+        <Stack direction={"row"} sx={{marginTop: 1}}  >
           <Typography variant="body2">
             Don't have an account?
           </Typography>
 
           <Typography
             variant="body2"
-            sx={{ color: "blue", cursor: "pointer", textDecoration: "underline" , marginLeft: 1}}
+            sx={{ color: "blue", cursor: "pointer", textDecoration: "underline" , marginLeft: 1,}}
             onClick={() => navigate("/register")}
           >
             Sign Up
