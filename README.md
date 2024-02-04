@@ -1,70 +1,40 @@
-# Getting Started with Create React App
+Live : 
+https://gby-blogapp.vercel.app/
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+It's a website where you can share your own blogs, edit them, leave comments, and delete those comments. You can also save some of your blogs as drafts. Various technologies such as React-router-dom, axios, mui, and redux have been utilized.
 
-## Available Scripts
+https://github.com/YildizGokhan/blog-app/assets/144238207/dad635c9-18a0-41f7-9e6c-86ad15c9cfd0
 
-In the project directory, you can run:
 
-### `yarn start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+My DashBoard 
+![image](https://github.com/YildizGokhan/blog-app/assets/144238207/038f6249-5b32-41e4-bc42-0cf8fecb8241)
+Selected Category
+![image](https://github.com/YildizGokhan/blog-app/assets/144238207/b4e63172-d46a-4f89-819a-53dee8aec832)
+![image](https://github.com/YildizGokhan/blog-app/assets/144238207/86e27a4a-fc4a-4225-b5da-296282b4683d)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Detail Page
+![image](https://github.com/YildizGokhan/blog-app/assets/144238207/58fc2ba1-6fab-46f1-8b82-5c6895c15215)
+if this blog belongs to you, edit and delete buttons will be visible.
+Delete button is a modal like that:
+![image](https://github.com/YildizGokhan/blog-app/assets/144238207/e0128b18-1aa2-4eff-a7cc-2f17338038a2)
 
-### `yarn test`
+There are two stats selection, draft and published.
+if you choose draft status, only you can see releated blog.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+ And comment form and card area;
+ ![image](https://github.com/YildizGokhan/blog-app/assets/144238207/7026a626-021b-4930-9e6a-f50cf99f4327)
+Again, if comment belongs to you, edit and delete buttons will be visible.
 
-### `yarn build`
+Edit comment is a modal
+![image](https://github.com/YildizGokhan/blog-app/assets/144238207/a38960a6-a643-4bd8-aeea-74e7d62dd5d6)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+New Blog Form
+![image](https://github.com/YildizGokhan/blog-app/assets/144238207/fef442a9-7c36-4fd3-b91c-132890c287d1)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+My Blogs
+![image](https://github.com/YildizGokhan/blog-app/assets/144238207/d0a7afa5-bf7c-42ed-9f5d-2a419f687606)
+![image](https://github.com/YildizGokhan/blog-app/assets/144238207/60a09f97-cddb-4bfb-8d89-db06e1d13cdd)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `yarn eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
