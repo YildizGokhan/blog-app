@@ -46,7 +46,7 @@ const LoginForm = (
 
   return (
     <Form>
-      <Box noValidate >
+      <Box noValidate sx={{ objectFit: "contain" }}>
         <TextField
           margin="normal"
           required
@@ -76,7 +76,7 @@ const LoginForm = (
           onBlur={handleBlur}
           InputProps={{
             endAdornment: (
-              <InputAdornment >
+              <InputAdornment position="end">
                 <IconButton
                   aria-label="toggle password visibility"
                   onClick={togglePasswordVisibility}
@@ -92,18 +92,17 @@ const LoginForm = (
           type="submit"
           fullWidth
           variant="contained"
-          sx={{ mt: 3, mb: 2 }}
         >
           Sign In
         </Button>
-        <Stack direction={"row"} gap={"5px"}>
+        <Stack direction={"row"} >
           <Typography variant="body2">
             Don't have an account?
           </Typography>
 
           <Typography
             variant="body2"
-            sx={{ color: "blue", cursor: "pointer", textDecoration: "underline" }}
+            sx={{ color: "blue", cursor: "pointer", textDecoration: "underline" , marginLeft: 1}}
             onClick={() => navigate("/register")}
           >
             Sign Up

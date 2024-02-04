@@ -19,7 +19,7 @@ export default function Login() {
     <ThemeProvider theme={defaultTheme}>
     <Stack sx={{ background: "radial-gradient(circle, rgba(236,240,220,1) 3%, rgba(201,208,117,0.9753151260504201) 99%)", height: "100vh"}}>
       <Container component="main" maxWidth="xs" sx={{
-      boxShadow: '-10px -5px 20px rgba(0, 0, 0, 0.8)',height: "50vh", margin: "auto", marginTop: 15 }}>
+      boxShadow: '-10px -5px 20px rgba(0, 0, 0, 0.8)',height: "50vh", margin: "auto", marginTop: 15, border: 1 }}>
         <Box
           sx={{
             marginTop: 8,
