@@ -54,7 +54,6 @@ const LoginForm = (
           id="email"
           label="Email"
           name="email"
-          autoFocus
           value={values.email}
           onChange={handleChange}
           error={touched.email && Boolean(errors.email)}
